@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button as AntdButton } from 'antd/lib';
 import PropTypes from 'prop-types';
 import { COLOR } from '../../../utils/theme';

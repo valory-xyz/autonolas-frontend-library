@@ -1,8 +1,9 @@
 {
   "name": "autonolas-frontend-library",
   "version": "0.1.0",
-  "main": "src/index.js",
   "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
     "dev": "next dev",
     "build": "CI= next build",
@@ -12,7 +13,8 @@
     "testw": "jest --watch",
     "testc": "jest --coverage --verbose",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build-lib": "rollup -c"
   },
   "dependencies": {
     "antd": "^4.12.3",
@@ -27,6 +29,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -52,7 +58,10 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-storybook": "^0.6.4",
-    "jest": "^27.3.1"
+    "jest": "^27.3.1",
+    "rollup": "^2.78.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "jest": {
     "projects": [
