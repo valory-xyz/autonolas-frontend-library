@@ -1,15 +1,56 @@
+import resolve from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import svgr from '@svgr/rollup';
+import url from '@rollup/plugin-url';
+import postcss from 'rollup-plugin-postcss';
+import json from '@rollup/plugin-json';
 
-const config = {
-  input: 'src/index.jsx',
+const lessToJs = require('less-vars-to-js');
+
+const path = require('path');
+const fs = require('fs');
+
+const themeVariables = lessToJs(
+  fs.readFileSync(path.join(__dirname, 'src/styles/variables.less'), 'utf8'),
+  { resolveVariables: true, stripPrefix: true },
+);
+
+export default {
+  input: 'src/index.js',
   output: {
-    file: 'dist/index.esm.js',
-    format: 'esm',
+    file: 'dist/index.js',
+    format: 'cjs',
   },
-  external: [/@babel\/runtime/, 'react'],
+  // All the used libs needs to be here
+  external: ['react', 'react-proptypes'],
   plugins: [
-    babel({ babelHelpers: 'runtime', plugins: ['@babel/plugin-transform-runtime'] }),
+    json(),
+    resolve(
+      { extensions: ['.js', '.ts', '.jsx'] },
+    ),
+    postcss({
+      extract: true,
+      use: [
+        'sass',
+        [
+          'less',
+          {
+            javascriptEnabled: true,
+            modifyVars: themeVariables,
+          },
+        ],
+      ],
+    }),
+    commonjs({
+      include: 'node_modules/**',
+    }),
+    babel({
+      plugins: [['import', { libraryName: 'antd', style: true }]],
+      exclude: ['node_modules/**', 'public/**'],
+      extensions: ['.js', '.jsx'],
+    }),
+    url(),
+    svgr({ svgo: false }),
   ],
 };
-
-export default config;

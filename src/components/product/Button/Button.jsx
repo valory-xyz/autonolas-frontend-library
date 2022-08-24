@@ -1,67 +1,41 @@
-import React from 'react';
-import { Button as AntdButton } from 'antd/lib';
-import PropTypes from 'prop-types';
-import { COLOR } from '../../../utils/theme';
+import React, { forwardRef } from 'react';
+import propTypes from 'prop-types';
+import { Button as AntButton } from 'antd';
 
-export const commonStyle = {
-  textTransform: 'uppercase',
-};
+/**
+ * Buttons allow users to take actions, and make choices, with a single tap.
+ * */
 
-const getStyle = (k) => {
-  switch (k) {
-    case 'primary':
-      return {
-        borderColor: COLOR.PURPLE,
-        backgroundColor: COLOR.PURPLE,
-      };
-
-    case 'danger':
-      return {
-        borderColor: COLOR.RED,
-        backgroundColor: COLOR.RED,
-      };
-
-    case 'disabled':
-      return {
-        borderColor: COLOR.GREY_1,
-        backgroundColor: COLOR.GREY_1,
-        color: COLOR.BORDER_GREY,
-      };
-
-    default:
-      return {
-        borderColor: COLOR.PURPLE,
-        backgroundColor: COLOR.PURPLE,
-      };
-  }
-};
-
-export const Button = ({
-  children, type, style, ...rest
-}) => (
-  <AntdButton
-    type={type}
-    {...rest}
-    style={{ ...commonStyle, ...getStyle(type), ...(style || {}) }}
-  >
-    {children}
-  </AntdButton>
+const Button = forwardRef(
+  ({
+    size, type, disabled, onClick, children, ...otherProps
+  }, ref) => (
+    <AntButton
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      ref={ref}
+      type={type}
+      {...otherProps}
+    >
+      {children}
+    </AntButton>
+  ),
 );
 
-Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.array,
-    PropTypes.string,
-  ]),
-  type: PropTypes.oneOf(['primary', 'danger', 'disabled']),
-  style: PropTypes.shape({}),
+Button.defaultProps = {
+  size: 'middle',
+  type: 'primary',
+  disabled: false,
+  onClick: () => {},
 };
 
-Button.defaultProps = {
-  children: null,
-  type: 'primary',
-  style: {},
+Button.propTypes = {
+  size: propTypes.oneOf(['small', 'middle', 'large']),
+  type: propTypes.oneOf(['primary', 'dashed', 'outline', 'ghost']),
+  disabled: propTypes.bool,
+  onClick: propTypes.func,
+  children: propTypes.node.isRequired,
 };
 
 export default Button;

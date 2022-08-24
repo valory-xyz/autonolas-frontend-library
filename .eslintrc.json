@@ -30,6 +30,7 @@
     "arrow-parens": ["error"],
     "no-console": ["warn", { "allow": ["error"] }],
     "import/prefer-default-export": "off",
-    "jest/no-hooks": "off"
+    "jest/no-hooks": "off",
+    "semi": [2, "always"]
   }
 }

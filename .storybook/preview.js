@@ -1,12 +1,10 @@
-import 'antd/dist/antd.css';
-// require ('../styles/variables.less')
+import { addParameters, addDecorator } from '@storybook/react'
 
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+addParameters({
+  options: {
+    storySort: {
+      order: ['Style', 'Icons', 'User Inputs', 'Content', 'User Feedback'],
     },
   },
-}
+  controls: { hideNoControlsWarning: true },
+})
