@@ -1,12 +1,3 @@
-const path = require('path')
-const fs = require('fs')
-const lessToJs = require('less-vars-to-js')
-
-const themeVariables = lessToJs(
-  fs.readFileSync(path.join(__dirname, '../src/styles/variables.less'), 'utf8'),
-  { resolveVariables: true, stripPrefix: true },
-)
-
 module.exports = {
   stories: ['../src/**/**/*.stories.js', '../src/**/**/*.stories.mdx'],
   addons: [
@@ -40,7 +31,6 @@ module.exports = {
           options: {
             lessOptions: {
               // If you are using less-loader@5 please spread the lessOptions to options directly
-              modifyVars: themeVariables,
               javascriptEnabled: true,
             },
           },
