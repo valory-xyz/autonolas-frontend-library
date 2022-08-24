@@ -7,8 +7,8 @@
   "scripts": {
     "build": "rollup -c",
     "start": "npm run storybook",
-    "lint": "eslint -c .eslintrc.js src",
-    "lint:fix": "eslint -c .eslintrc.js src --fix",
+    "lint": "eslint -c .eslintrc.json src",
+    "lint:fix": "eslint -c .eslintrc.json src --fix",
     "test": "jest",
     "testw": "jest --watch",
     "testc": "jest --coverage --verbose",
