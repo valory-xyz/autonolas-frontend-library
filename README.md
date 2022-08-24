@@ -1,6 +1,6 @@
 # Autonolas Frontend Library
 
-This repository contains the common UI modules/components.
+This repository contains the common UI modules/components for [Autonolas](https://www.autonolas.network/) frontends.
 
 ## Tech Stack
 
