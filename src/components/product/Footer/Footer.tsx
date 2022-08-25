@@ -15,6 +15,6 @@ export const Footer = ({ leftContent, rightContent }: FooterProps) => (
       {new Date().getFullYear()}
     </div>
 
-    <div className="footer-left-content">{rightContent}</div>
+    <div className="footer-right-content">{rightContent}</div>
   </FooterContainer>
 );
