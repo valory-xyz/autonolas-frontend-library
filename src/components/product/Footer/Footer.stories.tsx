@@ -5,4 +5,6 @@ export default {
   title: 'Footer',
 };
 
-export const Default = (): JSX.Element => <Footer leftContent={<>Left Side Content</>}></Footer>;
+export const Default = (): JSX.Element => (
+  <Footer leftContent={<>Left Side Content</>} rightContent={<>Right Side Content</>}></Footer>
+);
