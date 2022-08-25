@@ -6,7 +6,6 @@ export const FooterContainer = styled.div`
   align-items: flex-end;
   padding: 1rem 50px;
   .footer-left-content {
-    font-size: 14px;
   }
   .socials {
     display: flex;

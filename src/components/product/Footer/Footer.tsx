@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FooterContainer } from './styles';
 
 const SOCIALS = [
@@ -24,8 +23,6 @@ const SOCIALS = [
 export const getSocials = () => (
   <div className="socials">
     {SOCIALS.map((social) => {
-      const src = `/images/${social.type}.svg`;
-
       return (
         <a
           href={social.url}
@@ -35,14 +32,18 @@ export const getSocials = () => (
           key={`social-${social.type}`}
           aria-label={`social-${social.type}`}
         >
-          <img src={src} alt="" width={18} height={16} />
+          <img src={require(`./images/${social.type}.svg`)} alt="" width={18} height={16} />
         </a>
       );
     })}
   </div>
 );
 
-export const Footer = ({ leftContent = null }) => (
+type FooterProps = {
+  leftContent?: JSX.Element;
+};
+
+export const Footer = ({ leftContent }: FooterProps) => (
   <FooterContainer>
     <div className="footer-left-content">{leftContent}</div>
 
@@ -54,11 +55,3 @@ export const Footer = ({ leftContent = null }) => (
     {getSocials()}
   </FooterContainer>
 );
-
-Footer.propTypes = {
-  leftContent: PropTypes.element,
-};
-
-Footer.defaultProps = {
-  leftContent: null,
-};

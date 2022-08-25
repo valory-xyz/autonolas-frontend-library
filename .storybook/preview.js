@@ -1,10 +1,5 @@
-import { addParameters, addDecorator } from '@storybook/react'
+import { addDecorator } from '@storybook/react';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
 
-addParameters({
-  options: {
-    storySort: {
-      order: ['Style', 'Icons', 'User Inputs', 'Content', 'User Feedback'],
-    },
-  },
-  controls: { hideNoControlsWarning: true },
-})
+initialize();
+addDecorator(mswDecorator);
