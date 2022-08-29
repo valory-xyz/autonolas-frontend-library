@@ -1,4 +1,5 @@
 const path = require('path')
+const lessPath = '../src/styles/antd-variables.less';
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
@@ -22,9 +23,7 @@ module.exports = {
         loader: 'less-loader', options: {
           lessOptions: {
             modifyVars: {
-              'primary-color': 'green',
-              'font-size-base': '18px',
-              'font-family': '"manrope__regular", sans-serif',
+              'ant-theme-file': "; @import '" + path.resolve(__dirname, '../src/styles/antd-variables.less') + "'",
             },
             javascriptEnabled: true,
           }
