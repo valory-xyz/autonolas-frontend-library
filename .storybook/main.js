@@ -1,44 +1,42 @@
-module.exports = {
-  stories: ['../src/**/**/*.stories.js', '../src/**/**/*.stories.mdx'],
-  addons: [
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        craOverrides: {
-          fileLoaderExcludes: ['less'],
-        },
-      },
-    },
-    '@storybook/addon-docs',
-    '@storybook/addon-knobs',
-    '@storybook/addon-controls',
-    '@storybook/addon-actions',
-  ],
-  webpackFinal: async (config, { configType }) => {
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
-    // 'PRODUCTION' is used when building the static version of storybook.
+const path = require('path')
+const lessPath = '../src/styles/antd-variables.less';
 
-    // Make whatever fine-grained changes you need
+module.exports = {
+  stories: ['../src/**/*.stories.tsx'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-links', '@storybook/addon-storysource', '@storybook/addon-a11y', "@storybook/preset-ant-design"],
+  webpackFinal: async config => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: [['react-app', { flow: false, typescript: true }]],
+      },
+    });
+
+    config.module.rules = config.module.rules.filter(
+      f => f.test.toString() !== '/\\.less$/'
+    );
+
     config.module.rules.push({
       test: /\.less$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader',
-        {
-          loader: 'less-loader', // compiles Less to CSS
-          options: {
-            lessOptions: {
-              // If you are using less-loader@5 please spread the lessOptions to options directly
-              javascriptEnabled: true,
+      use: ['style-loader', 'css-loader', {
+        loader: 'less-loader', options: {
+          lessOptions: {
+            modifyVars: {
+              'ant-theme-file': "; @import '" + path.resolve(__dirname, '../src/styles/antd-variables.less') + "'",
             },
-          },
-        },
-      ],
-    })
+            javascriptEnabled: true,
+          }
+        }
+      }],
+      include: path.resolve(__dirname, '../'),
+    });
 
-    // Return the altered config
-    return config
+    config.resolve.extensions.push('.ts', '.tsx');
+    config.node = Object.assign({}, config.node, {
+      fs: 'empty',
+    });
+
+    return config;
   },
-}
+};

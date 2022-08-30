@@ -1,13 +1,13 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  verbose: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx}'],
-  setupFilesAfterEnv: ['./jest.setup.js'],
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-native|my-project|react-native-button)/)',
-  ],
-  moduleNameMapper: {
-    '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.js',
-  },
+  preset: 'ts-jest',
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.stories.{js,jsx,ts,tsx}'],
+  roots: ['<rootDir>/src'],
   testEnvironment: 'jsdom',
+  reporters: ['default', 'jest-junit'],
+  moduleNameMapper: {
+    '^.+\\.(css|less)$': '<rootDir>/test/mock/styleMock.js',
+  },
+  testMatch: ['<rootDir>/**/?(*.)(test).{ts,tsx}'],
+  setupFilesAfterEnv: ['<rootDir>/src/jest-setup.ts'],
 };
