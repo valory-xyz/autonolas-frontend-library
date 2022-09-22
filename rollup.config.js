@@ -1,15 +1,36 @@
+import resolve from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import svgr from '@svgr/rollup';
+import url from '@rollup/plugin-url';
+import json from '@rollup/plugin-json';
 
-const config = {
-  input: 'src/index.jsx',
+export default {
+  input: 'src/index.js',
   output: {
-    file: 'dist/index.esm.js',
-    format: 'esm',
+    file: 'dist/index.js',
+    format: 'cjs',
+    globals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      'styled-components': 'styled',
+    },
   },
-  external: [/@babel\/runtime/, 'react'],
+  // All the used libs needs to be here
+  external: ['react', 'react-dom', 'react-proptypes', 'styled-components'],
   plugins: [
-    babel({ babelHelpers: 'runtime', plugins: ['@babel/plugin-transform-runtime'] }),
+    json(),
+    resolve(
+      { extensions: ['.js', '.ts', '.jsx'] },
+    ),
+    commonjs({
+      include: 'node_modules/**',
+    }),
+    babel({
+      exclude: ['node_modules/**', 'public/**'],
+      extensions: ['.js', '.jsx'],
+    }),
+    url(),
+    svgr({ svgo: false }),
   ],
 };
-
-export default config;

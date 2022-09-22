@@ -7,9 +7,11 @@ export const COLOR = {
   BLACK: '#000000',
   BORDER_GREY: '#E3E3E3',
   TABLE_BLACK: '#1B1B1B',
-};
 
-export const BOX_SHADOW = {};
+  // remove
+  PURPLE: '#7A00F4',
+  RED_1: '#EA3324',
+};
 
 export const BREAK_POINT = {
   xxs: '375px',

@@ -11,3 +11,14 @@ This repository contains the common UI modules/components for [Autonolas](https:
 - Ant Design
 - React-testing-library
 - Jest
+
+# Note
+- To avoid multiple react packages please do the following:
+
+1. In Application:
+a) cd node_modules/react && npm link
+b) cd node_modules/react-dom && npm link
+
+2. In Library
+a) npm link react
+b) npm link react-dom
