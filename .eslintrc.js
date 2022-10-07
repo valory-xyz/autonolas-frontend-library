@@ -26,5 +26,5 @@ module.exports = {
       version: 'latest',
     },
   },
-  ignorePatterns: ['src/documentation/**/*', '*.stories.*', '**/stories/**'],
+  ignorePatterns: ['src/documentation/**/*', '*.stories.*', '**/stories/**', 'dist/**'],
 };
