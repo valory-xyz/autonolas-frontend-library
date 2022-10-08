@@ -1,5 +1,5 @@
 import React from 'react';
-// import { FooterContainer } from './styles';
+import { FooterContainer } from './styles';
 
 type FooterProps = {
   leftContent?: JSX.Element;
@@ -7,7 +7,7 @@ type FooterProps = {
 };
 
 export const Footer = ({ leftContent, rightContent }: FooterProps) => (
-  <div>
+  <FooterContainer>
     <div className="footer-left-content">{leftContent}</div>
 
     <div className="footer-center">
@@ -16,5 +16,5 @@ export const Footer = ({ leftContent, rightContent }: FooterProps) => (
     </div>
 
     <div className="footer-right-content">{rightContent}</div>
-  </div>
+  </FooterContainer>
 );
