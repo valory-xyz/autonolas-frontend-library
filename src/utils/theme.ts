@@ -1,11 +1,13 @@
 export const COLOR = {
   PRIMARY: '#7A00F4',
   RED: '#EA3324',
+  WHITE: '#FFFFFF',
+
   GREY_1: '#C4C4C4',
   GREY_2: '#9A9A9A',
-  WHITE: '#FFFFFF',
-  BLACK: '#000000',
   BORDER_GREY: '#E3E3E3',
+
+  BLACK: '#000000',
   TABLE_BLACK: '#1B1B1B',
 
   // remove
