@@ -9,10 +9,6 @@ export const COLOR = {
 
   BLACK: '#000000',
   TABLE_BLACK: '#1B1B1B',
-
-  // remove
-  PURPLE: '#7A00F4',
-  RED_1: '#EA3324',
 };
 
 export const BREAK_POINT = {
