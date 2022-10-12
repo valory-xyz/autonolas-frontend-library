@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
-    "module": "es2015",
+    "module": "commonjs",
     "target": "es5",
     "lib": ["es6", "dom", "es2020"],
     "sourceMap": true,
@@ -19,12 +19,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*",
-    "src/jest-setup.ts",
-    "public/**/*.ts",
-    "public/**/*",
-  ],
+  "include": ["src/**/*", "src/jest-setup.ts"],
   "exclude": [
     "node_modules",
     "build",
