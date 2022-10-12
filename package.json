@@ -29,16 +29,23 @@
   "author": "Autonolas",
   "homepage": "https://github.com/valory-xyz/autonolas-frontend-library#readme",
   "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "antd": "^4.12.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "antd": "^4.12.3",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "lodash": "^4.17.21",
+    "web3": "^1.6.1",
+    "web3modal": "^1.9.8"
   },
   "peerDependencies": {
+    "antd": "^4.12.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "antd": "^4.12.3",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "lodash": "^4.17.21",
+    "web3": "^1.6.1",
+    "web3modal": "^1.9.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
