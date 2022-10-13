@@ -1,8 +1,20 @@
 import React from 'react';
 import { Login } from './Login';
+import Web3 from 'web3';
+import { Web3ReactProvider } from '@web3-react/core';
+import { Web3DataProvider } from '../Web3DataProvider';
 
-export default {
-  title: 'Login',
-};
+const getLibrary = (provider: any) => new Web3(provider);
 
-export const Default = (): JSX.Element => <Login />;
+export default { title: 'Login' };
+
+// TODO
+//  onClick={() => {}}
+// window.console.log(values)
+export const Default = (): JSX.Element => (
+  <Web3DataProvider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Login />
+    </Web3ReactProvider>
+  </Web3DataProvider>
+);
