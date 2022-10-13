@@ -8,13 +8,10 @@ const getLibrary = (provider: any) => new Web3(provider);
 
 export default { title: 'Login' };
 
-// TODO
-//  onClick={() => {}}
-// window.console.log(values)
 export const Default = (): JSX.Element => (
   <Web3DataProvider>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Login />
+      <Login onConnect={(e) => console.log(e)} onDisconnect={() => console.log('disconnect')} />
     </Web3ReactProvider>
   </Web3DataProvider>
 );

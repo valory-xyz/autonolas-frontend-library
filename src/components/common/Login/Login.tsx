@@ -38,11 +38,13 @@ if (typeof window !== 'undefined') {
 }
 
 /* --------------- Login component --------------- */
+type ConnectType = { address?: string; balance?: string; chainId?: number };
 type LoginProps = {
-  onClick?: () => { account?: string; balance?: string; chainId?: number };
+  onConnect?: ({ address, balance, chainId }: ConnectType) => void;
+  onDisconnect?: () => void;
 };
 
-export const Login = ({ onClick }: LoginProps) => {
+export const Login = ({ onConnect, onDisconnect }: LoginProps) => {
   const { provider, web3Provider, setProvider, setWeb3Provider } =
     useContext(Web3DataContext);
 
@@ -90,7 +92,9 @@ export const Login = ({ onClick }: LoginProps) => {
       setProvider(modalProvider);
       setWeb3Provider(wProvider);
       setChainId(currentChainId || null);
-      // onClick({ address: address[0], chain: currentChainId || null });
+
+      const values = { address: address[0], chainId: currentChainId };
+      if (onConnect) onConnect(values);
     } catch (error) {
       window.console.error(error);
     }
@@ -106,6 +110,8 @@ export const Login = ({ onClick }: LoginProps) => {
     setUserBalance(null);
     setErrorMessage(null);
     setProvider(null);
+
+    if (onDisconnect) onDisconnect();
   }, [provider]);
 
   // Auto connect to the cached provider
