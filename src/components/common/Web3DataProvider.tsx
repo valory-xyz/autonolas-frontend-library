@@ -16,22 +16,24 @@ export const Web3DataContext = createContext<ProviderContextType>(
   {} as ProviderContextType,
 );
 
-export const Web3DataProvider: FC = ({ children }: { children: ReactNode }) => {
+export const Web3DataProvider: FC = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   const [provider, setProvider] = useState<ProviderType>(null);
   const [web3Provider, setWeb3Provider] = useState<Web3ProviderType>(null);
 
   return (
-    <div>
-      <Web3DataContext.Provider
-        value={{
-          provider,
-          setProvider,
-          web3Provider,
-          setWeb3Provider,
-        }}
-      >
-        {children}
-      </Web3DataContext.Provider>
-    </div>
+    <Web3DataContext.Provider
+      value={{
+        provider,
+        setProvider,
+        web3Provider,
+        setWeb3Provider,
+      }}
+    >
+      {children}
+    </Web3DataContext.Provider>
   );
 };

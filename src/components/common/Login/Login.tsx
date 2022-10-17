@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useContext, useCallback, useState } from 'react';
 import { Button } from 'antd';
 import round from 'lodash/round';
@@ -9,7 +10,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 
 import { SUPPORTED_NETWORKS } from '../../../utils';
 import { EllipsisMiddle } from '../Ellipsis';
-import { getBalance } from '../functions';
+import { getBalance } from '../../../functions';
 import { Web3DataContext } from '../Web3DataProvider';
 import { Container, DetailsContainer, WalletContainer } from './styles';
 
