@@ -39,27 +39,32 @@ if (typeof window !== 'undefined') {
 }
 
 /* --------------- Login component --------------- */
-type ConnectType = { address?: string; balance?: string; chainId?: number };
+type ConnectType = {
+  address?: string | null;
+  balance?: string | null;
+  chainId?: number | null;
+};
 type LoginProps = {
-  onConnect?: ({ address, balance, chainId }: ConnectType) => void;
+  onConnect?: ({}: ConnectType) => void;
   onDisconnect?: () => void;
+  onError?: (error: Error) => void;
 };
 
-export const Login = ({ onConnect, onDisconnect }: LoginProps) => {
+export const Login = ({ onConnect, onDisconnect, onError }: LoginProps) => {
   const { provider, web3Provider, setProvider, setWeb3Provider } =
     useContext(Web3DataContext);
 
   const [account, setUserAccount] = useState<string | null>(null);
   const [balance, setUserBalance] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<Error | null>(null);
 
   const setBalance = async (accountPassed: string) => {
     try {
       const result = await getBalance(accountPassed, web3Provider as Web3);
       setUserBalance(result as string);
     } catch (error) {
-      window.console.log(error);
+      setErrorMessage(error);
     }
   };
 
@@ -93,9 +98,6 @@ export const Login = ({ onConnect, onDisconnect }: LoginProps) => {
       setProvider(modalProvider);
       setWeb3Provider(wProvider);
       setChainId(currentChainId || null);
-
-      const values = { address: address[0], chainId: currentChainId };
-      if (onConnect) onConnect(values);
     } catch (error) {
       window.console.error(error);
     }
@@ -158,6 +160,18 @@ export const Login = ({ onConnect, onDisconnect }: LoginProps) => {
 
     return undefined;
   }, [provider, disconnectAccount]);
+
+  /**
+   * trigger callback if the values are changed
+   */
+  useEffect(() => {
+    const values: ConnectType = { address: account, balance, chainId };
+    if (account && onConnect) onConnect(values);
+  }, [account, balance, chainId]);
+
+  useEffect(() => {
+    if (errorMessage && onError) onError(errorMessage);
+  }, [errorMessage]);
 
   if (errorMessage) {
     return (
