@@ -5,38 +5,14 @@ import round from 'lodash/round';
 import isNil from 'lodash/isNil';
 
 import Web3 from 'web3';
-import Web3Modal from 'web3modal';
-import WalletConnectProvider from '@walletconnect/web3-provider';
 
 import { SUPPORTED_NETWORKS } from '../../../utils';
 import { EllipsisMiddle } from '../Ellipsis';
 import { getBalance } from '../../../functions';
 import { Web3DataContext } from '../Web3DataProvider';
 import { Container, DetailsContainer, WalletContainer } from './styles';
-
-/* --------------- web3Modal --------------- */
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider, // required
-    options: {
-      infuraId: undefined, // required
-      rpc: {
-        1: process.env.NEXT_PUBLIC_MAINNET_URL,
-        5: process.env.NEXT_PUBLIC_GOERLI_URL,
-        31337: process.env.NEXT_PUBLIC_AUTONOLAS_URL,
-      },
-    },
-  },
-};
-
-let web3Modal: Web3Modal;
-if (typeof window !== 'undefined') {
-  web3Modal = new Web3Modal({
-    network: 'mainnet', // optional
-    cacheProvider: true,
-    providerOptions, // required
-  });
-}
+import { ProviderOptions } from './helpers';
+import { GenericObject } from 'src/components/types';
 
 /* --------------- Login component --------------- */
 type ConnectType = {
@@ -48,9 +24,17 @@ type LoginProps = {
   onConnect?: ({}: ConnectType) => void;
   onDisconnect?: () => void;
   onError?: (error: Error) => void;
+  rpc?: GenericObject;
 };
 
-export const Login = ({ onConnect, onDisconnect, onError }: LoginProps) => {
+export const Login = ({
+  rpc,
+  onConnect,
+  onDisconnect,
+  onError,
+}: LoginProps) => {
+  const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
+
   const { provider, web3Provider, setProvider, setWeb3Provider } =
     useContext(Web3DataContext);
 
