@@ -1,2 +1,3 @@
-export { Footer } from './components';
+export * from './components';
+export * from './functions';
 export * from './utils';

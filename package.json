@@ -29,16 +29,25 @@
   "author": "Autonolas",
   "homepage": "https://github.com/valory-xyz/autonolas-frontend-library#readme",
   "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "@web3-react/core": "^6.1.9",
+    "antd": "^4.12.3",
+    "ethers": "^5.7.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "antd": "^4.12.3",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "web3": "^1.6.1",
+    "web3modal": "^1.9.8"
   },
   "peerDependencies": {
+    "antd": "^4.12.3",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "antd": "^4.12.3",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "web3": "^1.6.1",
+    "web3modal": "^1.9.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -65,6 +74,7 @@
     "babel-loader": "^8.2.3",
     "babel-preset-react-app": "^9.1.2",
     "chromatic": "^6.5.3",
+    "encoding": "^0.1.13",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.7.0",
