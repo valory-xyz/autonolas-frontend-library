@@ -5,9 +5,9 @@ import { GenericObject } from 'src/components/types';
 type rcpType = GenericObject | undefined;
 
 const localRpc = {
-  1: process.env.NEXT_PUBLIC_MAINNET_URL,
-  5: process.env.NEXT_PUBLIC_GOERLI_URL,
-  31337: process.env.NEXT_PUBLIC_AUTONOLAS_URL,
+  1: process.env.RPC_MAINNET_URL,
+  5: process.env.RPC_GOERLI_URL,
+  31337: process.env.RPC_LOCAL_URL,
 };
 
 /**

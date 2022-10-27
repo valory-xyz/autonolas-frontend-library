@@ -6,7 +6,6 @@ This repository contains the common UI modules/components for [Autonolas](https:
 
 - web3.js
 - ReactJS
-- NextJS
 - Styled-components
 - Ant Design
 - React-testing-library
@@ -37,11 +36,3 @@ Once you are done developing in `autonolas-frontend-library`, you can follow the
 1. In `autonolas-protocol-frontend`, run `yarn unlink --no-save autonolas-frontend-library`. The `--no-save` flag is important to ensure that the dependency is not removed from `package.json` and `yarn.lock`.
 2. In `autonolas-protocol-frontend`, run `yarn install autonolas-frontend-library` to fetch the latest published version from GitHub.
 3. In `autonolas-frontend-library`, run `yarn unlink` to delete the symlink created by yarn. You may require sudo permissions to run this command.
-
-## Steps to update autonolas-frontend-library package to latest version
-
-1. Find the entry for `autonolas-frontend-library` in `package.json`
-2. Copy the short hash of the latest commit on [autonolas-frontend-library master](https://github.com/valory-xyz/autonolas-frontend-library/commits/main)
-3. Paste the hash into the github link that controls the `autonolas-frontend-library` version in `package.json`
-4. Run `yarn` to also update package-lock.json
-5. Open a PR with these changes.
