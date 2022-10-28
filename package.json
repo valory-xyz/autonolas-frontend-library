@@ -1,5 +1,5 @@
 {
-  "name": "autonolas-frontend-library",
+  "name": "@autonolas/frontend-library",
   "version": "0.1.0",
   "description": "Codebase to common style, components, settings, etc.",
   "main": "dist/index.js",
