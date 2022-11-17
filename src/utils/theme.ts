@@ -3,6 +3,9 @@ export const COLOR = {
   RED: '#EA3324',
   WHITE: '#FFFFFF',
 
+  GREEN_1: '#00FC82',
+  GREEN_2: '#00F422',
+  
   GREY_1: '#C4C4C4',
   GREY_2: '#9A9A9A',
   BORDER_GREY: '#E3E3E3',
