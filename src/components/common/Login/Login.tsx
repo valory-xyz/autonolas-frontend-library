@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useContext, useCallback, useState } from 'react';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 import round from 'lodash/round';
 import isNil from 'lodash/isNil';
 
@@ -25,6 +25,7 @@ type LoginProps = {
   onDisconnect?: () => void;
   onError?: (error: Error) => void;
   rpc?: GenericObject;
+  buttonProps?: ButtonProps;
 };
 
 export const Login = ({
@@ -32,6 +33,7 @@ export const Login = ({
   onConnect,
   onDisconnect,
   onError,
+  buttonProps
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -170,7 +172,7 @@ export const Login = ({
   if (!account || !chainId) {
     return (
       <Container>
-        <Button type="primary" onClick={handleLogin}>
+        <Button type="primary" onClick={handleLogin} {...(buttonProps||{})}>
           Connect Wallet
         </Button>
       </Container>
