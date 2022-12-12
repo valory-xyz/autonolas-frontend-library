@@ -11,7 +11,24 @@ export default { title: 'Login' };
 export const Default = (): JSX.Element => (
   <Web3DataProvider>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Login onConnect={(e) => console.log(e)} onDisconnect={() => console.log('disconnect')} />
+      <Login
+        onConnect={(e) => console.log(e)}
+        onDisconnect={() => console.log('disconnect')}
+      />
+    </Web3ReactProvider>
+  </Web3DataProvider>
+);
+
+export const LinkButton = (): JSX.Element => (
+  <Web3DataProvider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Login
+        onConnect={(e) => console.log(e)}
+        onDisconnect={() => console.log('disconnect')}
+        buttonProps={{
+          type: 'link',
+        }}
+      />
     </Web3ReactProvider>
   </Web3DataProvider>
 );

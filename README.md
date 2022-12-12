@@ -15,12 +15,12 @@ This repository contains the common UI modules/components for [Autonolas](https:
 - To avoid multiple react packages please do the following:
 
 1. In Application:
-a) cd node_modules/react && npm link
-b) cd node_modules/react-dom && npm link
+a) cd node_modules/react && yarn link
+b) cd node_modules/react-dom && yarn link
 
 2. In Library
-a) npm link react
-b) npm link react-dom
+a) yarn link react
+b) yarn link react-dom
 
 ### Working with components in autonolas-frontend-library
 
@@ -36,3 +36,7 @@ Once you are done developing in `autonolas-frontend-library`, you can follow the
 1. In `autonolas-protocol-frontend`, run `yarn unlink --no-save autonolas-frontend-library`. The `--no-save` flag is important to ensure that the dependency is not removed from `package.json` and `yarn.lock`.
 2. In `autonolas-protocol-frontend`, run `yarn install autonolas-frontend-library` to fetch the latest published version from GitHub.
 3. In `autonolas-frontend-library`, run `yarn unlink` to delete the symlink created by yarn. You may require sudo permissions to run this command.
+
+### To run storybook
+
+yarn run storybook
