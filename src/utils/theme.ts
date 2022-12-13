@@ -2,6 +2,7 @@ export const COLOR = {
   PRIMARY: '#7A00F4',
   RED: '#EA3324',
   WHITE: '#FFFFFF',
+  ORANGE: ' #FF9400',
 
   GREEN_1: '#00FC82',
   GREEN_2: '#00F422',

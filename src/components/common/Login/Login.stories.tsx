@@ -25,9 +25,9 @@ export const LinkButton = (): JSX.Element => (
       <Login
         onConnect={(e) => console.log(e)}
         onDisconnect={() => console.log('disconnect')}
-        buttonProps={{
-          type: 'link',
-        }}
+        buttonProps={{ type: 'link' }}
+        isDapp={false}
+        backendUrl="https://contribution-service-backend.staging.autonolas.tech"
       />
     </Web3ReactProvider>
   </Web3DataProvider>

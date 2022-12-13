@@ -22,8 +22,11 @@ export const WalletContainer = styled.div`
     display: flex;
     align-items: center;
     margin-right: 1rem;
-    color: ${COLOR.RED};
-    svg {
+    color: ${COLOR.ORANGE};
+    .anticon-caret-down {
+      margin-left: 0.5rem;
+    }
+    .anticon-warning {
       margin-right: 0.5rem;
     }
   }

@@ -1,12 +1,13 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext, useCallback, useState } from 'react';
-import { Button, ButtonProps } from 'antd';
+import { Button, ButtonProps, Popover } from 'antd';
 import round from 'lodash/round';
 import isNil from 'lodash/isNil';
+import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import Web3 from 'web3';
 
-import { SUPPORTED_NETWORKS } from '../../../utils';
+import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
 import { EllipsisMiddle } from '../Ellipsis';
 import { getBalance } from '../../../functions';
 import { Web3DataContext } from '../Web3DataProvider';
@@ -26,6 +27,14 @@ type LoginProps = {
   onError?: (error: Error) => void;
   rpc?: GenericObject;
   buttonProps?: ButtonProps;
+  /**
+   * TODO: make it more generic
+   * if the application uses both blockchain node & backend,
+   * then it is not considered as complete dapp. Hence point
+   * to mainnet only on production
+   */
+  isDapp?: boolean;
+  backendUrl?: string;
 };
 
 export const Login = ({
@@ -33,7 +42,9 @@ export const Login = ({
   onConnect,
   onDisconnect,
   onError,
-  buttonProps
+  buttonProps,
+  isDapp = true,
+  backendUrl,
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -159,6 +170,23 @@ export const Login = ({
     if (errorMessage && onError) onError(errorMessage);
   }, [errorMessage]);
 
+  const isStaging = () => {
+    return (backendUrl || '').includes('staging');
+  };
+
+  /**
+   * returns if the current network is supported based on backend URL configured
+   */
+  const isValidNetwork = () => {
+    // staging and other preview env
+    if (isStaging()) {
+      return SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId);
+    }
+
+    // production env
+    return chainId === 1;
+  };
+
   if (errorMessage) {
     return (
       <Container>
@@ -172,20 +200,60 @@ export const Login = ({
   if (!account || !chainId) {
     return (
       <Container>
-        <Button type="primary" onClick={handleLogin} {...(buttonProps||{})}>
+        <Button type="primary" onClick={handleLogin} {...(buttonProps || {})}>
           Connect Wallet
         </Button>
       </Container>
     );
   }
 
+  const unsupportedText = (
+    <>
+      <WarningOutlined />
+      Unsupported network
+    </>
+  );
+
   return (
     <Container>
       <DetailsContainer>
         <WalletContainer>
-          {!SUPPORTED_NETWORKS.includes(chainId) && (
-            <div className="unsupported-network">Unsupported network</div>
+          {isDapp ? (
+            <>
+              {!SUPPORTED_NETWORKS.includes(chainId) && (
+                <div className="unsupported-network">{unsupportedText}</div>
+              )}
+            </>
+          ) : (
+            <>
+              {!isValidNetwork() && (
+                <div className="unsupported-network">
+                  {unsupportedText}
+                  <Popover
+                    content={
+                      <div>
+                        {isStaging() ? (
+                          <>
+                            {SUPPORTED_TEST_NETWORKS.map((e) => (
+                              <div key={`supported-chain-${e.id}`}>
+                                {e.name}
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <div>Ethereum</div>
+                        )}
+                      </div>
+                    }
+                    title="Switch to a supported network:"
+                  >
+                    <CaretDownOutlined />
+                  </Popover>
+                </div>
+              )}
+            </>
           )}
+
           <div>
             {isNil(balance) ? '--' : `${round(Number(balance), 2)} ETH`}
           </div>
