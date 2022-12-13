@@ -29,6 +29,7 @@
   "author": "Autonolas",
   "homepage": "https://github.com/valory-xyz/autonolas-frontend-library#readme",
   "dependencies": {
+    "@ant-design/icons": "^4.8.0",
     "@walletconnect/web3-provider": "^1.8.0",
     "@web3-react/core": "^6.1.9",
     "antd": "^4.12.3",
