@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { COLOR, MEDIA_QUERY } from '../../../utils';
 
+export const StickyContianer = styled.div`
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  line-height: normal;
+`;
+
 export const Logo = styled.div`
   width: 48px;
   cursor: pointer;
@@ -22,17 +29,29 @@ export const RightMenu = styled.div`
   }
 `;
 
-export const ContractsInfoContainer = styled.div`
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  .registry-contract {
+export const OffChainContainer = styled.div`
+  margin-right: 1.5rem;
+  .off-chain-text {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .status-timer-row {
     display: flex;
     align-items: center;
   }
-  img {
-    margin-right: 8px;
-  }
+`;
+
+export const ContractsInfoContainer = styled(StickyContianer)`
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  background: ${COLOR.WHITE};
+  border: 1px solid ${COLOR.GREY_3};
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 0.75rem;
+  transition: all 0.3s;
   .dot {
     display: inline-block;
     position: relative;
@@ -47,6 +66,11 @@ export const ContractsInfoContainer = styled.div`
   .dot-offline {
     background-color: ${COLOR.ORANGE};
   }
+  .minimize-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
 
   ${MEDIA_QUERY.mobileM} {
     flex-direction: column;
@@ -56,6 +80,10 @@ export const ContractsInfoContainer = styled.div`
 export const PoweredByLogo = styled.div`
   display: flex;
   margin-right: 1rem;
+  a {
+    line-height: normal;
+    height: 56px;
+  }
 `;
 
 export const NextUpdateTimer = styled.div`

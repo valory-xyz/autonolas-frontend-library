@@ -3,12 +3,12 @@ import React from 'react';
 export const PoweredBy = () => (
   <svg
     width="150"
-    height="53"
-    viewBox="0 0 150 53"
+    height="56"
+    viewBox="0 0 150 56"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="150" height="53" rx="5" fill="black" />
+    <rect width="150" height="56" rx="5" fill="black" />
     <g clipPath="url(#clip0_33_124)">
       <path
         d="M38.3986 18.6939H38.9052L39.9248 20.7337V31.4252L38.9052 33.4651H38.3986V29.8989L38.9052 29.3925V24.8064L38.3986 24.2999V18.6939Z"

@@ -1,39 +1,61 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Typography } from 'antd';
 import { ServiceStatusInfo } from './ServiceStatusInfo';
 
 export default {
   title: 'Service Status Info',
 };
 
-export const Default = () => (
-  <ServiceStatusInfo
-    isHealthy={true}
-    secondsLeftReceived={100}
-    // rightContent={<>Right Side Content</>}
-  />
-);
+const { Text } = Typography;
 
-// {
-//   id: 'contract-code',
-//   text: 'Contracts',
-//   redirectTo: isGoerli(chainId)
-//     ? 'https://goerli.etherscan.io/address/0x7C3B976434faE9986050B26089649D9f63314BD8'
-//     : 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
-// },
-// {
-//   id: 'service-code',
-//   text: 'Service code',
-//   redirectTo: 'https://github.com/valory-xyz/contribution-service',
-// },
-// {
-//   id: '2',
-//   text: 'Learn more',
-//   redirectTo: `/docs#${DOCS_SECTIONS['how-it-works']}`,
-//   isInternal: true,
-// },
-// {
-//   id: '3',
-//   text: 'Build your own',
-//   // redirectTo: 'https://www.autonolas.network/coordinationkit',
-//   redirectTo: null,
-// },
+const DummyContianer = styled.div`
+  height: 300vh;
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    line-height: 1.5715;
+  }
+  .row-1 {
+    font-size: 14px;
+  }
+`;
+
+const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
+
+const temp = [
+  {
+    name: 'Contract One',
+    link: 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
+  },
+  {
+    name: 'Code',
+    link: 'https://github.com/valory-xyz/contribution-service',
+  },
+];
+export const Default = () => (
+  <DummyContianer>
+    <ServiceStatusInfo
+      isHealthy={true}
+      secondsLeftReceived={100}
+      extra={
+        <div>
+          <Text className="row-1">CODE</Text>
+          <div>
+            {temp.map((contract, index) => (
+              <>
+                <Text type="secondary" className="row-2">
+                  <a href={contract.link} target="_blank" rel="noreferrer">
+                    {contract.name}
+                  </a>
+                </Text>
+                {temp.length - 1 !== index && <DotSpace />}
+              </>
+            ))}
+          </div>
+        </div>
+      }
+    />
+  </DummyContianer>
+);
