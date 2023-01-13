@@ -59,7 +59,7 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   font-size: 16px;
-  padding: 20px;
+  padding: 12px;
   transition: all 0.3s;
   .dot {
     display: inline-block;
