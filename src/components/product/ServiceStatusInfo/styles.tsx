@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { COLOR, MEDIA_QUERY } from '../../../utils';
 
-export const StickyContianer = styled.div`
+export const StickyContainer = styled.div`
   position: fixed;
   bottom: 1rem;
   left: 1rem;
   line-height: normal;
+  z-index: 1000;
 `;
 
 export const Logo = styled.div`
@@ -49,7 +50,7 @@ export const MobileOffChainContainer = styled.div`
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContianer)`
+export const ContractsInfoContainer = styled(StickyContainer)`
   right: 1rem;
   display: flex;
   align-items: center;
@@ -58,7 +59,7 @@ export const ContractsInfoContainer = styled(StickyContianer)`
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   font-size: 16px;
-  padding: 0.75rem;
+  padding: 20px;
   transition: all 0.3s;
   .dot {
     display: inline-block;
@@ -79,6 +80,9 @@ export const ContractsInfoContainer = styled(StickyContianer)`
     right: 0.5rem;
     top: 0.5rem;
   }
+  .ant-statistic-content-suffix {
+    margin-left: 0px;
+  }
 
   ${MEDIA_QUERY.mobileL} {
     font-size: 14px;
@@ -86,7 +90,7 @@ export const ContractsInfoContainer = styled(StickyContianer)`
   }
 `;
 
-export const PoweredByLogo = styled.div`
+export const Badge = styled.div`
   display: flex;
   margin-right: 1rem;
   a {

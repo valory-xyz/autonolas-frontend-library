@@ -52,7 +52,7 @@ export const Default = () => {
       <ServiceStatusInfo
         isHealthy={true}
         // isHealthy={undefined}
-        secondsLeftReceived={100}
+        secondsLeftReceived={15}
         extra={
           <div>
             <Text className="row-1">CODE</Text>

@@ -6,7 +6,7 @@ import { PoweredBy } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
 import {
   ContractsInfoContainer,
-  PoweredByLogo,
+  Badge,
   NextUpdateTimer,
   OffChainContainer,
   MobileOffChainContainer,
@@ -51,7 +51,7 @@ export const ServiceStatusInfo = ({
   const timerCountdown = isUndefined(secondsLeftReceived) ? undefined : (
     <Countdown
       value={Date.now() + Math.round(seconds || 0) * 1000}
-      format="ss"
+      format="s"
       suffix="s"
       onFinish={async () => {
         window.console.log('timer completed!');
@@ -91,11 +91,11 @@ export const ServiceStatusInfo = ({
 
   return (
     <ContractsInfoContainer>
-      <PoweredByLogo>
+      <Badge>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
           <PoweredBy />
         </a>
-      </PoweredByLogo>
+      </Badge>
 
       {/* status (green/orange dot) & timers */}
       {isMobile ? (
@@ -118,7 +118,7 @@ export const ServiceStatusInfo = ({
 
                 {!isUndefined(secondsLeftReceived) && (
                   <NextUpdateTimer>
-                    Next Update:&nbsp;
+                    Next update:&nbsp;
                     {isNil(seconds) ? '--' : timerCountdown}
                   </NextUpdateTimer>
                 )}

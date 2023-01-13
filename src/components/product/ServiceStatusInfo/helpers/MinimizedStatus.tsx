@@ -1,7 +1,7 @@
 import React  from 'react';
 import { isUndefined } from 'lodash';
 import { COLOR } from '../../../../utils';
-import { StickyContianer } from '../styles';
+import { StickyContainer } from '../styles';
 
 type MinimizedStatusProps = {
   isOperational?: boolean;
@@ -17,7 +17,7 @@ export const MinimizedStatus = ({
   const showStatus = !isUndefined(isOperational);
 
   return (
-    <StickyContianer>
+    <StickyContainer>
       <svg
         width="109"
         height="50"
@@ -126,6 +126,6 @@ export const MinimizedStatus = ({
           fill="white"
         />
       </svg>
-    </StickyContianer>
+    </StickyContainer>
   );
 };
