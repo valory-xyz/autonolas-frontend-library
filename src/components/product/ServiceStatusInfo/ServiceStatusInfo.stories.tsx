@@ -34,28 +34,33 @@ const temp = [
     link: 'https://github.com/valory-xyz/contribution-service',
   },
 ];
-export const Default = () => (
-  <DummyContianer>
-    <ServiceStatusInfo
-      isHealthy={true}
-      secondsLeftReceived={100}
-      extra={
-        <div>
-          <Text className="row-1">CODE</Text>
+
+export const Default = () => {
+  const list = temp.map((contract, index) => (
+    <>
+      <Text type="secondary" className="row-2">
+        <a href={contract.link} target="_blank" rel="noreferrer">
+          {contract.name}
+        </a>
+      </Text>
+      {temp.length - 1 !== index && <DotSpace />}
+    </>
+  ));
+
+  return (
+    <DummyContianer>
+      <ServiceStatusInfo
+        isHealthy={true}
+        // isHealthy={undefined}
+        secondsLeftReceived={100}
+        extra={
           <div>
-            {temp.map((contract, index) => (
-              <>
-                <Text type="secondary" className="row-2">
-                  <a href={contract.link} target="_blank" rel="noreferrer">
-                    {contract.name}
-                  </a>
-                </Text>
-                {temp.length - 1 !== index && <DotSpace />}
-              </>
-            ))}
+            <Text className="row-1">CODE</Text>
+            <div>{list}</div>
           </div>
-        </div>
-      }
-    />
-  </DummyContianer>
-);
+        }
+        extraMd={<div>{list}</div>}
+      />
+    </DummyContianer>
+  );
+};

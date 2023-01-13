@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { Typography, Statistic, Button } from 'antd';
+import { Typography, Statistic, Button, Grid } from 'antd';
 import { ShrinkOutlined } from '@ant-design/icons';
 import { isUndefined, isNil } from 'lodash';
 import PoweredBy from './helpers/PoweredBySvg';
@@ -9,15 +9,22 @@ import {
   PoweredByLogo,
   NextUpdateTimer,
   OffChainContainer,
+  MobileOffChainContainer,
 } from './styles';
 
 const { Text } = Typography;
 const { Countdown } = Statistic;
+const { useBreakpoint } = Grid;
 
 type ServiceStatusInfoDetails = {
   isHealthy?: boolean;
   secondsLeftReceived?: number;
   extra?: ReactNode;
+  /**
+   * extra content to be displayed on mobile size.
+   * if not defined, will use the same content as `extra`
+   */
+  extraMd?: ReactNode;
   onTimerFinish?: () => void;
 };
 
@@ -27,8 +34,11 @@ export const ServiceStatusInfo = ({
   isHealthy,
   secondsLeftReceived,
   extra,
+  extraMd,
   onTimerFinish,
 }: ServiceStatusInfoDetails) => {
+  const screens = useBreakpoint();
+  const isMobile = (screens.xs || screens.sm) && !screens.md;
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number | undefined>(0);
 
@@ -58,6 +68,18 @@ export const ServiceStatusInfo = ({
   const showOperationStatus =
     !isUndefined(isHealthy) || !isUndefined(secondsLeftReceived);
 
+  const actualStatus = isHealthy ? (
+    <>
+      <span className="dot dot-online" />
+      &nbsp;Operational
+    </>
+  ) : (
+    <>
+      <span className="dot dot-offline" />
+      &nbsp;Disrupted
+    </>
+  );
+
   if (isMinimized)
     return (
       <MinimizedStatus
@@ -75,34 +97,37 @@ export const ServiceStatusInfo = ({
         </a>
       </PoweredByLogo>
 
-      {showOperationStatus && (
-        <OffChainContainer>
-          <Text className="off-chain-text">Off-chain Service Status</Text>
-          <div className="status-timer-row">
-            <div>
-              {isHealthy ? (
-                <>
-                  <span className="dot dot-online" />
-                  &nbsp;Operational
-                </>
-              ) : (
-                <>
-                  <span className="dot dot-offline" />
-                  &nbsp;Disrupted
-                </>
-              )}
-              <DotSpace />
-            </div>
+      {/* status (green/orange dot) & timers */}
+      {isMobile ? (
+        <MobileOffChainContainer>
+          {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
+          <div>{extraMd || extra}</div>
+        </MobileOffChainContainer>
+      ) : (
+        <>
+          {showOperationStatus && (
+            <OffChainContainer>
+              <Text className="off-chain-text">Off-chain Service Status</Text>
+              <div className="status-timer-row">
+                {!isUndefined(isHealthy) && (
+                  <div>
+                    {actualStatus}
+                    <DotSpace />
+                  </div>
+                )}
 
-            <NextUpdateTimer>
-              Next Update:&nbsp;
-              {isNil(seconds) ? '--' : timerCountdown}
-            </NextUpdateTimer>
-          </div>
-        </OffChainContainer>
+                {!isUndefined(secondsLeftReceived) && (
+                  <NextUpdateTimer>
+                    Next Update:&nbsp;
+                    {isNil(seconds) ? '--' : timerCountdown}
+                  </NextUpdateTimer>
+                )}
+              </div>
+            </OffChainContainer>
+          )}
+          {extra}
+        </>
       )}
-
-      {extra || null}
 
       <Button
         type="link"
@@ -111,7 +136,7 @@ export const ServiceStatusInfo = ({
         onClick={() => setIsMinimized(true)}
         className="minimize-btn"
       >
-        Minimize
+        {isMobile ? '' : 'Minimize'}
       </Button>
     </ContractsInfoContainer>
   );

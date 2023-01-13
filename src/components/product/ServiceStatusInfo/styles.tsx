@@ -41,6 +41,14 @@ export const OffChainContainer = styled.div`
   }
 `;
 
+export const MobileOffChainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  div:first-child {
+    margin-bottom: 2px;
+  }
+`;
+
 export const ContractsInfoContainer = styled(StickyContianer)`
   right: 1rem;
   display: flex;
@@ -72,8 +80,9 @@ export const ContractsInfoContainer = styled(StickyContianer)`
     top: 0.5rem;
   }
 
-  ${MEDIA_QUERY.mobileM} {
-    flex-direction: column;
+  ${MEDIA_QUERY.mobileL} {
+    font-size: 14px;
+    padding: 0.5rem;
   }
 `;
 
@@ -83,6 +92,10 @@ export const PoweredByLogo = styled.div`
   a {
     line-height: normal;
     height: 56px;
+  }
+
+  ${MEDIA_QUERY.mobileL} {
+    margin-right: 0.5rem;
   }
 `;
 
