@@ -8,3 +8,7 @@
 
 - Button props for `wallet-connect`
 - Unsupported network for non-dapps
+
+## 0.3.0
+
+- `ServiceStatusInfo` component added

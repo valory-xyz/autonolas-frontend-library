@@ -9,6 +9,7 @@ export const COLOR = {
   
   GREY_1: '#C4C4C4',
   GREY_2: '#9A9A9A',
+  GREY_3: '#f0f0f0',
   BORDER_GREY: '#E3E3E3',
 
   BLACK: '#000000',
