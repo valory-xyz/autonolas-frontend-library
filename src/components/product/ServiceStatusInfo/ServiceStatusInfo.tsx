@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import { ShrinkOutlined } from '@ant-design/icons';
 import { isUndefined, isNil } from 'lodash';
-import PoweredBy from './helpers/PoweredBySvg';
+import { PoweredBy } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
 import {
   ContractsInfoContainer,
