@@ -12,3 +12,11 @@
 ## 0.3.0
 
 - `ServiceStatusInfo` component added
+
+## 0.3.1
+
+- `ServiceStatusInfo` component to have className
+
+## 0.3.2
+
+- `ServiceStatusInfo` component to have callback on-minimize & on-timer-end

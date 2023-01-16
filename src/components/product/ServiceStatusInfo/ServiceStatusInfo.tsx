@@ -25,7 +25,12 @@ type ServiceStatusInfoDetails = {
    * if not defined, will use the same content as `extra`
    */
   extraMd?: ReactNode;
-  onTimerFinish?: () => void;
+  onTimerFinish?: ({
+    setSeconds,
+  }: {
+    setSeconds: (value: number | undefined) => void;
+  }) => void;
+  onMinimizeToggle?: (isMinimized: boolean) => void;
 };
 
 const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
@@ -36,6 +41,7 @@ export const ServiceStatusInfo = ({
   extra,
   extraMd,
   onTimerFinish,
+  onMinimizeToggle,
 }: ServiceStatusInfoDetails) => {
   const screens = useBreakpoint();
   const isMobile = (screens.xs || screens.sm) && !screens.md;
@@ -55,9 +61,12 @@ export const ServiceStatusInfo = ({
       suffix="s"
       onFinish={async () => {
         window.console.log('timer completed!');
-        if (onTimerFinish) onTimerFinish();
+
+        setSeconds(0); // reseting timer to 0 as it is finished
+
+        if (onTimerFinish) onTimerFinish({ setSeconds });
       }}
-      onChange={(e: number) => setSeconds(parseInt(`${e / 1000}`))}
+      onChange={(e: number) => setSeconds(parseInt(`${e / 1000}`, 10))}
     />
   );
 
@@ -84,13 +93,16 @@ export const ServiceStatusInfo = ({
     return (
       <MinimizedStatus
         isOperational={isHealthy}
-        onMaximize={() => setIsMinimized(false)}
+        onMaximize={() => {
+          setIsMinimized(false);
+          if (onMinimizeToggle) onMinimizeToggle(false);
+        }}
         timerCountdown={timerCountdown}
       />
     );
 
   return (
-    <ContractsInfoContainer>
+    <ContractsInfoContainer className="service-status-maximized">
       <Badge>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
           <PoweredBy />
@@ -107,8 +119,10 @@ export const ServiceStatusInfo = ({
         <>
           {showOperationStatus && (
             <OffChainContainer>
-              <Text className="off-chain-text">Off-chain Service Status</Text>
-              <div className="status-timer-row">
+              <Text className="status-sub-header">
+                Off-chain Service Status
+              </Text>
+              <div className="status-sub-content">
                 {!isUndefined(isHealthy) && (
                   <div>
                     {actualStatus}
@@ -133,7 +147,10 @@ export const ServiceStatusInfo = ({
         type="link"
         size="small"
         icon={<ShrinkOutlined />}
-        onClick={() => setIsMinimized(true)}
+        onClick={() => {
+          setIsMinimized(true);
+          if (onMinimizeToggle) onMinimizeToggle(true);
+        }}
         className="minimize-btn"
       >
         {isMobile ? '' : 'Minimize'}

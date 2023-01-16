@@ -60,6 +60,7 @@ export const Default = () => {
           </div>
         }
         extraMd={<div>{list}</div>}
+        onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
       />
     </DummyContianer>
   );
