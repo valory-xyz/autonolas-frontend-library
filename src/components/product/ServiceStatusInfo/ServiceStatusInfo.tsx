@@ -26,6 +26,7 @@ type ServiceStatusInfoDetails = {
    */
   extraMd?: ReactNode;
   onTimerFinish?: () => void;
+  onMinimizeToggle?: (isMinimized: boolean) => void;
 };
 
 const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
@@ -36,6 +37,7 @@ export const ServiceStatusInfo = ({
   extra,
   extraMd,
   onTimerFinish,
+  onMinimizeToggle,
 }: ServiceStatusInfoDetails) => {
   const screens = useBreakpoint();
   const isMobile = (screens.xs || screens.sm) && !screens.md;
@@ -84,13 +86,16 @@ export const ServiceStatusInfo = ({
     return (
       <MinimizedStatus
         isOperational={isHealthy}
-        onMaximize={() => setIsMinimized(false)}
+        onMaximize={() => {
+          setIsMinimized(false);
+          if (onMinimizeToggle) onMinimizeToggle(false);
+        }}
         timerCountdown={timerCountdown}
       />
     );
 
   return (
-    <ContractsInfoContainer>
+    <ContractsInfoContainer className="serive-status-maximized">
       <Badge>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
           <PoweredBy />
@@ -133,7 +138,10 @@ export const ServiceStatusInfo = ({
         type="link"
         size="small"
         icon={<ShrinkOutlined />}
-        onClick={() => setIsMinimized(true)}
+        onClick={() => {
+          setIsMinimized(true);
+          if (onMinimizeToggle) onMinimizeToggle(true);
+        }}
         className="minimize-btn"
       >
         {isMobile ? '' : 'Minimize'}

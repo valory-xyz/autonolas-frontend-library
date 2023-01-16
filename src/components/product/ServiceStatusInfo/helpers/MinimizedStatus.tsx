@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { isUndefined } from 'lodash';
 import { COLOR } from '../../../../utils';
 import { StickyContainer } from '../styles';
@@ -6,7 +6,7 @@ import { StickyContainer } from '../styles';
 type MinimizedStatusProps = {
   isOperational?: boolean;
   timerCountdown?: JSX.Element;
-  onMaximize: () => void;
+  onMaximize?: () => void;
 };
 
 export const MinimizedStatus = ({
@@ -17,7 +17,7 @@ export const MinimizedStatus = ({
   const showStatus = !isUndefined(isOperational);
 
   return (
-    <StickyContainer>
+    <StickyContainer className="serive-status-minimized">
       <svg
         width="109"
         height="50"
