@@ -25,7 +25,11 @@ type ServiceStatusInfoDetails = {
    * if not defined, will use the same content as `extra`
    */
   extraMd?: ReactNode;
-  onTimerFinish?: () => void;
+  onTimerFinish?: ({
+    setSeconds,
+  }: {
+    setSeconds: (value: number | undefined) => void;
+  }) => void;
   onMinimizeToggle?: (isMinimized: boolean) => void;
 };
 
@@ -57,9 +61,12 @@ export const ServiceStatusInfo = ({
       suffix="s"
       onFinish={async () => {
         window.console.log('timer completed!');
-        if (onTimerFinish) onTimerFinish();
+
+        setSeconds(0); // reseting timer to 0 as it is finished
+
+        if (onTimerFinish) onTimerFinish({ setSeconds });
       }}
-      onChange={(e: number) => setSeconds(parseInt(`${e / 1000}`))}
+      onChange={(e: number) => setSeconds(parseInt(`${e / 1000}`, 10))}
     />
   );
 
@@ -112,8 +119,10 @@ export const ServiceStatusInfo = ({
         <>
           {showOperationStatus && (
             <OffChainContainer>
-              <Text className="off-chain-text">Off-chain Service Status</Text>
-              <div className="status-timer-row">
+              <Text className="status-sub-header">
+                Off-chain Service Status
+              </Text>
+              <div className="status-sub-content">
                 {!isUndefined(isHealthy) && (
                   <div>
                     {actualStatus}

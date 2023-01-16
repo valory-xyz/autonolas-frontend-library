@@ -32,14 +32,6 @@ export const RightMenu = styled.div`
 
 export const OffChainContainer = styled.div`
   margin-right: 1.5rem;
-  .off-chain-text {
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-  .status-timer-row {
-    display: flex;
-    align-items: center;
-  }
 `;
 
 export const MobileOffChainContainer = styled.div`
@@ -61,6 +53,15 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   font-size: 16px;
   padding: 12px;
   transition: all 0.3s;
+  .status-sub-header {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .status-sub-content {
+    display: flex;
+    align-items: center;
+    line-height: 1.75;
+  }
   .dot {
     display: inline-block;
     position: relative;
