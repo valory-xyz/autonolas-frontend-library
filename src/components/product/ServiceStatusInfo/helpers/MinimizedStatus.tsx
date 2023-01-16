@@ -17,7 +17,7 @@ export const MinimizedStatus = ({
   const showStatus = !isUndefined(isOperational);
 
   return (
-    <StickyContainer className="serive-status-minimized">
+    <StickyContainer className="service-status-minimized">
       <svg
         width="109"
         height="50"

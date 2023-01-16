@@ -102,7 +102,7 @@ export const ServiceStatusInfo = ({
     );
 
   return (
-    <ContractsInfoContainer className="serive-status-maximized">
+    <ContractsInfoContainer className="service-status-maximized">
       <Badge>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
           <PoweredBy />
