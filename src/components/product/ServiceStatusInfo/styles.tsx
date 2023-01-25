@@ -37,8 +37,11 @@ export const OffChainContainer = styled.div`
 export const MobileOffChainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  div:first-child {
+  div:nth-child(1) {
     margin-bottom: 4px;
+  }
+  div:nth-child(2) {
+    font-size: 16px
   }
 `;
 
