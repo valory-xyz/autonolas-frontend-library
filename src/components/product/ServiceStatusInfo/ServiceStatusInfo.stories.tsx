@@ -56,7 +56,7 @@ export const Default = () => {
         extra={
           <div>
             <Text className="row-1">CODE</Text>
-            <div>{list}</div>
+            <div className='status-sub-content'>{list}</div>
           </div>
         }
         extraMd={<div>{list}</div>}

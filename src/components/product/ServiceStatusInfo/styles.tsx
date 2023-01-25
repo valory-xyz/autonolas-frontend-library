@@ -45,7 +45,7 @@ export const MobileOffChainContainer = styled.div`
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContainer)`
+export const ContractsInfoContainer = styled(StickyContainer)<{ canMinimize: boolean }>`
   right: 1rem;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   font-size: 16px;
-  padding: 20px;
+  padding: ${({ canMinimize }) => (canMinimize ? `12px` : `20px`)};
   transition: all 0.3s;
   .status-sub-header {
     text-transform: uppercase;
@@ -97,12 +97,12 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   }
 `;
 
-export const Badge = styled.div`
+export const Badge = styled.div<{ canMinimize: boolean }>`
   display: flex;
   margin-right: 1rem;
   a {
     line-height: normal;
-    height: 72px;
+    height: ${({ canMinimize }) => (canMinimize ? '58px' : '72px')};
   }
 
   ${MEDIA_QUERY.mobileL} {

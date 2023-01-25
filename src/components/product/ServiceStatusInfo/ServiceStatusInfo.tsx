@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import { ShrinkOutlined } from '@ant-design/icons';
 import { isUndefined, isNil } from 'lodash';
-import { PoweredBy } from './helpers/PoweredBySvg';
+import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
 import {
   ContractsInfoContainer,
@@ -108,10 +108,10 @@ export const ServiceStatusInfo = ({
     );
 
   return (
-    <ContractsInfoContainer className="service-status-maximized">
-      <Badge>
+    <ContractsInfoContainer className="service-status-maximized" canMinimize={canMinimize}>
+      <Badge canMinimize={canMinimize}>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
-          <PoweredBy />
+          {canMinimize ? <PoweredByForSmallDevice /> : <PoweredBy />}
         </a>
       </Badge>
 
