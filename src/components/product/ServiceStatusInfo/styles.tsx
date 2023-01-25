@@ -38,7 +38,7 @@ export const MobileOffChainContainer = styled.div`
   display: flex;
   flex-direction: column;
   div:first-child {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -51,7 +51,7 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   font-size: 16px;
-  padding: 12px;
+  padding: 20px;
   transition: all 0.3s;
   .status-sub-header {
     text-transform: uppercase;
