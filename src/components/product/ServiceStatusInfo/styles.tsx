@@ -56,22 +56,25 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   .status-sub-header {
     text-transform: uppercase;
     font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
   }
   .status-sub-content {
     display: flex;
     align-items: center;
     line-height: 1.75;
+    font-size: 18px;
   }
   .dot {
     display: inline-block;
     position: relative;
-    top: -2px;
+    top: -3px;
     width: 5px;
     height: 5px;
     border-radius: 50%;
   }
   .dot-online {
-    background-color: ${COLOR.GREEN_2};
+    background-color: ${COLOR.GREEN_3};
   }
   .dot-offline {
     background-color: ${COLOR.ORANGE};
@@ -96,7 +99,7 @@ export const Badge = styled.div`
   margin-right: 1rem;
   a {
     line-height: normal;
-    height: 56px;
+    height: 72px;
   }
 
   ${MEDIA_QUERY.mobileL} {
