@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, MEDIA_QUERY } from '../../../utils';
+import { BORDER_RADIUS, BOX_SHADOW, COLOR, MEDIA_QUERY } from '../../../utils';
 
 export const StickyContainer = styled.div`
   position: fixed;
@@ -50,9 +50,9 @@ export const ContractsInfoContainer = styled(StickyContainer)<{ canMinimize: boo
   display: flex;
   align-items: center;
   background: ${COLOR.WHITE};
-  border: 1px solid ${COLOR.GREY_3};
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
+  border: 1px solid ${COLOR.GREY_4};
+  box-shadow: ${BOX_SHADOW.light};
+  border-radius: ${BORDER_RADIUS};
   font-size: 16px;
   padding: ${({ canMinimize }) => (canMinimize ? `12px` : `20px`)};
   transition: all 0.3s;
