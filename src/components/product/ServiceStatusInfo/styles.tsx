@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, MEDIA_QUERY } from '../../../utils';
+import { BORDER_RADIUS, BOX_SHADOW, COLOR, MEDIA_QUERY } from '../../../utils';
 
 export const StickyContainer = styled.div`
   position: fixed;
@@ -37,41 +37,47 @@ export const OffChainContainer = styled.div`
 export const MobileOffChainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  div:first-child {
-    margin-bottom: 2px;
+  div:nth-child(1) {
+    margin-bottom: 4px;
+  }
+  div:nth-child(2) {
+    font-size: 16px
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContainer)`
+export const ContractsInfoContainer = styled(StickyContainer)<{ canMinimize: boolean }>`
   right: 1rem;
   display: flex;
   align-items: center;
   background: ${COLOR.WHITE};
-  border: 1px solid ${COLOR.GREY_3};
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
+  border: 1px solid ${COLOR.GREY_4};
+  box-shadow: ${BOX_SHADOW.light};
+  border-radius: ${BORDER_RADIUS};
   font-size: 16px;
-  padding: 12px;
+  padding: ${({ canMinimize }) => (canMinimize ? `12px` : `20px`)};
   transition: all 0.3s;
   .status-sub-header {
     text-transform: uppercase;
     font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
   }
   .status-sub-content {
     display: flex;
     align-items: center;
     line-height: 1.75;
+    font-size: 18px;
   }
   .dot {
     display: inline-block;
     position: relative;
-    top: -2px;
+    top: -3px;
     width: 5px;
     height: 5px;
     border-radius: 50%;
   }
   .dot-online {
-    background-color: ${COLOR.GREEN_2};
+    background-color: ${COLOR.GREEN_3};
   }
   .dot-offline {
     background-color: ${COLOR.ORANGE};
@@ -91,12 +97,12 @@ export const ContractsInfoContainer = styled(StickyContainer)`
   }
 `;
 
-export const Badge = styled.div`
+export const Badge = styled.div<{ canMinimize: boolean }>`
   display: flex;
   margin-right: 1rem;
   a {
     line-height: normal;
-    height: 56px;
+    height: ${({ canMinimize }) => (canMinimize ? '58px' : '72px')};
   }
 
   ${MEDIA_QUERY.mobileL} {

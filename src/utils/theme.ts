@@ -6,10 +6,12 @@ export const COLOR = {
 
   GREEN_1: '#00FC82',
   GREEN_2: '#00F422',
-  
+  GREEN_3: '#33FF00',
+
   GREY_1: '#C4C4C4',
   GREY_2: '#9A9A9A',
   GREY_3: '#f0f0f0',
+  GREY_4: '#C6C6C6',
   BORDER_GREY: '#E3E3E3',
 
   BLACK: '#000000',
@@ -34,4 +36,10 @@ export const MEDIA_QUERY = {
   tabletL: `@media only screen and (max-width: ${BREAK_POINT.lg})`,
   laptop: `@media only screen and (max-width: ${BREAK_POINT.xl})`,
   desktop: `@media only screen and (max-width: ${BREAK_POINT.xxl})`,
+};
+
+export const BORDER_RADIUS = '5px';
+
+export const BOX_SHADOW = {
+  light: '0px 1px 6px rgba(0, 0, 0, 0.15)',
 };
