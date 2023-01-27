@@ -1,6 +1,6 @@
 {
   "name": "@autonolas/frontend-library",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Codebase to common style, components, settings, etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
