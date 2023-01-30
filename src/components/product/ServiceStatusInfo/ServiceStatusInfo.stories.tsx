@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography } from 'antd';
+import { Typography, Divider } from 'antd';
 import { ServiceStatusInfo } from './ServiceStatusInfo';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 const { Text } = Typography;
 
 const DummyContianer = styled.div`
-  height: 300vh;
+  font-family: system-ui;
   a {
     color: inherit;
     text-decoration: underline;
@@ -20,46 +20,39 @@ const DummyContianer = styled.div`
   .row-1 {
     font-size: 14px;
   }
+  .service-status-maximized {
+    /* just for storybook, else it will be always be sticky in footer */
+    position: relative !important;
+    bottom: 0;
+    left: 0;
+  }
+  .ant-divider-horizontal {
+    padding-top: 1rem;
+  }
 `;
 
-const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
-
-const temp = [
-  {
-    name: 'Contract One',
-    link: 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
-  },
-  {
-    name: 'Code',
-    link: 'https://github.com/valory-xyz/contribution-service',
-  },
-];
-
 export const Default = () => {
-  const list = temp.map((contract, index) => (
-    <>
-      <Text type="secondary" className="row-2">
-        <a href={contract.link} target="_blank" rel="noreferrer">
-          {contract.name}
-        </a>
-      </Text>
-      {temp.length - 1 !== index && <DotSpace />}
-    </>
-  ));
-
   return (
     <DummyContianer>
+      <Divider orientation="left">Contribution Widget</Divider>
       <ServiceStatusInfo
         isHealthy={true}
-        // isHealthy={undefined}
+        secondsLeftReceived={15}
+        appType="contribution"
+        onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+      />
+
+      <Divider orientation="left">Generic without appType</Divider>
+      <ServiceStatusInfo
+        isHealthy={true}
         secondsLeftReceived={15}
         extra={
           <div>
             <Text className="row-1">CODE</Text>
-            <div className='status-sub-content'>{list}</div>
+            <div className="status-sub-content">Some text</div>
           </div>
         }
-        extraMd={<div>{list}</div>}
+        extraMd={<div> Some text on md </div>}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
       />
     </DummyContianer>

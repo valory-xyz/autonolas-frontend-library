@@ -4,12 +4,15 @@ import { ShrinkOutlined } from '@ant-design/icons';
 import { isUndefined, isNil } from 'lodash';
 import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
+import { DotSpace, LinksSection } from './utils';
+import { AppType } from './types';
 import {
   ContractsInfoContainer,
   Badge,
   NextUpdateTimer,
   OffChainContainer,
   MobileOffChainContainer,
+  ExtraContent,
 } from './styles';
 
 const { Text } = Typography;
@@ -19,6 +22,7 @@ const { useBreakpoint } = Grid;
 type ServiceStatusInfoDetails = {
   isHealthy?: boolean;
   secondsLeftReceived?: number;
+  appType?: AppType;
   extra?: ReactNode;
   /**
    * extra content to be displayed on mobile size.
@@ -33,8 +37,6 @@ type ServiceStatusInfoDetails = {
   onMinimizeToggle?: (isMinimized: boolean) => void;
 };
 
-const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
-
 const timerStyle = { minWidth: '36px' };
 const Dash = () => (
   <span style={{ display: 'inline-block', ...timerStyle }}>--</span>
@@ -43,6 +45,7 @@ const Dash = () => (
 export const ServiceStatusInfo = ({
   isHealthy,
   secondsLeftReceived,
+  appType,
   extra,
   extraMd,
   onTimerFinish,
@@ -108,7 +111,10 @@ export const ServiceStatusInfo = ({
     );
 
   return (
-    <ContractsInfoContainer className="service-status-maximized" canMinimize={canMinimize}>
+    <ContractsInfoContainer
+      className="service-status-maximized"
+      canMinimize={canMinimize}
+    >
       <Badge canMinimize={canMinimize}>
         <a href="https://autonolas.network" target="_blank" rel="noreferrer">
           {canMinimize ? <PoweredByForSmallDevice /> : <PoweredBy />}
@@ -145,7 +151,9 @@ export const ServiceStatusInfo = ({
               </div>
             </OffChainContainer>
           )}
-          {extra}
+          <ExtraContent>
+            <LinksSection appType={appType} isMidSize={false} />
+          </ExtraContent>
         </>
       )}
 

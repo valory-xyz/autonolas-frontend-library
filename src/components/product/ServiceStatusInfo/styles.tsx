@@ -130,3 +130,13 @@ export const FixedFooter = styled.div`
   width: 100%;
   border-top: 1px solid ${COLOR.GREY_3};
 `;
+
+export const ExtraContent = styled.div`
+  display: flex;
+  align-items: center;
+  > div {
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+`;
