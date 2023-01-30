@@ -32,6 +32,15 @@ const DummyContianer = styled.div`
   }
 `;
 
+const Extra = () => (
+  <div>
+    <Text className="row-1">SOME TITLE</Text>
+    <div className="status-sub-content">Some text</div>
+  </div>
+);
+
+const ExtraMd = () => <div> Some text on md </div>;
+
 export const Default = () => {
   const list: Array<{ name: string; type: AppType }> = [
     { name: 'Oracle Kit', type: 'oraclekit' },
@@ -54,30 +63,27 @@ export const Default = () => {
         </Fragment>
       ))}
 
+      <Divider orientation="left">With appType & more text</Divider>
+      <ServiceStatusInfo
+        isHealthy={true}
+        secondsLeftReceived={15}
+        appType={'mintkit'}
+        extra={<Extra />}
+        extraMd={<ExtraMd />}
+        onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+      />
+
       <Divider orientation="left">Generic without appType</Divider>
       <ServiceStatusInfo
         isHealthy={true}
         secondsLeftReceived={15}
-        extra={
-          <div>
-            <Text className="row-1">CODE</Text>
-            <div className="status-sub-content">Some text</div>
-          </div>
-        }
-        extraMd={<div> Some text on md </div>}
+        extra={<Extra />}
+        extraMd={<ExtraMd />}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
       />
 
       <Divider orientation="left">Generic without timer & appType</Divider>
-      <ServiceStatusInfo
-        extra={
-          <div>
-            <Text className="row-1">CODE</Text>
-            <div className="status-sub-content">Some text</div>
-          </div>
-        }
-        extraMd={<div> Some text on md </div>}
-      />
+      <ServiceStatusInfo extra={<Extra />} extraMd={<ExtraMd />} />
     </DummyContianer>
   );
 };

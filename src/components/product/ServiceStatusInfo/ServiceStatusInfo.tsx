@@ -124,10 +124,12 @@ export const ServiceStatusInfo = ({
       {/* status (green/orange dot) & timers */}
       {canMinimize ? (
         <MobileOffChainContainer>
-          {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
           <div>
+            {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
             <LinksSection appType={appType} isMidSize={true} />
-            {extraMd || extra || null}
+          </div>
+          <div className="extra-md-view">
+            <div>{extraMd || null}</div>
           </div>
         </MobileOffChainContainer>
       ) : (

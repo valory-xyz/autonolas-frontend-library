@@ -115,7 +115,7 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
     <>
       {[
         {
-          id: 'code',
+          id: 'docs',
           list: LINKS[appType].largeBuiltWith,
           name: (
             <>
@@ -126,10 +126,10 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
             </>
           ),
         },
-        { id: 'docs', name: 'CODE', list: LINKS[appType].docs },
+        { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
         // currently we show docs only for contributionkit
-        if (e.id === 'docs' && appType !== 'contributionkit') return null;
+        if (e.id === 'code' && appType !== 'contributionkit') return null;
 
         return (
           <div key={e.id}>
