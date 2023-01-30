@@ -27,4 +27,4 @@
 
 ## 0.3.4
 
-- `ServiceStatusInfo` component to support links for different apps such as protocol, el-collectooorr, oracle, contribution service.
+- `ServiceStatusInfo` component to support links for different apps such as el-collectooorr, oracle, contribution service.

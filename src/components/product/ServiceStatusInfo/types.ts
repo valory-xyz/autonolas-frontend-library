@@ -1,10 +1,8 @@
-export type AppType = 'contribution';
-// export type AppType = 'el-collectooorr' | 'protocol' | 'contribution';
+export type AppType = 'contributionkit' | 'mlkit' | 'oraclekit' | 'mintkit';
 
 export type LinksSectionType = {
   appType?: AppType;
   isMidSize?: boolean;
-  chainId?: 1 | 5 | 31337;
 };
 
 export type EachLink = {
@@ -22,6 +20,6 @@ export type LinkType = Record<
     };
     largeBuiltWith: EachLink[];
     midBuiltWith: EachLink[];
-    docs: EachLink[];
+    docs?: EachLink[];
   }
 >;

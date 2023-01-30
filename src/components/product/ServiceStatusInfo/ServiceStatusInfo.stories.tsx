@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Typography, Divider } from 'antd';
+import { AppType } from './types';
 import { ServiceStatusInfo } from './ServiceStatusInfo';
 
 export default {
@@ -32,15 +33,26 @@ const DummyContianer = styled.div`
 `;
 
 export const Default = () => {
+  const list: Array<{ name: string; type: AppType }> = [
+    { name: 'Oracle Kit', type: 'oraclekit' },
+    { name: 'ML kit', type: 'mlkit' },
+    { name: 'Mint Kit', type: 'mintkit' },
+    { name: 'Contribution Kit', type: 'contributionkit' },
+  ];
+
   return (
     <DummyContianer>
-      <Divider orientation="left">Contribution Widget</Divider>
-      <ServiceStatusInfo
-        isHealthy={true}
-        secondsLeftReceived={15}
-        appType="contribution"
-        onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
-      />
+      {list.map((e) => (
+        <Fragment key={e.type}>
+          <Divider orientation="left">{e.name}</Divider>
+          <ServiceStatusInfo
+            isHealthy={true}
+            secondsLeftReceived={15}
+            appType={e.type}
+            onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+          />
+        </Fragment>
+      ))}
 
       <Divider orientation="left">Generic without appType</Divider>
       <ServiceStatusInfo
@@ -54,6 +66,17 @@ export const Default = () => {
         }
         extraMd={<div> Some text on md </div>}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+      />
+
+      <Divider orientation="left">Generic without timer & appType</Divider>
+      <ServiceStatusInfo
+        extra={
+          <div>
+            <Text className="row-1">CODE</Text>
+            <div className="status-sub-content">Some text</div>
+          </div>
+        }
+        extraMd={<div> Some text on md </div>}
       />
     </DummyContianer>
   );

@@ -1,91 +1,61 @@
-import React, { Fragment, ReactNode } from 'react';
+import React, { Fragment } from 'react';
 import { Typography } from 'antd';
 import { LinkType, LinksSectionType, EachLink } from './types';
 
 const { Text } = Typography;
 
+const PROPEL_URL = 'https://propel.valory.xyz';
 const DOCS_LINK = 'https://docs.autonolas.network/product';
-const ML_APY_DOCS = `${DOCS_LINK}/mlkit/`;
+const ML_KIT_DOCS = `${DOCS_LINK}/mlkit/`;
+const ORACLE_KIT_DOCS = `${DOCS_LINK}/oraclekit/`;
+const MINT_KIT_DOCS = `${DOCS_LINK}/mintkit/`;
 const COORDTINATION_KIT_URL = `${DOCS_LINK}/coordinationkit/`;
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
 
-const getList = (contents: EachLink[]) =>
-  contents.map(({ text, redirectTo, isInternal = true }, index) => (
-    <Fragment key={`link-${redirectTo}`}>
-      <Text type="secondary">
-        {redirectTo ? (
-          <>
-            <a
-              href={redirectTo}
-              target={isInternal ? '_self' : '_blank'}
-              rel="noreferrer"
-            >
-              {text}
-            </a>
-          </>
-        ) : (
-          <>{`${text} (link coming soon)`}</>
-        )}
-
-        {index !== contents.length - 1 && <>&nbsp;&nbsp;•&nbsp;&nbsp;</>}
-      </Text>
-    </Fragment>
-  ));
-
 const LINKS: LinkType = {
-  // {
-  //   'el-collectooorr': {
-  //     kitName: 'El Collectooorr',
-  //     largeBuiltWith: [
-  //       { text: 'What is this?', whatIsThis: ML_APY_DOCS },
-  //       { text: 'Run the Code', link: `${ML_APY_DOCS}#demo` },
-  //       { text: 'Build your own', link: `${ML_APY_DOCS}#build` },
-  //     ],
-  //     midBuiltWith: [],
-  //   },
-  // },
-  // {
-  //   protocol: {
-  //     largeBuiltWith: [],
-  //     midBuiltWith: [],
-  //   },
-  // },
-  // {oracle: {
-  //   largeBuiltWith: [
-  //     { text: 'What is this?', whatIsThis: ML_APY_DOCS },
-  //     { text: 'Run the Code', link: `${ML_APY_DOCS}#demo` },
-  //     { text: 'Build your own', link: `${ML_APY_DOCS}#build` },
-  //   ],
-  //   midBuiltWith: [],
-  // }},
-
-  contribution: {
-    kit: {
-      link: COORDTINATION_KIT_URL,
-      name: 'CONTRIBUTIONKIT',
-    },
+  mintkit: {
+    kit: { link: MINT_KIT_DOCS, name: 'MINTKIT' },
     largeBuiltWith: [
-      {
-        text: 'Run demo code',
-        redirectTo: `${COORDTINATION_KIT_URL}#demo`,
-      },
-      {
-        text: 'Get help building',
-        redirectTo: 'https://propel.valory.xyz',
-        isInternal: false,
-      },
+      { text: 'Run the Code', redirectTo: `${MINT_KIT_DOCS}#demo` },
+      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
     ],
     midBuiltWith: [
-      {
-        text: 'Run demo code',
-        redirectTo: `${COORDTINATION_KIT_URL}#demo`,
-      },
-      {
-        text: 'Get help',
-        redirectTo: 'https://propel.valory.xyz',
-        isInternal: false,
-      },
+      { text: 'Run demo code', redirectTo: `${MINT_KIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+  },
+  oraclekit: {
+    kit: { link: ORACLE_KIT_DOCS, name: 'ORACLEKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
+      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+  },
+  mlkit: {
+    kit: { link: ML_KIT_DOCS, name: 'MLKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
+      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+  },
+  contributionkit: {
+    kit: { link: COORDTINATION_KIT_URL, name: 'CONTRIBUTIONKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
+      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
     docs: [
       {
@@ -109,21 +79,37 @@ const LINKS: LinkType = {
   },
 };
 
-export const LinksSection = ({
-  appType,
-  isMidSize,
-  // chainId,
-}: LinksSectionType) => {
-  // const LINKS: LinkType = {
-  //   ...constantLinks,
-  //   ...getContributionList(),
-  // };
+const getList = (contents?: EachLink[]) =>
+  (contents || []).map(({ text, redirectTo, isInternal = true }, index) => (
+    <Fragment key={`link-${redirectTo}`}>
+      <Text type="secondary">
+        {redirectTo ? (
+          <>
+            <a
+              href={redirectTo}
+              target={isInternal ? '_self' : '_blank'}
+              rel="noreferrer"
+            >
+              {text}
+            </a>
+          </>
+        ) : (
+          <>{`${text} (link coming soon)`}</>
+        )}
 
+        {index !== (contents || []).length - 1 && (
+          <>&nbsp;&nbsp;•&nbsp;&nbsp;</>
+        )}
+      </Text>
+    </Fragment>
+  ));
+
+export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
   // if no appType, return null
   if (!appType) return null;
 
   // for mid-size
-  if (isMidSize) return <>{LINKS[appType].midBuiltWith}</>;
+  if (isMidSize) return <>{getList(LINKS[appType].midBuiltWith)}</>;
 
   return (
     <>
@@ -141,15 +127,20 @@ export const LinksSection = ({
           ),
         },
         { id: 'docs', name: 'CODE', list: LINKS[appType].docs },
-      ].map((e) => (
-        <div key={e.id}>
-          <div>
-            <Text className="status-sub-header">{e.name}</Text>
-          </div>
+      ].map((e) => {
+        // currently we show docs only for contributionkit
+        if (e.id === 'docs' && appType !== 'contributionkit') return null;
 
-          <div className="status-sub-content">{getList(e.list)}</div>
-        </div>
-      ))}
+        return (
+          <div key={e.id}>
+            <div>
+              <Text className="status-sub-header">{e.name}</Text>
+            </div>
+
+            <div className="status-sub-content">{getList(e.list)}</div>
+          </div>
+        );
+      })}
     </>
   );
 };
