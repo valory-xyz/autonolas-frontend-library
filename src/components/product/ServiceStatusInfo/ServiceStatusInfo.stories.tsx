@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { Typography } from 'antd';
+import { Typography, Divider } from 'antd';
+import { AppType } from './types';
 import { ServiceStatusInfo } from './ServiceStatusInfo';
 
 export default {
@@ -10,7 +11,7 @@ export default {
 const { Text } = Typography;
 
 const DummyContianer = styled.div`
-  height: 300vh;
+  font-family: system-ui;
   a {
     color: inherit;
     text-decoration: underline;
@@ -20,48 +21,69 @@ const DummyContianer = styled.div`
   .row-1 {
     font-size: 14px;
   }
+  .service-status-maximized {
+    /* just for storybook, else it will be always be sticky in footer */
+    position: relative !important;
+    bottom: 0;
+    left: 0;
+  }
+  .ant-divider-horizontal {
+    padding-top: 1rem;
+  }
 `;
 
-const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
+const Extra = () => (
+  <div>
+    <Text className="row-1">SOME TITLE</Text>
+    <div className="status-sub-content">Some text</div>
+  </div>
+);
 
-const temp = [
-  {
-    name: 'Contract One',
-    link: 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
-  },
-  {
-    name: 'Code',
-    link: 'https://github.com/valory-xyz/contribution-service',
-  },
-];
+const ExtraMd = () => <div> Some text on md </div>;
 
 export const Default = () => {
-  const list = temp.map((contract, index) => (
-    <>
-      <Text type="secondary" className="row-2">
-        <a href={contract.link} target="_blank" rel="noreferrer">
-          {contract.name}
-        </a>
-      </Text>
-      {temp.length - 1 !== index && <DotSpace />}
-    </>
-  ));
+  const list: Array<{ name: string; type: AppType }> = [
+    { name: 'Oracle Kit', type: 'oraclekit' },
+    { name: 'ML kit', type: 'mlkit' },
+    { name: 'Mint Kit', type: 'mintkit' },
+    { name: 'Contribution Kit', type: 'contributionkit' },
+  ];
 
   return (
     <DummyContianer>
+      {list.map((e) => (
+        <Fragment key={e.type}>
+          <Divider orientation="left">{e.name}</Divider>
+          <ServiceStatusInfo
+            isHealthy={true}
+            secondsLeftReceived={15}
+            appType={e.type}
+            onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+          />
+        </Fragment>
+      ))}
+
+      <Divider orientation="left">With appType & more text</Divider>
       <ServiceStatusInfo
         isHealthy={true}
-        // isHealthy={undefined}
         secondsLeftReceived={15}
-        extra={
-          <div>
-            <Text className="row-1">CODE</Text>
-            <div className='status-sub-content'>{list}</div>
-          </div>
-        }
-        extraMd={<div>{list}</div>}
+        appType={'mintkit'}
+        extra={<Extra />}
+        extraMd={<ExtraMd />}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
       />
+
+      <Divider orientation="left">Generic without appType</Divider>
+      <ServiceStatusInfo
+        isHealthy={true}
+        secondsLeftReceived={15}
+        extra={<Extra />}
+        extraMd={<ExtraMd />}
+        onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+      />
+
+      <Divider orientation="left">Generic without timer & appType</Divider>
+      <ServiceStatusInfo extra={<Extra />} extraMd={<ExtraMd />} />
     </DummyContianer>
   );
 };

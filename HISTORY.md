@@ -20,3 +20,11 @@
 ## 0.3.2
 
 - `ServiceStatusInfo` component to have callback on-minimize & on-timer-end
+
+## 0.3.3
+
+- `ServiceStatusInfo` component updated
+
+## 0.3.4
+
+- `ServiceStatusInfo` component to support links for different apps such as el-collectooorr, oracle, contribution service.

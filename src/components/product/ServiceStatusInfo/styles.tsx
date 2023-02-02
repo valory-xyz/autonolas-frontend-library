@@ -36,16 +36,19 @@ export const OffChainContainer = styled.div`
 
 export const MobileOffChainContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  div:nth-child(1) {
-    margin-bottom: 4px;
-  }
+  align-items: center;
   div:nth-child(2) {
-    font-size: 16px
+    font-size: 16px;
+  }
+  .extra-md-view {
+    display: flex;
+    margin-left: 1rem;
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContainer)<{ canMinimize: boolean }>`
+export const ContractsInfoContainer = styled(StickyContainer)<{
+  canMinimize: boolean;
+}>`
   right: 1rem;
   display: flex;
   align-items: center;
@@ -129,4 +132,14 @@ export const FixedFooter = styled.div`
   background: ${COLOR.WHITE};
   width: 100%;
   border-top: 1px solid ${COLOR.GREY_3};
+`;
+
+export const ExtraContent = styled.div`
+  display: flex;
+  align-items: center;
+  > div {
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
 `;
