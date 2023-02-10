@@ -13,6 +13,12 @@ const COORDTINATION_KIT_URL = `${DOCS_LINK}/coordinationkit/`;
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
 
+const isGoerli = () => {
+  // on server side, window is undefined.
+  if (typeof window === 'undefined') return false;
+  return Number((window as any)?.MODAL_PROVIDER?.chainId || 1) === 5;
+};
+
 const LINKS: LinkType = {
   mintkit: {
     kit: { link: MINT_KIT_DOCS, name: 'MINTKIT' },
@@ -69,10 +75,9 @@ const LINKS: LinkType = {
       },
       {
         text: 'Contracts',
-        redirectTo:
-          Number((window as any)?.MODAL_PROVIDER?.chainId || 1) === 5
-            ? 'https://goerli.etherscan.io/address/0x7C3B976434faE9986050B26089649D9f63314BD8'
-            : 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
+        redirectTo: isGoerli()
+          ? 'https://goerli.etherscan.io/address/0x7C3B976434faE9986050B26089649D9f63314BD8'
+          : 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
         isInternal: false,
       },
     ],
@@ -84,15 +89,13 @@ const getList = (contents?: EachLink[]) =>
     <Fragment key={`link-${redirectTo}`}>
       <Text type="secondary">
         {redirectTo ? (
-          <>
-            <a
-              href={redirectTo}
-              target={isInternal ? '_self' : '_blank'}
-              rel="noreferrer"
-            >
-              {text}
-            </a>
-          </>
+          <a
+            href={redirectTo}
+            target={isInternal ? '_self' : '_blank'}
+            rel="noreferrer"
+          >
+            {text}
+          </a>
         ) : (
           <>{`${text} (link coming soon)`}</>
         )}
