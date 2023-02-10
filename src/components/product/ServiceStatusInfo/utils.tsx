@@ -64,10 +64,10 @@ const LINKS: LinkType = {
       { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
     docs: [
-      {
-        text: 'Live service',
-        redirectTo: 'https://protocol.autonolas.network/services',
-      },
+      // {
+      //   text: 'Live service',
+      //   redirectTo: 'https://protocol.autonolas.network/services',
+      // },
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/contribution-service',
