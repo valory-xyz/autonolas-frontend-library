@@ -28,3 +28,7 @@
 ## 0.3.4
 
 - `ServiceStatusInfo` component to support links for different apps such as el-collectooorr, oracle, contribution service.
+
+## 0.3.5
+
+- `ServiceStatusInfo` window reference bug fix
