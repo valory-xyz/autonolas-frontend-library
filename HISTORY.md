@@ -32,3 +32,7 @@
 ## 0.3.5
 
 - `ServiceStatusInfo` window reference bug fix
+
+## 0.3.6
+
+- `ServiceStatusInfo` remove `Live Service` link
