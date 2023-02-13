@@ -30,6 +30,12 @@ const LINKS: LinkType = {
       { text: 'Run demo code', redirectTo: `${MINT_KIT_DOCS}#demo` },
       { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
+    docs: [
+      {
+        text: 'Live service',
+        redirectTo: 'https://protocol.autonolas.network/services/1',
+      },
+    ],
   },
   oraclekit: {
     kit: { link: ORACLE_KIT_DOCS, name: 'ORACLEKIT' },
@@ -131,8 +137,13 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
         },
         { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
-        // currently we show docs only for contributionkit
-        if (e.id === 'code' && appType !== 'contributionkit') return null;
+        // currently we show docs only for contributionkit and mintkit
+        if (
+          e.id === 'code' &&
+          appType !== 'contributionkit' &&
+          appType !== 'mintkit'
+        )
+          return null;
 
         return (
           <div key={e.id}>
