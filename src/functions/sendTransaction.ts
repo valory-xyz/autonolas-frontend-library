@@ -3,7 +3,6 @@ import { ethers, Contract } from 'ethers';
 import { notification } from 'antd';
 import get from 'lodash/get';
 import { Web3ReceiptType } from '../types';
-// import { GenericObject } from '../types';
 
 const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';
@@ -52,7 +51,6 @@ async function pollTransactionDetails(hash: string, chainId: number) {
 export const sendTransaction = (
   sendFn: Contract,
   account = (window as any)?.MODAL_PROVIDER?.accounts[0],
-  // extra: GenericObject,
 ) => {
   return new Promise((resolve, reject) => {
     const provider = new ethers.providers.Web3Provider(
