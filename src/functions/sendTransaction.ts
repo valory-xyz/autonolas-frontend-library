@@ -1,18 +1,22 @@
-import { ethers } from 'ethers';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ethers, Contract } from 'ethers';
 import { notification } from 'antd';
 import get from 'lodash/get';
 import { Web3ReceiptType } from '../types';
+// import { GenericObject } from '../types';
 
-const safeSendTransactionNotification = () =>
-  notification.warning({
-    message: 'Please submit the transaction in your safe app.',
-  });
+const SAFE_API_MAINNET =
+  'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';
+const SAFE_API_GOERLI =
+  'https://safe-transaction-goerli.safe.global/api/v1/multisig-transactions';
 
 const getUrl = (hash: string, chainId: number) => {
-  if (chainId === 5) {
-    return `${process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_GOERLI}/${hash}`;
-  }
-  return `${process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_MAINNET}/${hash}`;
+  const mainnetUrl =
+    process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_MAINNET || SAFE_API_MAINNET;
+  const goerliUrl =
+    process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_GOERLI || SAFE_API_GOERLI;
+
+  return chainId === 5 ? `${goerliUrl}/${hash}` : `${mainnetUrl}/${hash}`;
 };
 
 /**
@@ -46,11 +50,11 @@ async function pollTransactionDetails(hash: string, chainId: number) {
  * poll until the hash has been approved before deploy
  */
 export const sendTransaction = (
-  sendFn: any, // TODO: fix this
+  sendFn: Contract,
   account = (window as any)?.MODAL_PROVIDER?.accounts[0],
-  // extra,
-) =>
-  new Promise((resolve, reject) => {
+  // extra: GenericObject,
+) => {
+  return new Promise((resolve, reject) => {
     const provider = new ethers.providers.Web3Provider(
       (window as any).MODAL_PROVIDER,
       'any',
@@ -68,7 +72,9 @@ export const sendTransaction = (
            * - poll until transaction is completed
            * - return response
            */
-          safeSendTransactionNotification();
+          notification.warning({
+            message: 'Please submit the transaction in your safe app.',
+          });
 
           sendFn
             .on('transactionHash', async (safeTx: string) => {
@@ -107,3 +113,4 @@ export const sendTransaction = (
         console.error('Error on fetching code');
       });
   });
+};
