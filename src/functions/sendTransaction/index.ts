@@ -77,8 +77,9 @@ export const sendTransaction = (
             });
         }
       })
-      .catch(() => {
+      .catch((error) => {
         console.error('Error on fetching code');
+        reject(error);
       });
   });
 };
