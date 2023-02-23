@@ -1,2 +1,2 @@
 export * from './functions';
-export * from './sendTransaction';
+export { sendTransaction } from './sendTransaction';

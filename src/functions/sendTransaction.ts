@@ -4,12 +4,12 @@ import { notification } from 'antd';
 import get from 'lodash/get';
 import { Web3ReceiptType } from '../types';
 
-const SAFE_API_MAINNET =
+export const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';
-const SAFE_API_GOERLI =
+export const SAFE_API_GOERLI =
   'https://safe-transaction-goerli.safe.global/api/v1/multisig-transactions';
 
-const getUrl = (hash: string, chainId: number) => {
+export const getUrl = (hash: string, chainId: number) => {
   const mainnetUrl =
     process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_MAINNET || SAFE_API_MAINNET;
   const goerliUrl =
@@ -45,6 +45,17 @@ async function pollTransactionDetails(hash: string, chainId: number) {
   });
 }
 
+export const getProvider = () => {
+  if (typeof window !== 'undefined' && (window as any)?.MODAL_PROVIDER) {
+    return new ethers.providers.Web3Provider(
+      (window as any).MODAL_PROVIDER,
+      'any',
+    );
+  }
+
+  throw new Error('No provider found');
+};
+
 /**
  * poll until the hash has been approved before deploy
  */
@@ -53,14 +64,12 @@ export const sendTransaction = (
   account = (window as any)?.MODAL_PROVIDER?.accounts[0],
 ) => {
   return new Promise((resolve, reject) => {
-    const provider = new ethers.providers.Web3Provider(
-      (window as any).MODAL_PROVIDER,
-      'any',
-    );
+    const provider = getProvider();
 
     provider
       .getCode(account)
       .then(async (code) => {
+        // console.log(code);
         const isGnosisSafe = code !== '0x';
 
         if (isGnosisSafe) {
@@ -97,7 +106,6 @@ export const sendTransaction = (
               reject(e);
             });
         } else {
-          // usual send function
           sendFn
             .then((receipt: Web3ReceiptType) => {
               resolve(receipt);
