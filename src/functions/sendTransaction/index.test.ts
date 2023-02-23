@@ -1,11 +1,6 @@
 import { ethers, Contract } from 'ethers';
-import {
-  getUrl,
-  SAFE_API_MAINNET,
-  SAFE_API_GOERLI,
-  sendTransaction,
-} from '../sendTransaction';
-import * as HELPER_METHODS from '../sendTransaction';
+import * as HELPER_METHODS from './helpers';
+import { getUrl, SAFE_API_MAINNET, SAFE_API_GOERLI, sendTransaction } from '.';
 
 const dummyReceipt = {
   blockHash: 'abcd',
@@ -22,18 +17,15 @@ const dummyReceipt = {
   transactionIndex: 1,
 };
 
+const dummyAccount = '0xdD2FD4581271e230360230F9337D5c0430Bf44C0';
+
+// mock the helper methods
 const mockGetProvider = jest.spyOn(HELPER_METHODS, 'getProvider');
 const mockChainId = jest.spyOn(HELPER_METHODS, 'getChainId');
 const mockPollTransactionDetails = jest.spyOn(
   HELPER_METHODS,
   'pollTransactionDetails',
 );
-
-// jest.mock('../sendTransaction.ts', () => ({
-//   getProvider: jest.fn(() => ({
-//     getCode: Promise.resolve('0x'),
-//   })),
-// }));
 
 describe('getUrl', () => {
   it.each([
@@ -46,56 +38,41 @@ describe('getUrl', () => {
   });
 });
 
-// write a test case for sendTransaction function from sendTransaction.ts
 describe('sendTransaction', () => {
-  // Before each test, stub the fetch function
-  // beforeEach(() => {
-  //   window.fetch = jest.fn();
-  // });
-
-  // beforeEach(() => {
-  //   window.fetch = jest.fn();
-  // });
-
-  // (getProvider as any).mockImplementation(() => ({
-  //   getCode: Promise.resolve('0x'),
-  // }));
-
   it('should call the send transaction passed as a param (non gnosis safe)', async () => {
+    // mock the provider to return a non gnosis safe address
     mockGetProvider.mockImplementation(() => {
       return {
         getCode: jest.fn(() => Promise.resolve('0x')),
       } as unknown as ethers.providers.Web3Provider;
     });
 
-    // const dummySendFn = jest.fn(() =>
-    //   Promise.resolve(dummyReceipt)
-    // ) as unknown as Contract;
-
+    // resolving the callback function `sendFn` with a dummy receipt
     const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(dummySendFn, '0x123');
+    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount);
+
+    // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
   });
 
   it('should call the transactionHash of send transaction and poll to gnosis safe API', async () => {
+    // mock the provider to return a gnosis safe address
     mockGetProvider.mockImplementation(() => {
       return {
         getCode: jest.fn(() => Promise.resolve('random-string')),
       } as unknown as ethers.providers.Web3Provider;
     });
 
-    // 
     mockChainId.mockImplementation(() => Promise.resolve(5));
 
-
+    // mock the pollTransactionDetails to return a dummy receipt
     mockPollTransactionDetails.mockImplementation(() =>
       Promise.resolve(dummyReceipt),
     );
 
-    // ({
-    //   on: jest.fn('transactionHash', () => 'safeTxHash'),
-    // })
+    // resolving the callback function `sendFn` with `on` function
+    // which will call the `transactionHash` callback & poll to gnosis safe API
     const dummySendFn = {
       on: jest.fn((event, callback) => {
         if (event === 'transactionHash') {
@@ -104,10 +81,7 @@ describe('sendTransaction', () => {
       }),
     } as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(dummySendFn, '0x123');
-
-    // notifcation should be shown
-    // expect(/Please submit the transaction on Gnosis Safe/).toBeInTheDocument();
+    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount);
 
     // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
