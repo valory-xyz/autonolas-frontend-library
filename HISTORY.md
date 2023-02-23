@@ -35,4 +35,8 @@
 
 ## 0.3.6
 
+- `ServiceStatusInfo` remove `Live Service` link
+
+## 0.3.7
+
 - `sendTransaction` util function added
