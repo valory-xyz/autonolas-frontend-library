@@ -23,6 +23,11 @@ const dummyReceipt = {
 };
 
 const mockGetProvider = jest.spyOn(HELPER_METHODS, 'getProvider');
+const mockChainId = jest.spyOn(HELPER_METHODS, 'getChainId');
+const mockPollTransactionDetails = jest.spyOn(
+  HELPER_METHODS,
+  'pollTransactionDetails',
+);
 
 // jest.mock('../sendTransaction.ts', () => ({
 //   getProvider: jest.fn(() => ({
@@ -56,26 +61,55 @@ describe('sendTransaction', () => {
   //   getCode: Promise.resolve('0x'),
   // }));
 
-  beforeEach(() => {
-    mockGetProvider.mockImplementation(
-      () =>
-        ({
-          getCode: jest.fn(() => Promise.resolve('0x')),
-        } as unknown as ethers.providers.Web3Provider),
-    );
-    //
-  });
-
   it('should call the send transaction passed as a param (non gnosis safe)', async () => {
-    const sendFn = jest.fn();
+    mockGetProvider.mockImplementation(() => {
+      return {
+        getCode: jest.fn(() => Promise.resolve('0x')),
+      } as unknown as ethers.providers.Web3Provider;
+    });
 
-    // const dummySendFn = jest.fn(() => 
+    // const dummySendFn = jest.fn(() =>
     //   Promise.resolve(dummyReceipt)
     // ) as unknown as Contract;
 
-    const dummySendFn =Promise.resolve(dummyReceipt)as unknown as Contract;
+    const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
-    const temp = await sendTransaction(dummySendFn, '0x123');
-    expect(temp).toBe(dummyReceipt);
+    const receiptReceived = await sendTransaction(dummySendFn, '0x123');
+    expect(receiptReceived).toBe(dummyReceipt);
+  });
+
+  it('should call the transactionHash of send transaction and poll to gnosis safe API', async () => {
+    mockGetProvider.mockImplementation(() => {
+      return {
+        getCode: jest.fn(() => Promise.resolve('random-string')),
+      } as unknown as ethers.providers.Web3Provider;
+    });
+
+    // 
+    mockChainId.mockImplementation(() => Promise.resolve(5));
+
+
+    mockPollTransactionDetails.mockImplementation(() =>
+      Promise.resolve(dummyReceipt),
+    );
+
+    // ({
+    //   on: jest.fn('transactionHash', () => 'safeTxHash'),
+    // })
+    const dummySendFn = {
+      on: jest.fn((event, callback) => {
+        if (event === 'transactionHash') {
+          callback('safeTxHash');
+        }
+      }),
+    } as unknown as Contract;
+
+    const receiptReceived = await sendTransaction(dummySendFn, '0x123');
+
+    // notifcation should be shown
+    // expect(/Please submit the transaction on Gnosis Safe/).toBeInTheDocument();
+
+    // receipt should be returned
+    expect(receiptReceived).toBe(dummyReceipt);
   });
 });

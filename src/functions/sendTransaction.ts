@@ -21,7 +21,7 @@ export const getUrl = (hash: string, chainId: number) => {
 /**
  * poll gnosis-safe API every 3 seconds
  */
-async function pollTransactionDetails(hash: string, chainId: number) {
+export const pollTransactionDetails = async (hash: string, chainId: number) => {
   return new Promise((resolve, reject) => {
     /* eslint-disable-next-line consistent-return */
     const interval = setInterval(async () => {
@@ -43,7 +43,7 @@ async function pollTransactionDetails(hash: string, chainId: number) {
       }
     }, 3000);
   });
-}
+};
 
 export const getProvider = () => {
   if (typeof window !== 'undefined' && (window as any)?.MODAL_PROVIDER) {
@@ -54,6 +54,17 @@ export const getProvider = () => {
   }
 
   throw new Error('No provider found');
+};
+
+export const getChainId = async () => {
+  if (typeof window !== 'undefined' && (window as any)?.WEB3_PROVIDER) {
+    const chainId: number = await (
+      window as any
+    ).WEB3_PROVIDER.eth?.getChainId();
+    return chainId || 1;
+  }
+
+  throw new Error('No provider found to fetch chainId');
 };
 
 /**
@@ -91,8 +102,8 @@ export const sendTransaction = (
                * use `transactionHash`, get the hash, then poll until
                * it resolves with Output
                */
-              const chainId =
-                (await (window as any).WEB3_PROVIDER?.eth?.getChainId()) || 1;
+              const chainId = await getChainId();
+
               pollTransactionDetails(safeTx, chainId)
                 .then((receipt) => {
                   resolve(receipt);
