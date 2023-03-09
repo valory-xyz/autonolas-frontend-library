@@ -1,8 +1,12 @@
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { GenericObject } from 'src/components/types';
+import { EthereumProvider } from '@walletconnect/ethereum-provider';
+import type { EthereumRpcMap } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 
 type rcpType = GenericObject | undefined;
+
+const PROJECT_ID = '1b87939bfd17a9b5104e180353f4ff67';
 
 const localRpc = {
   1: process.env.RPC_MAINNET_URL,
@@ -17,21 +21,30 @@ export const ProviderOptions = (function () {
   let web3Modal: Web3Modal;
 
   function createInstance(rpc: rcpType) {
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider, // required
-        options: {
-          infuraId: undefined, // required
-          rpc: rpc || localRpc,
-        },
-      },
-    };
-
     if (typeof window !== 'undefined') {
       web3Modal = new Web3Modal({
         network: 'mainnet', // optional
         cacheProvider: true,
-        providerOptions, // required
+        providerOptions: {
+          walletconnect: {
+            version: 1,
+            // package: EthereumProvider.init({
+            //   projectId: PROJECT_ID,
+            //   chains: [1, 5, 31337], // REQUIRED chain ids
+            //   rpcMap: (rpc || localRpc) as EthereumRpcMap, // OPTIONAL rpc urls for each chain
+            // }), // required
+            package: WalletConnectProvider, // required
+            // package: EthereumProvider, // required
+            options: {
+              infuraId: undefined, // required
+              rpc: rpc || localRpc,
+
+              // rpcMap: rpc || localRpc,
+              // projectId: PROJECT_ID,
+
+            },
+          },
+        },
       });
     }
 
@@ -47,3 +60,29 @@ export const ProviderOptions = (function () {
     },
   };
 })();
+
+// export const NewProviderOptions = (function (rpc) {
+//   const provider = EthereumProvider.init({
+//     projectId: PROJECT_ID,
+//     chains: [1, 5, 31337], // REQUIRED chain ids
+//     rpcMap: (rpc || localRpc) as EthereumRpcMap, // OPTIONAL rpc urls for each chain
+//   });
+
+//   return provider;
+// })();
+
+// export const myNewProvider = EthereumProvider.init({
+//   projectId: PROJECT_ID,
+//   chains: [1, 5, 31337], // REQUIRED chain ids
+//   rpcMap: localRpc as EthereumRpcMap, // OPTIONAL rpc urls for each chain
+// });
+
+// export const options = {
+//   projectId, // REQUIRED your projectId
+//   chains, // REQUIRED chain ids
+//   methods, // OPTIONAL ethereum methods
+//   events, // OPTIONAL ethereum events
+//   rpcMap, // OPTIONAL rpc urls for each chain
+//   metadata, // OPTIONAL metadata of your app
+//   showQrModal, // OPTIONAL - `true` by default
+// };
