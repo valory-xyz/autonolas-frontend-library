@@ -10,6 +10,7 @@ const ML_KIT_DOCS = `${DOCS_LINK}/mlkit/`;
 const ORACLE_KIT_DOCS = `${DOCS_LINK}/oraclekit/`;
 const MINT_KIT_DOCS = `${DOCS_LINK}/mintkit/`;
 const COORDTINATION_KIT_URL = `${DOCS_LINK}/coordinationkit/`;
+const IE_KIT_DOCS = `${DOCS_LINK}/iekit/`;
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
 
@@ -88,6 +89,32 @@ const LINKS: LinkType = {
       },
     ],
   },
+  // TODO: links pending
+  iekit: {
+    kit: { link: IE_KIT_DOCS, name: 'IEKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
+      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    docs: [
+      {
+        text: 'Live service',
+        redirectTo: 'https://protocol.autonolas.network/services/1',
+      },
+      {
+        text: 'Service Code',
+        redirectTo: 'https://protocol.autonolas.network/services/1',
+      },
+      {
+        text: 'Contracts',
+        redirectTo: 'https://protocol.autonolas.network/services/1',
+      },
+    ],
+  },
 };
 
 const getList = (contents?: EachLink[]) =>
@@ -137,13 +164,11 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
         },
         { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
-        // currently we show docs only for contributionkit and mintkit
-        if (
-          e.id === 'code' &&
-          appType !== 'contributionkit' &&
-          appType !== 'mintkit'
-        )
-          return null;
+        // currently we show docs only for contributionkit, mintkit and iekit
+        const isValid = ['contributionkit', 'mintkit', 'iekit'].includes(
+          appType,
+        );
+        if (e.id === 'code' && !isValid) return null;
 
         return (
           <div key={e.id}>
