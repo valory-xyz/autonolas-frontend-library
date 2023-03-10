@@ -89,7 +89,6 @@ const LINKS: LinkType = {
       },
     ],
   },
-  // TODO: links pending
   iekit: {
     kit: { link: IE_KIT_DOCS, name: 'IEKIT' },
     largeBuiltWith: [
@@ -101,17 +100,22 @@ const LINKS: LinkType = {
       { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
     docs: [
-      {
-        text: 'Live service',
-        redirectTo: 'https://protocol.autonolas.network/services/1',
-      },
+      // {
+      //   text: 'Live service',
+      //   redirectTo: 'https://protocol.autonolas.network/services/1',
+      //   isInternal: false,
+      // },
       {
         text: 'Service Code',
-        redirectTo: 'https://protocol.autonolas.network/services/1',
+        redirectTo: 'https://github.com/valory-xyz/IEKit',
+        isInternal: false,
       },
       {
         text: 'Contracts',
-        redirectTo: 'https://protocol.autonolas.network/services/1',
+        redirectTo: isGoerli()
+          ? 'https://goerli.etherscan.io/address/0x7C3B976434faE9986050B26089649D9f63314BD8'
+          : 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
+        isInternal: false,
       },
     ],
   },
