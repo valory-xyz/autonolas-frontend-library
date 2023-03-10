@@ -36,3 +36,7 @@
 ## 0.3.6
 
 - `ServiceStatusInfo` remove `Live Service` link
+
+## 0.3.7
+
+- `ServiceStatusInfo` update for IEKit
