@@ -1,4 +1,4 @@
-export type AppType = 'contributionkit' | 'mlkit' | 'oraclekit' | 'mintkit';
+export type AppType = 'contributionkit' | 'mlkit' | 'oraclekit' | 'mintkit' | 'iekit';
 
 export type LinksSectionType = {
   appType?: AppType;

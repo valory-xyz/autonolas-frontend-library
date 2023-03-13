@@ -42,26 +42,31 @@ const Extra = () => (
 const ExtraMd = () => <div> Some text on md </div>;
 
 export const Default = () => {
-  const list: Array<{ name: string; type: AppType }> = [
+  const list: Array<{ name: string; type: AppType; hideSeconds?: boolean }> = [
     { name: 'Oracle Kit', type: 'oraclekit' },
     { name: 'ML kit', type: 'mlkit' },
     { name: 'Mint Kit', type: 'mintkit' },
     { name: 'Contribution Kit', type: 'contributionkit' },
+    { name: 'IEKit', type: 'iekit', hideSeconds: true },
   ];
 
   return (
     <DummyContianer>
-      {list.map((e) => (
-        <Fragment key={e.type}>
-          <Divider orientation="left">{e.name}</Divider>
-          <ServiceStatusInfo
-            isHealthy={true}
-            secondsLeftReceived={15}
-            appType={e.type}
-            onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
-          />
-        </Fragment>
-      ))}
+      {list.map((e) => {
+        const otherProps = !e.hideSeconds
+          ? { isHealthy: true, secondsLeftReceived: 15 }
+          : {};
+        return (
+          <Fragment key={e.type}>
+            <Divider orientation="left">{e.name}</Divider>
+            <ServiceStatusInfo
+              {...otherProps}
+              appType={e.type}
+              onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+            />
+          </Fragment>
+        );
+      })}
 
       <Divider orientation="left">With appType & more text</Divider>
       <ServiceStatusInfo
