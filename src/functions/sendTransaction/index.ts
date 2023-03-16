@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contract } from 'ethers';
 import { notification } from 'antd';
-import { getChainId, getProvider, pollTransactionDetails } from './helpers';
 import { Web3ReceiptType } from '../../types';
+import { getChainId, getProvider, pollTransactionDetails } from './helpers';
 
 export const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';
@@ -19,7 +19,7 @@ export const getUrl = (hash: string, chainId: number) => {
 };
 
 /**
- * poll until the hash has been approved before deploy
+ * poll until the hash has been approved
  */
 export const sendTransaction = (
   sendFn: Contract,
@@ -31,7 +31,6 @@ export const sendTransaction = (
     provider
       .getCode(account)
       .then(async (code) => {
-        // console.log(code);
         const isGnosisSafe = code !== '0x';
 
         if (isGnosisSafe) {

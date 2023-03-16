@@ -28,6 +28,8 @@ const mockPollTransactionDetails = jest.spyOn(
   HELPER_METHODS,
   'pollTransactionDetails',
 );
+
+// to suppress the console.error in the test output
 console.error = jest.fn();
 
 describe('getUrl', () => {
