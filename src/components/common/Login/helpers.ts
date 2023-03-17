@@ -1,6 +1,6 @@
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { GenericObject } from 'src/components/types';
+import { GenericObject } from '../../../types';
 
 type rcpType = GenericObject | undefined;
 

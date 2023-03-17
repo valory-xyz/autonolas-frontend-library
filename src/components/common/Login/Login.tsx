@@ -8,12 +8,12 @@ import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import Web3 from 'web3';
 
 import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
-import { EllipsisMiddle } from '../Ellipsis';
 import { getBalance } from '../../../functions';
+import { GenericObject } from '../../../types';
+import { EllipsisMiddle } from '../Ellipsis';
 import { Web3DataContext } from '../Web3DataProvider';
-import { Container, DetailsContainer, WalletContainer } from './styles';
 import { ProviderOptions } from './helpers';
-import { GenericObject } from 'src/components/types';
+import { Container, DetailsContainer, WalletContainer } from './styles';
 
 /* --------------- Login component --------------- */
 type ConnectType = {
