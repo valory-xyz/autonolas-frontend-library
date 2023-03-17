@@ -40,3 +40,7 @@
 ## 0.3.7
 
 - `ServiceStatusInfo` update for IEKit
+
+## 0.3.8
+
+- `sendTransaction` util function added
