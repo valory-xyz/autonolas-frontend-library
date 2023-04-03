@@ -16,6 +16,10 @@ export const COLOR = {
 
   BLACK: '#000000',
   TABLE_BLACK: '#1B1B1B',
+
+  // antd colors
+  ANTD_BLUE: '#1890FF',
+  ANTD_BLUE_BG: '#E6F7FF',
 };
 
 export const BREAK_POINT = {

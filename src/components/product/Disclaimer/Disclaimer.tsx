@@ -1,12 +1,21 @@
 import React, { ReactNode, MouseEvent } from 'react';
 import { Alert, Button } from 'antd';
+import styled from 'styled-components';
+import { COLOR } from '../../../utils';
 
-const btnLinkStyle = {
-  padding: 0,
-  margin: 0,
-  height: 'auto',
-  lineHeight: 'normal',
-};
+const DisclaimerAlert = styled(Alert)`
+  background-color: ${COLOR.ANTD_BLUE_BG};
+  border-color: ${COLOR.ANTD_BLUE};
+  > .ant-alert-icon {
+    color: ${COLOR.ANTD_BLUE} !important;
+  }
+  .ant-btn-link {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    line-height: normal;
+  }
+`;
 
 export const Disclaimer = ({
   message,
@@ -21,16 +30,17 @@ export const Disclaimer = ({
   const isInternalLink = href && href.startsWith('/');
 
   return (
-    <Alert
+    <DisclaimerAlert
       type="info"
       showIcon
+      closable
       message={
         message || (
           <div>
             By accessing this app you agree to the&nbsp;
             <Button
               type="link"
-              style={btnLinkStyle}
+              // style={btnLinkStyle}
               href={href}
               target={isInternalLink ? undefined : '_blank'}
               onClick={(e) => {
@@ -41,7 +51,7 @@ export const Disclaimer = ({
                 }
               }}
             >
-              Disclaimer
+              disclaimer
             </Button>
           </div>
         )
