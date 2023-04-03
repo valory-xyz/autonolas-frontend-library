@@ -18,6 +18,9 @@ export const Default = () => (
     <Divider orientation="left">Default</Divider>
     <Disclaimer />
 
+    <Divider orientation="left">Disclaimer with customer HREF</Divider>
+    <Disclaimer href="https://autonolas.network/" />
+
     <Divider orientation="left">
       On click callback on default disclaimer
     </Divider>

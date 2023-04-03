@@ -10,13 +10,16 @@ const btnLinkStyle = {
 
 export const Disclaimer = ({
   message,
-  href,
+  href = '/disclaimer',
   onDisclaimerClick,
 }: {
   message?: ReactNode;
   href?: string;
   onDisclaimerClick?: (e: MouseEvent) => void;
 }) => {
+  // if the href is internal, we don't want to open it in a new tab
+  const isInternalLink = href && href.startsWith('/');
+
   return (
     <Alert
       type="info"
@@ -27,8 +30,9 @@ export const Disclaimer = ({
             By accessing this app you agree to the&nbsp;
             <Button
               type="link"
-              href={href || '/disclaimer'}
               style={btnLinkStyle}
+              href={href}
+              target={isInternalLink ? undefined : '_blank'}
               onClick={(e) => {
                 if (onDisclaimerClick) {
                   // prevent default behavior of the link and call the callback
