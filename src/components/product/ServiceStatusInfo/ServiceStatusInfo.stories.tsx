@@ -85,6 +85,7 @@ export const Default = () => {
         extra={<Extra />}
         extraMd={<ExtraMd />}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
+        showDisclaimer
       />
 
       <Divider orientation="left">Generic without timer & appType</Divider>

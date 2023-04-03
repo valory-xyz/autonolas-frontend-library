@@ -46,9 +46,10 @@ export const MobileOffChainContainer = styled.div`
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContainer)<{
+type InfoType = {
   canMinimize: boolean;
-}>`
+};
+export const ContractsInfoContainer = styled(StickyContainer)<InfoType>`
   right: 1rem;
   display: flex;
   align-items: center;
@@ -142,4 +143,11 @@ export const ExtraContent = styled.div`
       margin-right: 1.5rem;
     }
   }
+`;
+
+export const DisclaimerLink = styled.a`
+  position: absolute;
+  font-size: 14px;
+  bottom: 8px;
+  right: 26px;
 `;
