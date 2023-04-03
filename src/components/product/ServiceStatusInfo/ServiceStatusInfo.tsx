@@ -13,7 +13,6 @@ import {
   OffChainContainer,
   MobileOffChainContainer,
   ExtraContent,
-  DisclaimerLink,
 } from './styles';
 
 const { Text } = Typography;
@@ -36,8 +35,6 @@ type ServiceStatusInfoDetails = {
     setSeconds: (value: number | undefined) => void;
   }) => void;
   onMinimizeToggle?: (isMinimized: boolean) => void;
-  // show the disclaimer
-  showDisclaimer?: boolean;
 };
 
 const timerStyle = { minWidth: '36px' };
@@ -53,7 +50,6 @@ export const ServiceStatusInfo = ({
   extraMd,
   onTimerFinish,
   onMinimizeToggle,
-  showDisclaimer,
 }: ServiceStatusInfoDetails) => {
   const screens = useBreakpoint();
   const canMinimize = !screens.xl;
@@ -178,12 +174,6 @@ export const ServiceStatusInfo = ({
       >
         {canMinimize ? '' : 'Minimize'}
       </Button>
-
-      {showDisclaimer && (
-        <DisclaimerLink href="/disclaimer" rel="noreferrer">
-          Disclaimer
-        </DisclaimerLink>
-      )}
     </ContractsInfoContainer>
   );
 };

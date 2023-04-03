@@ -144,10 +144,3 @@ export const ExtraContent = styled.div`
     }
   }
 `;
-
-export const DisclaimerLink = styled.a`
-  position: absolute;
-  font-size: 14px;
-  bottom: 8px;
-  right: 26px;
-`;

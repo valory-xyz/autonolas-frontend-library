@@ -47,5 +47,4 @@
 
 ## 0.3.9
 
-- `ServiceStatusInfo` disclaimer link added
 - `Disclaimer` component added
