@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Divider, notification } from 'antd';
 import { Disclaimer } from './Disclaimer';
+import { DefaultDisclaimerText } from './DefaultDisclaimerText';
 
 export default {
   title: 'Disclaimer',
@@ -35,4 +36,10 @@ export const Default = () => (
     <Divider orientation="left">Custom Message</Divider>
     <Disclaimer message="This is a custom message" />
   </DummyDisclaimerContianer>
+);
+
+export const DisclaimerText = () => (
+  <>
+    <DefaultDisclaimerText />
+  </>
 );
