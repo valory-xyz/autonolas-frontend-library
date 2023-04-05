@@ -44,3 +44,7 @@
 ## 0.3.8
 
 - `sendTransaction` util function added
+
+## 0.3.9
+
+- `Disclaimer` component added

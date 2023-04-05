@@ -46,9 +46,10 @@ export const MobileOffChainContainer = styled.div`
   }
 `;
 
-export const ContractsInfoContainer = styled(StickyContainer)<{
+type InfoType = {
   canMinimize: boolean;
-}>`
+};
+export const ContractsInfoContainer = styled(StickyContainer)<InfoType>`
   right: 1rem;
   display: flex;
   align-items: center;
