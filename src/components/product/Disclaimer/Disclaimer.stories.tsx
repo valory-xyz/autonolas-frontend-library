@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Divider, message } from 'antd';
+import { Divider, notification } from 'antd';
 import { Disclaimer } from './Disclaimer';
 
 export default {
@@ -18,14 +18,18 @@ export const Default = () => (
     <Divider orientation="left">Default</Divider>
     <Disclaimer />
 
-    <Divider orientation="left">Disclaimer with customer HREF</Divider>
+    <Divider orientation="left">Disclaimer with custom HREF</Divider>
     <Disclaimer href="https://autonolas.network/" />
 
     <Divider orientation="left">
       On click callback on default disclaimer
     </Divider>
     <Disclaimer
-      onDisclaimerClick={() => message.info('This is a callback message')}
+      onDisclaimerClick={() =>
+        notification.info({
+          message: 'This is a callback message',
+        })
+      }
     />
 
     <Divider orientation="left">Custom Message</Divider>

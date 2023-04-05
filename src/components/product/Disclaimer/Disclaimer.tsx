@@ -21,7 +21,7 @@ export const Disclaimer = ({
   onDisclaimerClick?: (e: MouseEvent) => void;
 }) => {
   // if the href is internal, we don't want to open it in a new tab
-  const isInternalLink = href && href.startsWith('/');
+  const isInternalLink = href ? href.startsWith('/') : false;
 
   return (
     <DisclaimerAlert
