@@ -35,6 +35,7 @@ type LoginProps = {
    */
   isDapp?: boolean;
   backendUrl?: string;
+  supportedNetworks?: number[];
 };
 
 export const Login = ({
@@ -45,6 +46,7 @@ export const Login = ({
   buttonProps,
   isDapp = true,
   backendUrl,
+  supportedNetworks,
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -220,7 +222,7 @@ export const Login = ({
         <WalletContainer>
           {isDapp ? (
             <>
-              {!SUPPORTED_NETWORKS.includes(chainId) && (
+              {!(supportedNetworks || SUPPORTED_NETWORKS).includes(chainId) && (
                 <div className="unsupported-network">{unsupportedText}</div>
               )}
             </>
