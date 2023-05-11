@@ -48,3 +48,7 @@
 ## 0.3.9
 
 - `Disclaimer` component added
+
+## 0.3.10
+
+- pass supportedNetworks as props to Login component
