@@ -52,3 +52,7 @@
 ## 0.3.10
 
 - pass supportedNetworks as props to Login component
+
+## 0.3.11
+
+- get symbol from chainId

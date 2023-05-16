@@ -28,3 +28,24 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
   const backText = text.slice(text.length - suffixCount, text.length);
   return `${frontText}...${backText}`;
 };
+
+export const getSymbolName = (chainId: number) => {
+  switch (chainId) {
+    case 56:
+      return 'BNB';
+    case 137:
+    case 80001:
+      return 'MATIC';
+    case 43114:
+    case 43113:
+      return 'AVAX';
+    case 250:
+      return 'FTM';
+    case 1287:
+      return 'DEV';
+    case 100:
+      return 'xDAI';
+    default:
+      return 'ETH';
+  }
+};
