@@ -8,7 +8,7 @@ import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import Web3 from 'web3';
 
 import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
-import { getBalance } from '../../../functions';
+import { getBalance, getSymbolName } from '../../../functions';
 import { GenericObject } from '../../../types';
 import { EllipsisMiddle } from '../Ellipsis';
 import { Web3DataContext } from '../Web3DataProvider';
@@ -257,7 +257,11 @@ export const Login = ({
           )}
 
           <div>
-            {isNil(balance) ? '--' : `${round(Number(balance), 2)} ETH`}
+            {isNil(balance)
+              ? '--'
+              : `${round(Number(balance), 2)} ${getSymbolName(
+                  Number(chainId),
+                )}`}
           </div>
           <div className="dash" />
           <EllipsisMiddle data-testid="wallet-address">
