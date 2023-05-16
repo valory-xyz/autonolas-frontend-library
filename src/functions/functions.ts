@@ -32,6 +32,7 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
 export const getSymbolName = (chainId: number) => {
   switch (chainId) {
     case 56:
+    case 97:
       return 'BNB';
     case 137:
     case 80001:
@@ -44,6 +45,7 @@ export const getSymbolName = (chainId: number) => {
     case 1287:
       return 'DEV';
     case 100:
+    case 10200:
       return 'xDAI';
     default:
       return 'ETH';
