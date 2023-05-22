@@ -1,16 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Tooltip } from 'antd';
+import { Tooltip, TooltipProps } from 'antd';
 import { GATEWAY_URL } from '../../../utils/constants';
+import { getExplorerURL, getChainId } from '../../../functions';
 
-type AddressLinkType = {
-  text: string;
-  isTransaction?: boolean;
-  suffixCount?: number;
-  isIpfsLink?: boolean;
-  children?: ReactNode;
-};
-
-//
 /**
  * function to get the trimmed text
  * @example
@@ -49,24 +41,33 @@ const getRedirectLink = (text: string, isIpfsLink: boolean) => {
   }
 
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
+  const chainId = getChainId() || 1; // default to mainnet
+  const explorerUrl = getExplorerURL(chainId);
 
-  if (isTransaction) {
-    return `https://etherscan.io/tx/${text}`;
-  }
-
-  return `https://etherscan.io/address/${text}`;
+  return isTransaction
+    ? `${explorerUrl}/tx/${text}`
+    : `${explorerUrl}/address/${text}`;
 };
 
-// component
+type AddressLinkType = {
+  text: string;
+  isTransaction?: boolean;
+  suffixCount?: number;
+  isIpfsLink?: boolean;
+  tooltipPlacement?: TooltipProps['placement'];
+  children?: ReactNode;
+};
+
 export const AddressLink = ({
   text,
   suffixCount = 6,
   isIpfsLink = false,
+  tooltipPlacement = 'bottom',
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(getText(text, isIpfsLink), suffixCount);
 
   return (
-    <Tooltip title={text}>
+    <Tooltip title={text} placement={tooltipPlacement}>
       <a
         href={getRedirectLink(text, isIpfsLink)}
         target="_blank"

@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 import { AddressLink } from './AddressLink';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 export default {
   title: 'AddressLink',
@@ -28,7 +28,7 @@ export const Default = (): JSX.Element => {
       textToShow: 'IPFS',
       text: IPFS,
       isIpfsLink: true,
-    }
+    },
   ];
 
   return (
@@ -41,6 +41,7 @@ export const Default = (): JSX.Element => {
         padding: '8px 16px',
       }}
     >
+      <Title level={5}>Change the chain to see different explorer URL</Title>
       {list.map(({ textToShow, ...rest }, index) => (
         <div key={`address-link-${index}`}>
           <Text>{textToShow}</Text>:&nbsp;
