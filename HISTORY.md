@@ -36,3 +36,23 @@
 ## 0.3.6
 
 - `ServiceStatusInfo` remove `Live Service` link
+
+## 0.3.7
+
+- `ServiceStatusInfo` update for IEKit
+
+## 0.3.8
+
+- `sendTransaction` util function added
+
+## 0.3.9
+
+- `Disclaimer` component added
+
+## 0.3.10
+
+- pass supportedNetworks as props to Login component
+
+## 0.3.11
+
+- get symbol from chainId

@@ -11,13 +11,13 @@ import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import Web3 from 'web3';
 
 import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
+import { getBalance, getSymbolName } from '../../../functions';
+import { GenericObject } from '../../../types';
 import { EllipsisMiddle } from '../Ellipsis';
-import { getBalance } from '../../../functions';
 import { Web3DataContext } from '../Web3DataProvider';
-import { Container, DetailsContainer, WalletContainer } from './styles';
 import { ProviderOptions } from './helpers';
-import { GenericObject } from 'src/components/types';
-import { EthereumProvider } from '@walletconnect/ethereum-provider';
+// import { EthereumProvider } from '@walletconnect/ethereum-provider';
+import { Container, DetailsContainer, WalletContainer } from './styles';
 
 /* --------------- Login component --------------- */
 type ConnectType = {
@@ -39,6 +39,7 @@ type LoginProps = {
    */
   isDapp?: boolean;
   backendUrl?: string;
+  supportedNetworks?: number[];
 };
 
 export const Login = ({
@@ -49,6 +50,7 @@ export const Login = ({
   buttonProps,
   isDapp = true,
   backendUrl,
+  supportedNetworks,
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -209,15 +211,15 @@ export const Login = ({
     return chainId === 1;
   };
 
-  if (errorMessage) {
-    return (
-      <Container>
-        <WalletContainer data-testid="login-error">
-          {errorMessage}
-        </WalletContainer>
-      </Container>
-    );
-  }
+  // if (errorMessage) {
+  //   return (
+  //     <Container>
+  //       <WalletContainer data-testid="login-error">
+  //         {errorMessage}
+  //       </WalletContainer>
+  //     </Container>
+  //   );
+  // }
 
   if (!account || !chainId) {
     return (
@@ -242,7 +244,7 @@ export const Login = ({
         <WalletContainer>
           {isDapp ? (
             <>
-              {!SUPPORTED_NETWORKS.includes(chainId) && (
+              {!(supportedNetworks || SUPPORTED_NETWORKS).includes(chainId) && (
                 <div className="unsupported-network">{unsupportedText}</div>
               )}
             </>
@@ -277,7 +279,11 @@ export const Login = ({
           )}
 
           <div>
-            {isNil(balance) ? '--' : `${round(Number(balance), 2)} ETH`}
+            {isNil(balance)
+              ? '--'
+              : `${round(Number(balance), 2)} ${getSymbolName(
+                  Number(chainId),
+                )}`}
           </div>
           <div className="dash" />
           <EllipsisMiddle data-testid="wallet-address">

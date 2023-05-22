@@ -1,8 +1,8 @@
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { GenericObject } from 'src/components/types';
-import { EthereumProvider } from '@walletconnect/ethereum-provider';
-import type { EthereumRpcMap } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+// import { EthereumProvider } from '@walletconnect/ethereum-provider';
+// import type { EthereumRpcMap } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+import { GenericObject } from '../../../types';
 
 type rcpType = GenericObject | undefined;
 
@@ -27,7 +27,7 @@ export const ProviderOptions = (function () {
         cacheProvider: true,
         providerOptions: {
           walletconnect: {
-            version: 1,
+            // version: 1, 
             // package: EthereumProvider.init({
             //   projectId: PROJECT_ID,
             //   chains: [1, 5, 31337], // REQUIRED chain ids
