@@ -1,13 +1,24 @@
 const path = require('path')
-const lessPath = '../src/styles/antd-variables.less';
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: ['@storybook/addon-essentials', '@storybook/addon-links', '@storybook/addon-storysource', '@storybook/addon-a11y', "@storybook/preset-ant-design"],
   webpackFinal: async config => {
+    // TODO: this is not working
+    // config.module.rules.push({
+    //   test: /\.js/,
+    //   loader: require.resolve('babel-loader'),
+    //   options: {
+    //     presets: [['@babel/preset-env']],
+    //   },
+    // });
+
     config.module.rules.push({
-      test: /\.(ts|tsx)$/,
+      test: /\.ts$|tsx/,
+      // loader: ["babel-loader", "ts-loader"],
       loader: require.resolve('babel-loader'),
+      // add multiple loaders
+
       options: {
         presets: [['react-app', { flow: false, typescript: true }]],
       },
