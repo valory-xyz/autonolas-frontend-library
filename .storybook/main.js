@@ -3,19 +3,6 @@ const path = require('path')
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: ['@storybook/addon-essentials', '@storybook/addon-links', '@storybook/addon-storysource', '@storybook/addon-a11y', "@storybook/preset-ant-design"],
-  babel: async (options) => {
-    console.log(options);
-    return {
-      // Update your babel configuration here
-      ...options,
-      plugins: [
-        ...options.plugins,
-        // [require.resolve("@babel/plugin-proposal-private-methods"), { "loose": true }],
-        [require.resolve("@babel/plugin-proposal-private-property-in-object"), { "loose": true }],
-        // [require.resolve("@babel/plugin-proposal-class-properties"), { "loose": true }]
-      ]
-    }
-  },
   webpackFinal: async config => {
     config.module.rules.push({
       test: /\.js$/,
