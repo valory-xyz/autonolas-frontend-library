@@ -46,4 +46,8 @@ module.exports = {
 
     return config;
   },
+  env: (config) => ({
+    ...config,
+    EXAMPLE_VAR: 'Example value',
+  }),
 };

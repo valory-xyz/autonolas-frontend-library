@@ -1,12 +1,13 @@
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-// import { EthereumProvider } from '@walletconnect/ethereum-provider';
+// import WalletConnectProvider from '@walletconnect/ethereum-provider';
 // import type { EthereumRpcMap } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { GenericObject } from '../../../types';
 
 type rcpType = GenericObject | undefined;
 
-const PROJECT_ID = '1b87939bfd17a9b5104e180353f4ff67';
+// const PROJECT_ID = '1b87939bfd17a9b5104e180353f4ff67';
+const PROJECT_ID = process.env.WALLET_PROJECT_ID;
 
 const localRpc = {
   1: process.env.RPC_MAINNET_URL,
@@ -36,6 +37,7 @@ export const ProviderOptions = (function () {
             package: WalletConnectProvider, // required
             // package: EthereumProvider, // required
             options: {
+              // chainId: 1,
               infuraId: undefined, // required
               rpc: rpc || localRpc,
 
