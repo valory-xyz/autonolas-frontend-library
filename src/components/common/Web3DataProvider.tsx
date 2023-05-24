@@ -16,7 +16,7 @@ export const Web3DataContext = createContext<ProviderContextType>(
   {} as ProviderContextType,
 );
 
-export const Web3DataProvider: FC = ({
+export const Web3DataProvider = ({
   children,
 }: {
   children: ReactNode;

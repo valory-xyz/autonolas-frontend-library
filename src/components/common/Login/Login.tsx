@@ -70,7 +70,7 @@ export const Login = ({
       const result = await getBalance(accountPassed, web3Provider as Web3);
       setUserBalance(result as string);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(error as Error);
     }
   };
 
