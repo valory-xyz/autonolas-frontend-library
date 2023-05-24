@@ -17,7 +17,8 @@
     "strictNullChecks": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
   },
   "include": ["src/**/*", "src/jest-setup.ts"],
   "exclude": [
