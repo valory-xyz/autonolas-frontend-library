@@ -56,3 +56,7 @@
 ## 0.3.11
 
 - get symbol from chainId
+
+## 0.3.12
+
+- add support for `gnosis` chain in Login component
