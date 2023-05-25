@@ -12,11 +12,7 @@ export const Default = (): JSX.Element => (
   <Web3DataProvider>
     <Web3ReactProvider getLibrary={getLibrary}>
       <Login
-        onConnect={(e) => {
-          console.log(e);
-          console.log((window as any).MODAL_PROVIDER);
-          console.log((window as any).WEB3_PROVIDER);
-        }}
+        onConnect={(e) => console.log(e)}
         onDisconnect={() => console.log('disconnect')}
       />
     </Web3ReactProvider>

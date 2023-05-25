@@ -1,8 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext, useCallback, useState } from 'react';
-// import Core
-import Core from 'web3modal';
-import { ethers } from 'ethers';
 import { Button, ButtonProps, Popover } from 'antd';
 import round from 'lodash/round';
 import isNil from 'lodash/isNil';
@@ -16,7 +13,6 @@ import { GenericObject } from '../../../types';
 import { EllipsisMiddle } from '../Ellipsis';
 import { Web3DataContext } from '../Web3DataProvider';
 import { ProviderOptions } from './helpers';
-// import { EthereumProvider } from '@walletconnect/ethereum-provider';
 import { Container, DetailsContainer, WalletContainer } from './styles';
 
 /* --------------- Login component --------------- */
@@ -54,9 +50,6 @@ export const Login = ({
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
-  // const web3Modal = await NewProviderOptions(rpc);
-  // const web3Modal = myNewProvider;
-
   const { provider, web3Provider, setProvider, setWeb3Provider } =
     useContext(Web3DataContext);
 
@@ -84,22 +77,12 @@ export const Login = ({
     // This is the initial `provider` that is returned when
     // using web3Modal to connect. Can be MetaMask or WalletConnect.
     try {
-      // const modalProvider = await EthereumProvider.init({
-      //   projectId: '1b87939bfd17a9b5104e180353f4ff67',
-      //   chains: [1, 5, 31337],
-      // });
-
-      // console.log(modalProvider)
-
-      // await modalProvider.enable();
-
       const modalProvider = await web3Modal.connect();
 
       // We plug the initial `provider` and get back
       // a Web3Provider. This will add on methods and
       // event listeners such as `.on()` will be different.
       const wProvider = new Web3(modalProvider);
-      // const abcd = new ethers.providers.Web3Provider(modalProvider);
 
       const address = await wProvider.eth.getAccounts();
       const currentChainId = await wProvider.eth.getChainId();
@@ -109,12 +92,6 @@ export const Login = ({
       // *******************************************************
       (window as any).MODAL_PROVIDER = modalProvider;
       (window as any).WEB3_PROVIDER = wProvider;
-
-      // console.log({
-      //   modalProvider,
-      //   wProvider,
-      //   abcd,
-      // });
 
       setUserAccount(address[0]);
       setProvider(modalProvider);
@@ -126,6 +103,7 @@ export const Login = ({
   }, []);
 
   const disconnectAccount = useCallback(async () => {
+    await web3Modal.clearCachedProvider();
     if (provider?.disconnect && typeof provider.disconnect === 'function') {
       await provider.disconnect();
     }
@@ -139,11 +117,11 @@ export const Login = ({
   }, [provider]);
 
   // Auto connect to the cached provider
-  // useEffect(() => {
-  //   if (web3Modal && web3Modal.cachedProvider) {
-  //     handleLogin();
-  //   }
-  // }, [handleLogin]);
+  useEffect(() => {
+    if (web3Modal && web3Modal.cachedProvider) {
+      handleLogin();
+    }
+  }, [handleLogin]);
 
   // A `provider` should come with EIP-1193 events. We'll listen for those events
   // here so that when a user switches accounts or networks, we can update the
@@ -211,15 +189,15 @@ export const Login = ({
     return chainId === 1;
   };
 
-  // if (errorMessage) {
-  //   return (
-  //     <Container>
-  //       <WalletContainer data-testid="login-error">
-  //         {errorMessage}
-  //       </WalletContainer>
-  //     </Container>
-  //   );
-  // }
+  if (errorMessage) {
+    return (
+      <Container>
+        <WalletContainer data-testid="login-error">
+          {errorMessage}
+        </WalletContainer>
+      </Container>
+    );
+  }
 
   if (!account || !chainId) {
     return (
