@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { ButtonProps } from 'antd';
+import React, { useEffect, useMemo } from 'react';
 import {
   EthereumClient,
   w3mConnectors,
@@ -10,32 +9,24 @@ import {
   configureChains,
   createConfig,
   WagmiConfig,
-
-  // hooks
   useAccount,
-  useConnect,
-  useBalance,
   useNetwork,
-
-  // types
   Address,
 } from 'wagmi';
 import { mainnet, gnosis, polygon, goerli, polygonMumbai } from 'wagmi/chains';
 import { Web3Button } from '@web3modal/react';
-import { Button, Popover } from 'antd';
+import { Popover } from 'antd';
 import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import {
   COLOR,
   SUPPORTED_NETWORKS,
   SUPPORTED_TEST_NETWORKS,
 } from '../../../utils';
-import { GenericObject } from '../../../types';
 import { LoginContainer } from './styles';
 
 /**
- * configs and helpers
+ * configs
  */
-
 const chains = [mainnet, gnosis, polygon, goerli, polygonMumbai];
 const projectId = process.env.WALLET_PROJECT_ID as string;
 
@@ -48,9 +39,18 @@ const wagmiConfig = createConfig({
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
 /**
+ * helpers
+ */
+const unsupportedText = (
+  <>
+    <WarningOutlined />
+    Unsupported network
+  </>
+);
+
+/**
  * types
  */
-
 type ConnectType = {
   address?: string | null;
   balance?: string | null;
@@ -75,32 +75,20 @@ type LoginProps = {
   supportedNetworks?: number[];
 
   // more props for v2
-  theme: 'light' | 'dark';
-};
-
-const useLoginHelpers = (account: Address) => {
-  const { data } = useBalance({ address: account });
-  const { chain, chains } = useNetwork();
-  // console.log(chain, chains);
-
-  return {
-    balance: data,
-    chain,
-  };
+  theme?: 'light' | 'dark';
 };
 
 export const LoginV2 = ({
   onConnect: onConnectCb,
   onDisconnect: onDisconnectCb,
-  onError: onErrorCb, // TODO: fix this
+  // onError: onErrorCb, // TODO: fix this
   isDapp = true,
   backendUrl,
   supportedNetworks,
   theme = 'light',
 }: LoginProps) => {
-  // console.log(process.env);
   const [account, setAccount] = React.useState<Address | undefined>(undefined);
-  const { chain, chains } = useNetwork();
+  const { chain } = useNetwork();
   const chainId = chain?.id;
 
   useAccount({
@@ -113,38 +101,25 @@ export const LoginV2 = ({
     },
   });
 
-  // useConnect({
-  //   onError: (error) => {
-  //     if (onErrorCb) onErrorCb(error);
-  //   },
-  // });
-
   useEffect(() => {
     if (account && onConnectCb) {
       onConnectCb({ address: account });
     }
   }, [account, onConnectCb]);
 
-  const unsupportedText = (
-    <>
-      <WarningOutlined />
-      Unsupported network
-    </>
-  );
-
-  const isStaging = () => {
+  const isStaging = useMemo(() => {
     return (backendUrl || '').includes('staging');
-  };
+  }, [backendUrl]);
 
-  const isValidNetwork = () => {
+  const isValidNetwork = useMemo(() => {
     // staging and other preview env
-    if (isStaging()) {
+    if (isStaging) {
       return SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId);
     }
 
     // production env
     return chainId === 1;
-  };
+  }, [chainId, isStaging]);
 
   return (
     <LoginContainer>
@@ -158,7 +133,7 @@ export const LoginV2 = ({
             </>
           ) : (
             <>
-              {!isValidNetwork() && (
+              {!isValidNetwork && (
                 <div className="unsupported-network">
                   {unsupportedText}
                   <Popover
@@ -167,7 +142,7 @@ export const LoginV2 = ({
                     }
                     content={
                       <div>
-                        {isStaging() ? (
+                        {isStaging ? (
                           <>
                             {SUPPORTED_TEST_NETWORKS.map((e) => (
                               <div key={`supported-chain-${e.id}`}>

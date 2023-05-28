@@ -172,22 +172,14 @@ export const Login = ({
     if (errorMessage && onError) onError(errorMessage);
   }, [errorMessage]);
 
-  const isStaging = () => {
-    return (backendUrl || '').includes('staging');
-  };
+  const isStaging = (backendUrl || '').includes('staging');
 
   /**
-   * returns if the current network is supported based on backend URL configured
+   * if the current network is supported based on backend URL configured
    */
-  const isValidNetwork = () => {
-    // staging and other preview env
-    if (isStaging()) {
-      return SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId);
-    }
-
-    // production env
-    return chainId === 1;
-  };
+  const isValidNetwork = isStaging
+    ? SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId)
+    : chainId === 1;
 
   if (errorMessage) {
     return (
@@ -228,13 +220,13 @@ export const Login = ({
             </>
           ) : (
             <>
-              {!isValidNetwork() && (
+              {!isValidNetwork && (
                 <div className="unsupported-network">
                   {unsupportedText}
                   <Popover
                     content={
                       <div>
-                        {isStaging() ? (
+                        {isStaging ? (
                           <>
                             {SUPPORTED_TEST_NETWORKS.map((e) => (
                               <div key={`supported-chain-${e.id}`}>

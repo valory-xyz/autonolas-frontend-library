@@ -16,9 +16,9 @@ export const Default = (): JSX.Element => {
 
 export const NotDapp = (): JSX.Element => (
   <LoginV2
-    // onConnect={(e) => console.log(e)}
-    // onDisconnect={() => console.log('disconnect')}
-    // buttonProps={{ type: 'link' }}
+    onConnect={(e) => console.log(e)}
+    onDisconnect={() => console.log('disconnected')}
+    // onError={(e) => console.log(e)}
     isDapp={false}
     backendUrl="https://contribution-service-backend.staging.autonolas.tech"
   />
