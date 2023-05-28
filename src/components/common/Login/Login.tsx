@@ -38,6 +38,9 @@ type LoginProps = {
   supportedNetworks?: number[];
 };
 
+/**
+ * @deprecated use LoginV2 instead
+ */
 export const Login = ({
   rpc,
   onConnect,

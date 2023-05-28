@@ -13,21 +13,27 @@ import {
   useNetwork,
   Address,
 } from 'wagmi';
-import { mainnet, gnosis, polygon, goerli, polygonMumbai } from 'wagmi/chains';
+import {
+  mainnet,
+  gnosis,
+  polygon,
+  goerli,
+  polygonMumbai,
+  gnosisChiado,
+} from 'wagmi/chains';
 import { Web3Button } from '@web3modal/react';
-import { Popover } from 'antd';
-import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import {
   COLOR,
   SUPPORTED_NETWORKS,
   SUPPORTED_TEST_NETWORKS,
 } from '../../../utils';
+import { UnsupportedNetworks, unsupportedText } from './utils';
 import { LoginContainer } from './styles';
 
 /**
  * configs
  */
-const chains = [mainnet, gnosis, polygon, goerli, polygonMumbai];
+const chains = [mainnet, goerli, gnosis, gnosisChiado, polygon, polygonMumbai];
 const projectId = process.env.WALLET_PROJECT_ID as string;
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
@@ -37,16 +43,6 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
-
-/**
- * helpers
- */
-const unsupportedText = (
-  <>
-    <WarningOutlined />
-    Unsupported network
-  </>
-);
 
 /**
  * types
@@ -61,9 +57,7 @@ type LoginProps = {
   // similar props to v1
   onConnect?: ({}: ConnectType) => void; // TODO: pass balance, chainId
   onDisconnect?: () => void;
-  onError?: (error: Error) => void;
-  // rpc?: GenericObject;
-  // buttonProps?: ButtonProps;
+  // onError?: (error: Error) => void;
   // /**
   //  * TODO: make it more generic
   //  * if the application uses both blockchain node & backend,
@@ -74,7 +68,7 @@ type LoginProps = {
   backendUrl?: string;
   supportedNetworks?: number[];
 
-  // more props for v2
+  // more props for v2 (new)
   theme?: 'light' | 'dark';
 };
 
@@ -133,34 +127,7 @@ export const LoginV2 = ({
             </>
           ) : (
             <>
-              {!isValidNetwork && (
-                <div className="unsupported-network">
-                  {unsupportedText}
-                  <Popover
-                    getPopupContainer={(triggerNode) =>
-                      triggerNode.parentNode as HTMLElement
-                    }
-                    content={
-                      <div>
-                        {isStaging ? (
-                          <>
-                            {SUPPORTED_TEST_NETWORKS.map((e) => (
-                              <div key={`supported-chain-${e.id}`}>
-                                {e.name}
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <div>Ethereum</div>
-                        )}
-                      </div>
-                    }
-                    title="Switch to a supported network:"
-                  >
-                    <CaretDownOutlined />
-                  </Popover>
-                </div>
-              )}
+              {!isValidNetwork && <UnsupportedNetworks isStaging={isStaging} />}
             </>
           )}
         </>
