@@ -8,7 +8,7 @@ export default { title: 'LoginV2' };
 export const Default = (): JSX.Element => {
   const { chain, chains } = useNetwork();
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
-  window?.console.log({ chains });
+  window?.console.log({ chain, chains });
 
   return (
     <div
