@@ -39,7 +39,11 @@ const projectId = process.env.WALLET_PROJECT_ID as string;
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 2, chains }),
+  connectors: w3mConnectors({
+    projectId,
+    version: 2, // v2 of wallet connect
+    chains,
+  }),
   publicClient,
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
@@ -57,7 +61,7 @@ type LoginProps = {
   // similar props to v1
   onConnect?: ({}: ConnectType) => void; // TODO: pass balance, chainId
   onDisconnect?: () => void;
-  // onError?: (error: Error) => void;
+  // onError?: (error: Error) => void; // TODO: check if this is required
   // /**
   //  * TODO: make it more generic
   //  * if the application uses both blockchain node & backend,
@@ -70,12 +74,13 @@ type LoginProps = {
 
   // more props for v2 (new)
   theme?: 'light' | 'dark';
+  // buttonTheme // TODO
 };
 
 export const LoginV2 = ({
   onConnect: onConnectCb,
   onDisconnect: onDisconnectCb,
-  // onError: onErrorCb, // TODO: fix this
+  // onError: onErrorCb,
   isDapp = true,
   backendUrl,
   supportedNetworks,

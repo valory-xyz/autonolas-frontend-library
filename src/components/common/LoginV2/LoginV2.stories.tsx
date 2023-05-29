@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNetwork } from 'wagmi';
-import { LoginV2 } from './LoginV2';
 import { Switch } from 'antd';
+import { LoginV2 } from './LoginV2';
 
 export default { title: 'LoginV2' };
 
