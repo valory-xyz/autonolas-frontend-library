@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Tooltip, TooltipProps } from 'antd';
 import { GATEWAY_URL } from '../../../utils/constants';
 import { getExplorerURL, getChainId } from '../../../functions';
@@ -55,7 +55,6 @@ type AddressLinkType = {
   suffixCount?: number;
   isIpfsLink?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
-  children?: ReactNode;
 };
 
 export const AddressLink = ({
@@ -64,7 +63,10 @@ export const AddressLink = ({
   isIpfsLink = false,
   tooltipPlacement = 'bottom',
 }: AddressLinkType) => {
-  const trimmedText = getTrimmedText(getText(text, isIpfsLink), suffixCount);
+  const trimmedText = getTrimmedText(
+    getText(text as string, isIpfsLink),
+    suffixCount,
+  );
 
   return (
     <Tooltip title={text} placement={tooltipPlacement}>

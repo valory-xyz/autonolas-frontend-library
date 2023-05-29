@@ -1,12 +1,10 @@
 import React from 'react';
-import { Typography } from 'antd';
+import { Typography, Card } from 'antd';
 import { AddressLink } from './AddressLink';
 
 const { Text, Title } = Typography;
 
-export default {
-  title: 'AddressLink',
-};
+export default { title: 'AddressLink' };
 
 const ADDRESS = '0x02c26437b292d86c5f4f21bbcce0771948274f84';
 const TRANSACTION =
@@ -16,14 +14,8 @@ const IPFS =
 
 export const Default = (): JSX.Element => {
   const list = [
-    {
-      textToShow: 'Address',
-      text: ADDRESS,
-    },
-    {
-      textToShow: 'Transaction',
-      text: TRANSACTION,
-    },
+    { textToShow: 'Address', text: ADDRESS },
+    { textToShow: 'Transaction', text: TRANSACTION },
     {
       textToShow: 'IPFS',
       text: IPFS,
@@ -32,15 +24,7 @@ export const Default = (): JSX.Element => {
   ];
 
   return (
-    <div
-      style={{
-        border: '1px solid black',
-        borderRadius: '8px',
-        width: 400,
-        margin: '0 auto',
-        padding: '8px 16px',
-      }}
-    >
+    <Card style={{ width: 400, margin: '0 auto' }}>
       <Title level={5}>Change the chain to see different explorer URL</Title>
       {list.map(({ textToShow, ...rest }, index) => (
         <div key={`address-link-${index}`}>
@@ -48,6 +32,6 @@ export const Default = (): JSX.Element => {
           <AddressLink {...rest} />
         </div>
       ))}
-    </div>
+    </Card>
   );
 };
