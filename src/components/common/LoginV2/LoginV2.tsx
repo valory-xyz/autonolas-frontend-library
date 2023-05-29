@@ -21,7 +21,7 @@ import {
   polygonMumbai,
   gnosisChiado,
 } from 'wagmi/chains';
-import { Web3Button } from '@web3modal/react';
+import { Web3Button, Web3NetworkSwitch } from '@web3modal/react';
 import {
   COLOR,
   SUPPORTED_NETWORKS,
@@ -75,6 +75,7 @@ type LoginProps = {
 
   // more props for v2 (new)
   theme?: 'light' | 'dark';
+  showNetworkSwitch?: boolean;
   // buttonTheme // TODO
 };
 
@@ -89,6 +90,7 @@ export const LoginV2 = ({
   backendUrl,
   supportedNetworks,
   theme = 'light',
+  showNetworkSwitch = true,
 }: LoginProps) => {
   const [account, setAccount] = useState<Address | undefined>(undefined);
   const { chain } = useNetwork();
@@ -144,6 +146,12 @@ export const LoginV2 = ({
 
       <WagmiConfig config={wagmiConfig}>
         <Web3Button balance="show" avatar="hide" />
+        {showNetworkSwitch && (
+          <>
+            &nbsp;&nbsp;
+            <Web3NetworkSwitch />
+          </>
+        )}
       </WagmiConfig>
 
       <Web3Modal
