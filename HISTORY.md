@@ -56,3 +56,8 @@
 ## 0.3.11
 
 - get symbol from chainId
+
+## 0.4.0
+
+- New login component added (LoginV2)
+- Network name will be visible in the old login component
