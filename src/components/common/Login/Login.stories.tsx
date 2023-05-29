@@ -28,6 +28,7 @@ export const LinkButton = (): JSX.Element => (
         buttonProps={{ type: 'link' }}
         isDapp={false}
         backendUrl="https://contribution-service-backend.staging.autonolas.tech"
+        showNetworkName={false}
       />
     </Web3ReactProvider>
   </Web3DataProvider>

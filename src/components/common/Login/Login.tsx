@@ -8,7 +8,7 @@ import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import Web3 from 'web3';
 
 import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
-import { getBalance, getSymbolName } from '../../../functions';
+import { getBalance, getNetworkName, getSymbolName } from '../../../functions';
 import { GenericObject } from '../../../types';
 import { EllipsisMiddle } from '../Ellipsis';
 import { Web3DataContext } from '../Web3DataProvider';
@@ -36,6 +36,7 @@ type LoginProps = {
   isDapp?: boolean;
   backendUrl?: string;
   supportedNetworks?: number[];
+  showNetworkName?: boolean;
 };
 
 /**
@@ -50,6 +51,7 @@ export const Login = ({
   isDapp = true,
   backendUrl,
   supportedNetworks,
+  showNetworkName = true,
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -265,6 +267,13 @@ export const Login = ({
           <Button type="ghost" onClick={disconnectAccount}>
             Disconnect
           </Button>
+          {showNetworkName && (
+            <>
+              <div className="dash" />
+              Network:&nbsp;
+              {getNetworkName(Number(chainId))}
+            </>
+          )}
         </WalletContainer>
       </DetailsContainer>
     </Container>
