@@ -1,25 +1,7 @@
 import React from 'react';
-import { useBalance, useNetwork, Address } from 'wagmi';
 import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
 import { SUPPORTED_TEST_NETWORKS } from '../../../utils';
-
-/**
- * hooks
- */
-
-// Hook to get important data from the account
-export const useLoginHelpers = (account?: Address) => {
-  const { data } = useBalance({ address: account });
-  const { chain, chains } = useNetwork();
-
-  return {
-    balance: data,
-    chainId: chain?.id,
-    chain,
-    chains,
-  };
-};
 
 /**
  * helpers

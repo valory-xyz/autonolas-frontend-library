@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   EthereumClient,
   w3mConnectors,
@@ -34,7 +34,8 @@ import { LoginContainer } from './styles';
  * configs
  */
 const chains = [mainnet, goerli, gnosis, gnosisChiado, polygon, polygonMumbai];
-const projectId = process.env.WALLET_PROJECT_ID as string;
+const projectId = (process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ||
+  process.env.WALLET_PROJECT_ID) as string;
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({
@@ -77,6 +78,9 @@ type LoginProps = {
   // buttonTheme // TODO
 };
 
+/**
+ * Login component v2
+ */
 export const LoginV2 = ({
   onConnect: onConnectCb,
   onDisconnect: onDisconnectCb,
@@ -86,7 +90,7 @@ export const LoginV2 = ({
   supportedNetworks,
   theme = 'light',
 }: LoginProps) => {
-  const [account, setAccount] = React.useState<Address | undefined>(undefined);
+  const [account, setAccount] = useState<Address | undefined>(undefined);
   const { chain } = useNetwork();
   const chainId = chain?.id;
 
