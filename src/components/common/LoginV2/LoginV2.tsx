@@ -53,7 +53,7 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains);
  * types
  */
 type ConnectType = {
-  address?: string | null;
+  address: string | null;
   balance?: string | null;
   chainId?: number | null;
 };
@@ -145,13 +145,13 @@ export const LoginV2 = ({
       )}
 
       <WagmiConfig config={wagmiConfig}>
-        <Web3Button balance="show" avatar="hide" />
         {showNetworkSwitch && (
           <>
-            &nbsp;&nbsp;
             <Web3NetworkSwitch />
+            &nbsp;&nbsp;
           </>
         )}
+        <Web3Button balance="show" avatar="hide" />
       </WagmiConfig>
 
       <Web3Modal

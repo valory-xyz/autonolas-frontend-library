@@ -253,6 +253,13 @@ export const Login = ({
             </>
           )}
 
+          {showNetworkName && (
+            <>
+              Network:&nbsp;
+              {getNetworkName(Number(chainId))}
+              <div className="dash" />
+            </>
+          )}
           <div>
             {isNil(balance)
               ? '--'
@@ -267,13 +274,6 @@ export const Login = ({
           <Button type="ghost" onClick={disconnectAccount}>
             Disconnect
           </Button>
-          {showNetworkName && (
-            <>
-              <div className="dash" />
-              Network:&nbsp;
-              {getNetworkName(Number(chainId))}
-            </>
-          )}
         </WalletContainer>
       </DetailsContainer>
     </Container>
