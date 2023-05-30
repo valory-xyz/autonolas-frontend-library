@@ -56,6 +56,7 @@
 ## 0.3.11
 
 - get symbol from chainId
+- AddressLink component added
 
 ## 0.4.0
 

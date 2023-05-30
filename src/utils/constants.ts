@@ -9,3 +9,5 @@ export const SUPPORTED_TEST_NETWORKS = [
 ];
 
 export const NA = 'n/a';
+
+export const GATEWAY_URL = 'https://gateway.autonolas.tech/ipfs/';

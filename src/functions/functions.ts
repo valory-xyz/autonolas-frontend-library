@@ -86,3 +86,30 @@ export const getNetworkName = (networkId: number) => {
       return 'Unknown Network';
   }
 };
+
+export const getExplorerURL = (chainId = 1) => {
+  switch (chainId) {
+    case 5:
+      return `https://goerli.etherscan.io`;
+    case 56:
+    case 97:
+      return `https://bscscan.com`;
+    case 137:
+      return `https://mumbai.polygonscan.com/`;
+    case 80001:
+      return `https://polygonscan.com`;
+    case 43114:
+    case 43113:
+      return `https://cchain.explorer.avax.network`;
+    case 250:
+      return `https://ftmscan.com`;
+    case 1287:
+      return `https://explorer.devv.finance`;
+    case 100:
+      return `https://gnosisscan.io`;
+    case 10200:
+      return `https://blockscout.com/xdai/mainnet`;
+    default:
+      return `https://etherscan.io`;
+  }
+};
