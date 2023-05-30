@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import {
   EthereumClient,
   w3mConnectors,
@@ -82,7 +82,7 @@ type LoginProps = {
 /**
  * Login component v2
  */
-export const LoginV2 = ({
+export const LoginV2: FC<LoginProps> = ({
   onConnect: onConnectCb,
   onDisconnect: onDisconnectCb,
   // onError: onErrorCb,
@@ -91,7 +91,7 @@ export const LoginV2 = ({
   supportedNetworks,
   theme = 'light',
   showNetworkSwitch = true,
-}: LoginProps) => {
+}) => {
   const [account, setAccount] = useState<Address | undefined>(undefined);
   const { chain } = useNetwork();
   const chainId = chain?.id;

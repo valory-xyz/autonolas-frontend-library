@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, ReactElement } from 'react';
 import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
 import { SUPPORTED_TEST_NETWORKS } from '../../../utils';
@@ -18,7 +18,13 @@ export const unsupportedText = (
  * COMPONENTS
  */
 
-export const UnsupportedNetworks = ({ isStaging }: { isStaging: boolean }) => {
+type UnsupportedNetworksProps = {
+  isStaging: boolean;
+};
+
+export const UnsupportedNetworks: FC<UnsupportedNetworksProps> = ({
+  isStaging,
+}: UnsupportedNetworksProps): ReactElement => {
   return (
     <div className="unsupported-network">
       {unsupportedText}

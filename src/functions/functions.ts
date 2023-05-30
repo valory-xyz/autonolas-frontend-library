@@ -55,7 +55,7 @@ export const getSymbolName = (chainId: number) => {
 export const getNetworkName = (networkId: number) => {
   switch (networkId) {
     case 1:
-      return 'Mainnet';
+      return 'Ethereum';
     case 3:
       return 'Ropsten';
     case 4:
