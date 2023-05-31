@@ -8,7 +8,7 @@ import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import Web3 from 'web3';
 
 import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
-import { getBalance, getSymbolName } from '../../../functions';
+import { getBalance, getNetworkName, getSymbolName } from '../../../functions';
 import { GenericObject } from '../../../types';
 import { EllipsisMiddle } from '../Ellipsis';
 import { Web3DataContext } from '../Web3DataProvider';
@@ -36,8 +36,12 @@ type LoginProps = {
   isDapp?: boolean;
   backendUrl?: string;
   supportedNetworks?: number[];
+  showNetworkName?: boolean;
 };
 
+/**
+ * @deprecated use LoginV2 instead
+ */
 export const Login = ({
   rpc,
   onConnect,
@@ -47,6 +51,7 @@ export const Login = ({
   isDapp = true,
   backendUrl,
   supportedNetworks,
+  showNetworkName = true,
 }: LoginProps) => {
   const web3Modal = ProviderOptions.getWeb3ModalInstance(rpc);
 
@@ -63,7 +68,7 @@ export const Login = ({
       const result = await getBalance(accountPassed, web3Provider as Web3);
       setUserBalance(result as string);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(error as Error);
     }
   };
 
@@ -118,7 +123,7 @@ export const Login = ({
 
   // Auto connect to the cached provider
   useEffect(() => {
-    if (web3Modal.cachedProvider) {
+    if (web3Modal && web3Modal.cachedProvider) {
       handleLogin();
     }
   }, [handleLogin]);
@@ -172,22 +177,14 @@ export const Login = ({
     if (errorMessage && onError) onError(errorMessage);
   }, [errorMessage]);
 
-  const isStaging = () => {
-    return (backendUrl || '').includes('staging');
-  };
+  const isStaging = (backendUrl || '').includes('staging');
 
   /**
-   * returns if the current network is supported based on backend URL configured
+   * if the current network is supported based on backend URL configured
    */
-  const isValidNetwork = () => {
-    // staging and other preview env
-    if (isStaging()) {
-      return SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId);
-    }
-
-    // production env
-    return chainId === 1;
-  };
+  const isValidNetwork = isStaging
+    ? SUPPORTED_TEST_NETWORKS.some((e) => e.id === chainId)
+    : chainId === 1;
 
   if (errorMessage) {
     return (
@@ -228,13 +225,13 @@ export const Login = ({
             </>
           ) : (
             <>
-              {!isValidNetwork() && (
+              {!isValidNetwork && (
                 <div className="unsupported-network">
                   {unsupportedText}
                   <Popover
                     content={
                       <div>
-                        {isStaging() ? (
+                        {isStaging ? (
                           <>
                             {SUPPORTED_TEST_NETWORKS.map((e) => (
                               <div key={`supported-chain-${e.id}`}>
@@ -256,6 +253,13 @@ export const Login = ({
             </>
           )}
 
+          {showNetworkName && (
+            <>
+              Network:&nbsp;
+              {getNetworkName(Number(chainId))}
+              <div className="dash" />
+            </>
+          )}
           <div>
             {isNil(balance)
               ? '--'

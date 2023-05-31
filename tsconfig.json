@@ -4,7 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "target": "es5",
-    "lib": ["es6", "dom", "es2020"],
+    "lib": ["ES2015", "es6", "dom", "es2020"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
@@ -17,7 +17,8 @@
     "strictNullChecks": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
   },
   "include": ["src/**/*", "src/jest-setup.ts"],
   "exclude": [

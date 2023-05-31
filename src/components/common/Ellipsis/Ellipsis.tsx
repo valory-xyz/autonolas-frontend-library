@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Typography } from 'antd';
 import { getTrimmedText } from '../../../functions';
 
@@ -6,7 +6,7 @@ const { Text } = Typography;
 
 const textStyle = { maxWidth: '100%' };
 
-export const EllipsisMiddle: FC = ({
+export const EllipsisMiddle = ({
   suffixCount = 5,
   children,
   ...rest
