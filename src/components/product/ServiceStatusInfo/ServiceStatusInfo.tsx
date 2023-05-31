@@ -67,7 +67,7 @@ export const ServiceStatusInfo = ({
       value={Date.now() + Math.round(seconds || 0) * 1000}
       format="s"
       suffix="s"
-      onChange={(e: number) => setSeconds(parseInt(`${e / 1000}`, 10))}
+      onChange={(e) => setSeconds(parseInt(`${Number(e) / 1000}`, 10))}
       onFinish={async () => {
         window.console.log('timer completed!');
 

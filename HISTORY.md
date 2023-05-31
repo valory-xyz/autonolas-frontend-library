@@ -60,3 +60,9 @@
 ## 0.3.12
 
 - add support for `gnosis` chain in Login component
+- AddressLink component added
+
+## 0.4.0
+
+- New login component added (LoginV2)
+- Network name will be visible in the old login component
