@@ -58,7 +58,7 @@ export const Login = ({
   const { provider, web3Provider, setProvider, setWeb3Provider } =
     useContext(Web3DataContext);
 
-  const [account, setUserAccount] = useState<string | null>(null);
+  const [account, setUserAccount] = useState<string | null | undefined>(null);
   const [balance, setUserBalance] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
   const [errorMessage, setErrorMessage] = useState<Error | null>(null);
