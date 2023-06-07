@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Divider, notification } from 'antd';
-import { Disclaimer } from './Disclaimer';
-import { DefaultDisclaimerText } from './DefaultDisclaimerText';
+import { Disclaimer, DefaultDisclaimerText } from './index.tsx';
 
 export default {
   title: 'Disclaimer',
 };
 
-const DummyDisclaimerContianer = styled.div`
+const DummyDisclaimerContianer = styled.default.div`
   .ant-divider-horizontal {
     padding-top: 1rem;
   }

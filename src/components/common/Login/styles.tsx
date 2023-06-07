@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { COLOR, MEDIA_QUERY } from '../../../utils';
+import { COLOR, MEDIA_QUERY } from '../../../utils/index.ts';
 
-export const Container = styled.div``;
+export const Container = styled.default.div``;
 
-export const DetailsContainer = styled.div`
+export const DetailsContainer = styled.default.div`
   .ant-typography {
     margin: 0;
     max-width: 180px;
@@ -13,7 +13,7 @@ export const DetailsContainer = styled.div`
   }
 `;
 
-export const WalletContainer = styled.div`
+export const WalletContainer = styled.default.div`
   display: flex;
   align-items: center;
   font-size: 18px;

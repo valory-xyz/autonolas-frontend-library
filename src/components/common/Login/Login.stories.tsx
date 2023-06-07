@@ -1,10 +1,10 @@
 import React from 'react';
-import { Login } from './Login';
-import Web3 from 'web3';
+import { Login } from './Login.tsx';
+import Web3  from 'web3';
 import { Web3ReactProvider } from '@web3-react/core';
-import { Web3DataProvider } from '../Web3DataProvider';
+import { Web3DataProvider } from '../Web3DataProvider.tsx';
 
-const getLibrary = (provider: any) => new Web3(provider);
+const getLibrary = (provider: any) => new Web3.default(provider);
 
 export default { title: 'Login' };
 

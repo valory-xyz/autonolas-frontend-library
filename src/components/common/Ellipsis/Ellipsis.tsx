@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
-import { getTrimmedText } from '../../../functions';
+import { getTrimmedText } from '../../../functions/index.ts';
 
 const { Text } = Typography;
 

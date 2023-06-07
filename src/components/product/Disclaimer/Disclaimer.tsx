@@ -2,7 +2,7 @@ import React, { ReactNode, MouseEvent } from 'react';
 import { Alert, Button } from 'antd';
 import styled from 'styled-components';
 
-const DisclaimerAlert = styled(Alert)`
+const DisclaimerAlert = styled.default(Alert)`
   .ant-btn-link {
     padding: 0;
     margin: 0;

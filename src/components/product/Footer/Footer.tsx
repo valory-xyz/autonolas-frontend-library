@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterContainer } from './styles';
+import { FooterContainer } from './styles.tsx';
 
 type FooterProps = {
   leftContent?: JSX.Element;

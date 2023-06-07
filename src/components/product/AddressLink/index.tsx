@@ -1,1 +1,1 @@
-export { AddressLink } from './AddressLink';
+export { AddressLink } from './AddressLink.tsx';

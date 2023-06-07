@@ -1,6 +1,6 @@
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { GenericObject } from '../../../types';
+import { GenericObject } from '../../../types/index.ts';
 
 type rcpType = GenericObject | undefined;
 
@@ -15,7 +15,7 @@ const localRpc = {
  * Singleton class to create only one instance of `web3Modal`
  */
 export const ProviderOptions = (function () {
-  let web3Modal: Web3Modal;
+  let web3Modal: any;
 
   function createInstance(rpc: rcpType) {
     const providerOptions = {
@@ -28,7 +28,7 @@ export const ProviderOptions = (function () {
       },
     };
     if (typeof window !== 'undefined') {
-      web3Modal = new Web3Modal({
+      web3Modal = new Web3Modal.default({
         network: 'mainnet', // optional
         cacheProvider: true,
         providerOptions,

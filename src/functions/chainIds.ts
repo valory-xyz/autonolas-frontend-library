@@ -1,4 +1,4 @@
-import { STAGING_CHAIN_ID } from '../utils/constants';
+import { STAGING_CHAIN_ID } from '../utils/constants.ts';
 
 export const getChainId = (chainId?: number | null) => {
   if (typeof window === 'undefined') return null;

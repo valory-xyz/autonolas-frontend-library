@@ -1,2 +1,2 @@
-export * from './Disclaimer';
-export * from './DefaultDisclaimerText';
+export * from './Disclaimer.tsx';
+export * from './DefaultDisclaimerText.tsx';

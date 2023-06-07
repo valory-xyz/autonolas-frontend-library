@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Footer } from './Footer';
+import { Footer } from './Footer.tsx';
 
 describe('<Footer>', () => {
   it('should render footer', async () => {

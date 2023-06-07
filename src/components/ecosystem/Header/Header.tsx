@@ -1,8 +1,8 @@
 import React, { ReactElement, FC } from 'react';
 import styled from 'styled-components';
-import { MEDIA_QUERY } from '../../../utils';
+import { MEDIA_QUERY } from '../../../utils/index.ts';
 
-const H2 = styled.h2`
+const H2 = styled.default.h2`
   margin: 0;
   font-size: 116px;
   line-height: 1;

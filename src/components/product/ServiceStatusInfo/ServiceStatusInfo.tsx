@@ -2,10 +2,10 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import { ShrinkOutlined } from '@ant-design/icons';
 import { isUndefined, isNil } from 'lodash';
-import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
-import { MinimizedStatus } from './helpers/MinimizedStatus';
-import { DotSpace, LinksSection } from './utils';
-import { AppType } from './types';
+import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg.tsx';
+import { MinimizedStatus } from './helpers/MinimizedStatus.tsx';
+import { DotSpace, LinksSection } from './utils.tsx';
+import { AppType } from './types.ts';
 import {
   ContractsInfoContainer,
   Badge,
@@ -13,7 +13,7 @@ import {
   OffChainContainer,
   MobileOffChainContainer,
   ExtraContent,
-} from './styles';
+} from './styles.tsx';
 
 const { Text } = Typography;
 const { Countdown } = Statistic;

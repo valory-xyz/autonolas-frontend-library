@@ -1,6 +1,6 @@
-const path = require('path')
+import path from 'path';
 
-module.exports = {
+export default ({
   stories: ['../src/**/*.stories.tsx'],
   addons: ['@storybook/addon-essentials', '@storybook/addon-links', '@storybook/addon-storysource', '@storybook/addon-a11y', "@storybook/preset-ant-design"],
   webpackFinal: async config => {
@@ -46,4 +46,4 @@ module.exports = {
 
     return config;
   }
-};
+});

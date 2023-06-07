@@ -1,3 +1,3 @@
-export * from './functions';
-export * from './chainIds';
-export { sendTransaction } from './sendTransaction';
+export * from './functions.ts';
+export * from './chainIds.ts';
+export { sendTransaction } from './sendTransaction/index.ts';

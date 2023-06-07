@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { BREAK_POINT } from '../../../utils';
+import { BREAK_POINT } from '../../../utils/index.ts';
 
-const Desc = styled.div<{ type?: number }>`
-  font-family: "manrope__medium", sans-serif;
+const Desc = styled.default.div<{ type?: number }>`
+  font-family: 'manrope__medium', sans-serif;
   &.center {
     text-align: center;
   }

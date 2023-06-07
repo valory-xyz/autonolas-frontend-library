@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { COLOR } from '../../../utils';
+import { COLOR } from '../../../utils/index.ts';
 
-export const LoginContainer = styled.div`
+export const LoginContainer = styled.default.div`
   display: flex;
   align-items: center;
   font-size: 18px;

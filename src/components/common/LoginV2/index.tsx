@@ -1,1 +1,1 @@
-export { LoginV2 } from './LoginV2';
+export { LoginV2 } from './LoginV2.tsx';

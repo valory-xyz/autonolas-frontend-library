@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
-import { SUPPORTED_TEST_NETWORKS } from '../../../utils';
+import { SUPPORTED_TEST_NETWORKS } from '../../../utils/index.ts';
 
 /**
  * helpers

@@ -1,19 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext, useCallback, useState } from 'react';
 import { Button, ButtonProps, Popover } from 'antd';
-import round from 'lodash/round';
-import isNil from 'lodash/isNil';
+import { isNil, round } from 'lodash';
 import { WarningOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import Web3 from 'web3';
 
-import { SUPPORTED_NETWORKS, SUPPORTED_TEST_NETWORKS } from '../../../utils';
-import { getBalance, getNetworkName, getSymbolName } from '../../../functions';
-import { GenericObject } from '../../../types';
-import { EllipsisMiddle } from '../Ellipsis';
-import { Web3DataContext } from '../Web3DataProvider';
-import { ProviderOptions } from './helpers';
-import { Container, DetailsContainer, WalletContainer } from './styles';
+import {
+  SUPPORTED_NETWORKS,
+  SUPPORTED_TEST_NETWORKS,
+} from '../../../utils/index.ts';
+import {
+  getBalance,
+  getNetworkName,
+  getSymbolName,
+} from '../../../functions/index.ts';
+import { GenericObject } from '../../../types/index.ts';
+import { EllipsisMiddle } from '../Ellipsis/index.ts';
+import { Web3DataContext } from '../Web3DataProvider.tsx';
+import { ProviderOptions } from './helpers.ts';
+import { Container, DetailsContainer, WalletContainer } from './styles.tsx';
 
 /* --------------- Login component --------------- */
 type ConnectType = {
@@ -65,7 +71,10 @@ export const Login = ({
 
   const setBalance = async (accountPassed: string) => {
     try {
-      const result = await getBalance(accountPassed, web3Provider as Web3);
+      const result = await getBalance(
+        accountPassed,
+        web3Provider as Web3.default,
+      );
       setUserBalance(result as string);
     } catch (error) {
       setErrorMessage(error as Error);
@@ -87,7 +96,7 @@ export const Login = ({
       // We plug the initial `provider` and get back
       // a Web3Provider. This will add on methods and
       // event listeners such as `.on()` will be different.
-      const wProvider = new Web3(modalProvider);
+      const wProvider = new Web3.default(modalProvider);
 
       const address = await wProvider.eth.getAccounts();
       const currentChainId = await wProvider.eth.getChainId();

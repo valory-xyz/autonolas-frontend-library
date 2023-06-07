@@ -1,1 +1,1 @@
-export * from './Ellipsis';
+export * from './Ellipsis.tsx';

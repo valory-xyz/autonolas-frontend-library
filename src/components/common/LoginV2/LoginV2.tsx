@@ -1,9 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from '@web3modal/ethereum';
+const { EthereumClient, w3mConnectors, w3mProvider } = await import(
+  '@web3modal/ethereum'
+);
 import { Web3Modal } from '@web3modal/react';
 import {
   configureChains,
@@ -22,13 +20,13 @@ import {
   gnosisChiado,
 } from 'wagmi/chains';
 import { Web3Button, Web3NetworkSwitch } from '@web3modal/react';
+import { COLOR } from '../../../utils/theme.js';
 import {
-  COLOR,
   SUPPORTED_NETWORKS,
   SUPPORTED_TEST_NETWORKS,
-} from '../../../utils';
-import { UnsupportedNetworks, unsupportedText } from './utils';
-import { LoginContainer } from './styles';
+} from '../../../utils/constants.js';
+import { UnsupportedNetworks, unsupportedText } from './utils.js';
+import { LoginContainer } from './styles.js';
 
 /**
  * configs

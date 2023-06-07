@@ -1,3 +1,3 @@
-export * from './Disclaimer';
-export * from './Footer';
-export * from './ServiceStatusInfo';
+export * from './Disclaimer/index.tsx';
+export * from './Footer/index.tsx';
+export * from './ServiceStatusInfo/index.tsx';

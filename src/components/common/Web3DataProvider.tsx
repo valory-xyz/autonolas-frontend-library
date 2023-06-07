@@ -3,7 +3,7 @@ import Web3 from 'web3';
 
 // TODO: check type of provider
 type ProviderType = any | null;
-type Web3ProviderType = Web3 | null;
+type Web3ProviderType = Web3.default | null;
 
 type ProviderContextType = {
   provider: ProviderType;

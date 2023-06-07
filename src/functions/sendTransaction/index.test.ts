@@ -1,6 +1,6 @@
 import { ethers, Contract } from 'ethers';
-import * as HELPER_METHODS from './helpers';
-import { getUrl, SAFE_API_MAINNET, SAFE_API_GOERLI, sendTransaction } from '.';
+import * as HELPER_METHODS from './helpers.ts';
+import { getUrl, SAFE_API_MAINNET, SAFE_API_GOERLI, sendTransaction } from './index.ts';
 
 const dummyReceipt = {
   blockHash: 'abcd',

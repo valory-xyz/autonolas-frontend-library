@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { COLOR, MEDIA_QUERY } from '../../../utils';
+import { COLOR, MEDIA_QUERY } from '../../../utils/index.ts';
 
 type BtnType = 'black' | 'primary' | 'purple' | 'link-arrow';
 
@@ -11,7 +11,7 @@ type ButtonProps = {
   hasArrowSuffix?: boolean;
 };
 
-const Btn = styled.button<{ btnType: BtnType }>`
+const Btn = styled.default.div<{ btnType: BtnType  }>`
   outline: none;
   font-size: 18px;
   text-transform: uppercase;
@@ -44,8 +44,8 @@ const Btn = styled.button<{ btnType: BtnType }>`
     font-size: 18px;
   }
 
-  ${({ type = 'primary' }) => {
-    switch (type) {
+  ${({ btnType = 'primary' }) => {
+    switch (btnType) {
       case 'black':
         return `
           border: 1px solid ${COLOR.BLACK};

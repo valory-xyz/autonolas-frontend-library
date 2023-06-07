@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Typography, Divider } from 'antd';
-import { AppType } from './types';
-import { ServiceStatusInfo } from './ServiceStatusInfo';
+import { AppType } from './types.ts';
+import { ServiceStatusInfo } from './index.tsx';
 
 export default {
   title: 'Service Status Info',

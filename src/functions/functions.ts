@@ -1,9 +1,8 @@
 import { ethers } from 'ethers';
-import Web3 from 'web3';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
-export const getBalance = (account: string, p: Web3) =>
+export const getBalance = (account: string, p: any) =>
   new Promise((resolve, reject) => {
     p.eth
       .getBalance(account)

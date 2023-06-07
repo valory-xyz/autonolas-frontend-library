@@ -1,3 +1,3 @@
-export * from './common';
-export * from './product';
-export * from './ecosystem';
+export * from './common/index.ts';
+export * from './product/index.ts';
+export * from './ecosystem/index.ts';

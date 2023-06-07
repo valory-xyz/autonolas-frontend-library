@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ethers } from 'ethers';
-import get from 'lodash/get';
-import { getUrl } from './index';
+import { get } from 'lodash';
+import { getUrl } from './index.ts';
 
 /**
  * poll gnosis-safe API every 3 seconds

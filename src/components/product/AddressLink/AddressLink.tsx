@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, TooltipProps } from 'antd';
-import { GATEWAY_URL } from '../../../utils/constants';
-import { getExplorerURL, getChainId } from '../../../functions';
+import { GATEWAY_URL } from '../../../utils/constants.js';
+import { getExplorerURL, getChainId } from '../../../functions/index.js';
 
 /**
  * function to get the trimmed text

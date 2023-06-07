@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Card } from 'antd';
-import { AddressLink } from './AddressLink';
+import { AddressLink } from './index.tsx';
 
 const { Text, Title } = Typography;
 

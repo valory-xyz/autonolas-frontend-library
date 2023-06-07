@@ -1,2 +1,2 @@
-export * from './constants';
-export * from './theme';
+export * from './constants.ts';
+export * from './theme.ts';

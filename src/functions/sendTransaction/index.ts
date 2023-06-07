@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contract } from 'ethers';
 import { notification } from 'antd';
-import { Web3ReceiptType } from '../../types';
-import { getChainId, getProvider, pollTransactionDetails } from './helpers';
+import { Web3ReceiptType } from '../../types/index.ts';
+import { getChainId, getProvider, pollTransactionDetails } from './helpers.ts';
 
 export const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';

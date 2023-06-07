@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Typography } from 'antd';
-import { LinkType, LinksSectionType, EachLink } from './types';
+import { LinkType, LinksSectionType, EachLink } from './types.ts';
 
 const { Text } = Typography;
 

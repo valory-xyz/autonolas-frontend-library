@@ -1,7 +1,7 @@
 import React from 'react';
 import { isUndefined } from 'lodash';
-import { COLOR } from '../../../../utils';
-import { StickyContainer } from '../styles';
+import { COLOR } from '../../../../utils/index.ts';
+import { StickyContainer } from '../styles.tsx';
 
 type MinimizedStatusProps = {
   isOperational?: boolean;

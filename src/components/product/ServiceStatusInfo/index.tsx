@@ -1,1 +1,1 @@
-export * from './ServiceStatusInfo';
+export * from './ServiceStatusInfo.tsx';
