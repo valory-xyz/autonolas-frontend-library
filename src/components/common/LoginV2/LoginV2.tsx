@@ -59,16 +59,8 @@ type ConnectType = {
 };
 
 type LoginProps = {
-  // similar props to v1
-  onConnect?: ({}: ConnectType) => void; // TODO: pass balance, chainId
+  onConnect?: ({}: ConnectType) => void; 
   onDisconnect?: () => void;
-  // onError?: (error: Error) => void; // TODO: check if this is required
-  // /**
-  //  * TODO: make it more generic
-  //  * if the application uses both blockchain node & backend,
-  //  * then it is not considered as complete dapp. Hence point
-  //  * to mainnet only on production
-  //  */
   isDapp?: boolean;
   backendUrl?: string;
   supportedNetworks?: number[];
@@ -76,7 +68,6 @@ type LoginProps = {
   // more props for v2 (new)
   theme?: 'light' | 'dark';
   showNetworkSwitch?: boolean;
-  // buttonTheme // TODO
 };
 
 /**
@@ -85,7 +76,6 @@ type LoginProps = {
 export const LoginV2: FC<LoginProps> = ({
   onConnect: onConnectCb,
   onDisconnect: onDisconnectCb,
-  // onError: onErrorCb,
   isDapp = true,
   backendUrl,
   supportedNetworks,
