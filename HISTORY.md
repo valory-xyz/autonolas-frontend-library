@@ -52,13 +52,9 @@
 ## 0.3.10
 
 - pass supportedNetworks as props to Login component
-
-## 0.3.11
-
 - get symbol from chainId
+- add support for `gnosis` chain in Login component
 - AddressLink component added
 
-## 0.4.0
-
-- New login component added (LoginV2)
-- Network name will be visible in the old login component
+## 0.3.11
+- Remove LoginV2 component

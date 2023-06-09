@@ -7,6 +7,7 @@ type rcpType = GenericObject | undefined;
 const localRpc = {
   1: process.env.RPC_MAINNET_URL,
   5: process.env.RPC_GOERLI_URL,
+  100: process.env.RPC_GNOSIS_URL,
   31337: process.env.RPC_LOCAL_URL,
 };
 
