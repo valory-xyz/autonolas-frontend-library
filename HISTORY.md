@@ -58,3 +58,6 @@
 
 ## 0.3.11
 - Remove LoginV2 component
+
+## 0.3.12
+- Add simple markdown component
