@@ -65,3 +65,6 @@
 
 ## 0.3.13
 - Remove simple markdown component
+
+## 0.3.14
+- Replace text "Get help building" with "Built by Valory" for appType iekit
