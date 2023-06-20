@@ -60,4 +60,8 @@
 - Remove LoginV2 component
 
 ## 0.3.12
+- Add `centerContent` prop to `Footer` component
 - Add simple markdown component
+
+## 0.3.13
+- Remove simple markdown component
