@@ -93,11 +93,11 @@ const LINKS: LinkType = {
     kit: { link: IE_KIT_DOCS, name: 'IEKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      { text: 'Built by Valory', redirectTo: PROPEL_URL, isInternal: false },
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      { text: 'Built by Valory', redirectTo: PROPEL_URL, isInternal: false },
     ],
     docs: [
       // {
