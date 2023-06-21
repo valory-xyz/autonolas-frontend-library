@@ -11,6 +11,7 @@ const ORACLE_KIT_DOCS = `${DOCS_LINK}/oraclekit/`;
 const MINT_KIT_DOCS = `${DOCS_LINK}/mintkit/`;
 const COORDTINATION_KIT_URL = `${DOCS_LINK}/coordinationkit/`;
 const IE_KIT_DOCS = `${DOCS_LINK}/iekit/`;
+const ECOSYSTEM_BUILDER = 'https://www.autonolas.network/#ecosystem-builders';
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
 
@@ -93,11 +94,19 @@ const LINKS: LinkType = {
     kit: { link: IE_KIT_DOCS, name: 'IEKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      {
+        text: 'Get help building',
+        redirectTo: ECOSYSTEM_BUILDER,
+        isInternal: false,
+      },
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      {
+        text: 'Get help building',
+        redirectTo: ECOSYSTEM_BUILDER,
+        isInternal: false,
+      },
     ],
     docs: [
       // {
