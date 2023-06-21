@@ -113,3 +113,28 @@ export const getExplorerURL = (chainId = 1) => {
       return `https://etherscan.io`;
   }
 };
+
+export function removeSubdomainFrom(urlPassed?: string): string {
+  const currentURL =
+    urlPassed || (typeof window !== 'undefined' ? window.location.origin : '');
+
+  if (!currentURL) {
+    throw new Error('No URL provided');
+  }
+
+  const regex = {
+    protocol: new RegExp(/http(s)*:\/\//), // gets the http:// OR https:// from url string
+    subdomain: new RegExp(/^[^.]*\.(?=\w+\.\w+$)/), // gets the http(s)://subdomain portion from url string
+  };
+
+  // save protocol from provided Url so we can reapply it to the non-subdomain
+  const protocol = regex.protocol.exec(currentURL);
+
+  if (protocol && protocol.length) {
+    // if https://subdomain exists, just remove the subdomain from it
+    const url = currentURL.replace(regex.subdomain, protocol[0]);
+    return url;
+  }
+
+  return currentURL;
+}
