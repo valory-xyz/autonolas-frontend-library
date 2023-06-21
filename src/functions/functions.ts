@@ -114,9 +114,13 @@ export const getExplorerURL = (chainId = 1) => {
   }
 };
 
-export function removeSubdomainFrom(urlPassed?: string) {
+export function removeSubdomainFrom(urlPassed?: string): string {
   const currentURL =
     urlPassed || (typeof window !== 'undefined' ? window.location.origin : '');
+
+  if (!currentURL) {
+    throw new Error('No URL provided');
+  }
 
   const regex = {
     protocol: new RegExp(/http(s)*:\/\//), // gets the http:// OR https:// from url string

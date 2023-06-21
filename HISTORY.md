@@ -65,3 +65,6 @@
 
 ## 0.3.13
 - Remove simple markdown component
+
+## 0.3.14
+- function to remove subdomain from url
