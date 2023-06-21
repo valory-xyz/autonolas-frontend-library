@@ -68,3 +68,6 @@
 
 ## 0.3.14
 - Replace text "Get help building" with "Built by Valory" for appType iekit
+
+## 0.3.15
+- function to remove subdomain from url
