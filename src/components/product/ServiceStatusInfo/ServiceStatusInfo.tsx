@@ -140,18 +140,16 @@ export const ServiceStatusInfo = ({
                 Off-chain Service Status
               </Text>
               <div className="status-sub-content">
-                {!isUndefined(isHealthy) && (
-                  <div>
-                    {actualStatus}
-                    <DotSpace />
-                  </div>
-                )}
+                {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
 
                 {!isUndefined(secondsLeftReceived) && (
-                  <NextUpdateTimer>
-                    Next update:&nbsp;
-                    {isNil(seconds) ? <Dash /> : timerCountdown}
-                  </NextUpdateTimer>
+                  <>
+                    <DotSpace />
+                    <NextUpdateTimer>
+                      Next update:&nbsp;
+                      {isNil(seconds) ? <Dash /> : timerCountdown}
+                    </NextUpdateTimer>
+                  </>
                 )}
               </div>
             </OffChainContainer>
