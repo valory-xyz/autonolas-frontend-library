@@ -35,6 +35,8 @@ type ServiceStatusInfoDetails = {
     setSeconds: (value: number | undefined) => void;
   }) => void;
   onMinimizeToggle?: (isMinimized: boolean) => void;
+  // if true, will be maximized by default
+  isDefaultMaximized?: boolean;
 };
 
 const timerStyle = { minWidth: '36px' };
@@ -50,10 +52,11 @@ export const ServiceStatusInfo = ({
   extraMd,
   onTimerFinish,
   onMinimizeToggle,
+  isDefaultMaximized = false,
 }: ServiceStatusInfoDetails) => {
   const screens = useBreakpoint();
   const canMinimize = !screens.xl;
-  const [isMinimized, setIsMinimized] = useState<boolean>(false);
+  const [isMinimized, setIsMinimized] = useState<boolean>(!isDefaultMaximized);
   const [seconds, setSeconds] = useState<number | undefined>(0);
 
   useEffect(() => {
@@ -140,18 +143,16 @@ export const ServiceStatusInfo = ({
                 Off-chain Service Status
               </Text>
               <div className="status-sub-content">
-                {!isUndefined(isHealthy) && (
-                  <div>
-                    {actualStatus}
-                    <DotSpace />
-                  </div>
-                )}
+                {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
 
                 {!isUndefined(secondsLeftReceived) && (
-                  <NextUpdateTimer>
-                    Next update:&nbsp;
-                    {isNil(seconds) ? <Dash /> : timerCountdown}
-                  </NextUpdateTimer>
+                  <>
+                    <DotSpace />
+                    <NextUpdateTimer>
+                      Next update:&nbsp;
+                      {isNil(seconds) ? <Dash /> : timerCountdown}
+                    </NextUpdateTimer>
+                  </>
                 )}
               </div>
             </OffChainContainer>

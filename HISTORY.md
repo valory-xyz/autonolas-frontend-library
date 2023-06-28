@@ -71,3 +71,6 @@
 
 ## 0.3.15
 - function to remove subdomain from url
+
+## 0.3.16
+- update `ServiceStatusInfo` minor UX

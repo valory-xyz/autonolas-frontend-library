@@ -71,7 +71,6 @@ export const Default = () => {
       <Divider orientation="left">With appType & more text</Divider>
       <ServiceStatusInfo
         isHealthy={true}
-        secondsLeftReceived={15}
         appType={'mintkit'}
         extra={<Extra />}
         extraMd={<ExtraMd />}
