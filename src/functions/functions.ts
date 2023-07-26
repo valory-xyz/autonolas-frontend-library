@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import Web3 from 'web3';
+import { toLower } from 'lodash';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
@@ -138,3 +139,9 @@ export function removeSubdomainFrom(urlPassed?: string): string {
 
   return currentURL;
 }
+
+export const areAddressesEqual = (a1: string, a2: string) =>
+  toLower(a1) === toLower(a2);
+
+export const isValidAddress = (address: string) =>
+  ethers.utils.isAddress(address);
