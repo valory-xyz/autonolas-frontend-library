@@ -74,3 +74,6 @@
 
 ## 0.3.16
 - update `ServiceStatusInfo` minor UX
+
+## 0.3.17
+- export `AddressLink` component & added `areAddressesEqual`, `isValidAddress` functions
