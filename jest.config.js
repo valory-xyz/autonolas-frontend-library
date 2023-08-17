@@ -9,5 +9,5 @@ module.exports = {
     '^.+\\.(css|less)$': '<rootDir>/test/mock/styleMock.js',
   },
   testMatch: ['<rootDir>/**/?(*.)(test).{ts,tsx}'],
-  setupFilesAfterEnv: ['<rootDir>/src/jest-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/jest-setup.ts'],
 };
