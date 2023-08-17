@@ -1,0 +1,22 @@
+export default {
+  entryPoints: ['src/index.ts'], 
+  format: ['cjs', 'esm'],
+  splitting: true,
+  sourcemap: true,
+  minify: true,
+  dts: true,
+  target: 'es5',
+  module: "commonjs",
+  include: ['src/**/*', 'src/jest-setup.ts'],
+  exclude: [
+    'node_modules',
+    'build',
+    'dist',
+    'scripts',
+    'acceptance-tests',
+    'webpack',
+    'jest',
+    '**/*/*.test.ts',
+    'examples',
+  ],
+};
