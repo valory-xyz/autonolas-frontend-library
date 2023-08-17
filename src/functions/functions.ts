@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { BigNumberish, ethers } from 'ethers';
 import Web3 from 'web3';
 import { toLower } from 'lodash';
 
@@ -8,7 +8,7 @@ export const getBalance = (account: string, p: Web3) =>
   new Promise((resolve, reject) => {
     p.eth
       .getBalance(account)
-      .then((balance: string) => {
+      .then((balance: BigNumberish) => {
         const balanceInEth: string = ethers.utils.formatEther(balance);
         resolve(balanceInEth);
       })

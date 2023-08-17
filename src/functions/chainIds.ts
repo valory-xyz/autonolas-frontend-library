@@ -6,7 +6,7 @@ export const getChainId = (chainId?: number | null) => {
   return Number(
     chainId ||
       (window as any).MODAL_PROVIDER?.chainId ||
-      window?.ethereum?.chainId,
+      (window as any)?.ethereum?.chainId,
   );
 };
 

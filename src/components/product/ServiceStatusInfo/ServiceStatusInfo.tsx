@@ -166,7 +166,7 @@ export const ServiceStatusInfo = ({
 
       <Button
         type="link"
-        icon={<ShrinkOutlined />}
+        icon={<ShrinkOutlined rev="" />}
         onClick={() => {
           setIsMinimized(true);
           if (onMinimizeToggle) onMinimizeToggle(true);
