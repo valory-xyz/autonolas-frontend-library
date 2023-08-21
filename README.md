@@ -4,12 +4,12 @@ This repository contains the common UI modules/components for [Autonolas](https:
 
 ## Tech Stack
 
-- web3.js
 - ReactJS
-- Styled-components
+- Styled components
 - Ant Design
-- React-testing-library
+- React testing library
 - Jest
+- ethers
 
 # Note
 - To avoid multiple react packages please do the following:
