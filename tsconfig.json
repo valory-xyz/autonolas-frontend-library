@@ -20,7 +20,7 @@
     "esModuleInterop": true,
     "strict": true,
   },
-  "include": ["src/**/*", "test/jest-setup.ts"],
+  "include": ["src/**/*"],
   "exclude": [
     "node_modules",
     "build",

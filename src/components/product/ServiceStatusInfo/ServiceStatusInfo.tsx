@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
-import { ShrinkOutlined } from '@ant-design/icons';
+import ShrinkOutlined from '@ant-design/icons/ShrinkOutlined';
 import { isUndefined, isNil } from 'lodash';
 import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';

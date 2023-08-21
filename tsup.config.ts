@@ -1,4 +1,6 @@
-export default {
+import { defineConfig } from 'tsup'
+
+export default defineConfig({
   entryPoints: ['src/index.ts'],
   format: ['cjs', 'esm'],
   splitting: true,
@@ -6,17 +8,11 @@ export default {
   minify: true,
   dts: true,
   target: 'es5',
-  module: 'commonjs',
-  include: ['src/**/*', 'test/jest-setup.ts'],
-  exclude: [
-    'node_modules',
-    'build',
-    'dist',
-    'scripts',
-    'acceptance-tests',
-    'webpack',
-    'jest',
-    '**/*/*.test.ts',
-    'examples',
-  ],
-};
+  treeshake: true,
+  entry: {
+    index: 'src/index.ts',
+  },
+  minifyWhitespace: true,
+  minifySyntax: true,
+  tsconfig: 'tsconfig.json',
+});
