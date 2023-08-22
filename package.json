@@ -1,12 +1,12 @@
 {
   "name": "@autonolas/frontend-library",
-  "version": "0.3.17",
+  "version": "0.3.19",
   "description": "Codebase to common style, components, settings, etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --skipLibCheck",
-    "build:watch": "tsc -w --skipLibCheck",
+    "build": "tsup",
+    "build:watch": "tsup",
     "lint": "eslint src",
     "lint:fix": "yarn run lint -- --fix",
     "lint:staged": "lint-staged",
@@ -29,33 +29,25 @@
   "author": "Autonolas",
   "homepage": "https://github.com/valory-xyz/autonolas-frontend-library#readme",
   "dependencies": {
-    "@ant-design/icons": "^4.8.0",
+    "@ant-design/icons": "^5.2.5",
     "@storybook/builder-webpack5": "^7.0.15",
     "@wagmi/core": "^1.0.5",
-    "@walletconnect/ethereum-provider": "^2.7.5",
-    "@walletconnect/web3-provider": "^1.8.0",
     "@web3-react/core": "^6.1.9",
-    "@web3modal/ethereum": "^2.4.1",
-    "@web3modal/react": "^2.4.1",
-    "antd": "^4.12.3",
+    "antd": "^5.8.3",
     "ethers": "^5",
     "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7",
     "viem": "^0.3.35",
-    "wagmi": "^1.0.5",
-    "web3": "^1.6.1",
-    "web3modal": "^1.9.12"
+    "wagmi": "^1.0.5"
   },
   "peerDependencies": {
-    "antd": "^4.12.3",
+    "antd": "^5.8.3",
     "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.0.1",
-    "web3": "^1.6.1",
-    "web3modal": "^1.9.8"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
@@ -100,6 +92,7 @@
     "prettier": "^2.4.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "ts-jest": "^27.0.7",
+    "tsup": "^7.2.0",
     "typescript": "^4.7.4"
   },
   "msw": {

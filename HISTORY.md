@@ -77,3 +77,16 @@
 
 ## 0.3.17
 - export `AddressLink` component & added `areAddressesEqual`, `isValidAddress` functions
+
+## 0.3.18
+- Text update
+
+## 0.3.19
+- Text update
+
+## 0.4.0
+- Minify /dist folder using tsup
+- updated packages to latest version (Eg. react, react-dom, etc)
+- Removed Login component & corresponding unused packages
+- Removed fonts folder
+- Removed web3 package & related functions (getBalance)

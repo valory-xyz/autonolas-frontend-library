@@ -30,7 +30,7 @@ export const sendTransaction = (
 
     provider
       .getCode(account)
-      .then(async (code) => {
+      .then(async (code: string) => {
         const isGnosisSafe = code !== '0x';
 
         if (isGnosisSafe) {
@@ -76,7 +76,7 @@ export const sendTransaction = (
             });
         }
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error('Error on fetching code');
         reject(error);
       });

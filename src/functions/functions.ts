@@ -1,21 +1,7 @@
 import { ethers } from 'ethers';
-import Web3 from 'web3';
 import { toLower } from 'lodash';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
-
-export const getBalance = (account: string, p: Web3) =>
-  new Promise((resolve, reject) => {
-    p.eth
-      .getBalance(account)
-      .then((balance: string) => {
-        const balanceInEth: string = ethers.utils.formatEther(balance);
-        resolve(balanceInEth);
-      })
-      .catch((e: Error) => {
-        reject(e);
-      });
-  });
 
 /**
  * Trim text
