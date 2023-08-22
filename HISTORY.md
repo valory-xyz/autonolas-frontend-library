@@ -86,5 +86,7 @@
 
 ## 0.4.0
 - Minify /dist folder using tsup
+- updated packages to latest version (Eg. react, react-dom, etc)
 - Removed Login component & corresponding unused packages
 - Removed fonts folder
+- Removed web3 package & related functions (getBalance)
