@@ -61,6 +61,7 @@ export const Default = () => {
             <Divider orientation="left">{e.name}</Divider>
             <ServiceStatusInfo
               {...otherProps}
+              isDefaultMaximized
               appType={e.type}
               onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
             />
