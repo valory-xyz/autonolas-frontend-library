@@ -47,6 +47,10 @@ const LINKS: LinkType = {
         text: 'Live service',
         redirectTo: 'https://registry.olas.network/services/1',
       },
+      {
+        text: 'Service code',
+        redirectTo: 'http://github.com/valory-xyz/agent-academy-1',
+      },
     ],
   },
   oraclekit: {
@@ -59,6 +63,12 @@ const LINKS: LinkType = {
       { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
       { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
+    docs: [
+      {
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/price-oracle',
+      },
+    ],
   },
   mlkit: {
     kit: { link: ML_KIT_DOCS, name: 'MLKIT' },
@@ -69,6 +79,12 @@ const LINKS: LinkType = {
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
       { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    docs: [
+      {
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/apy-oracle',
+      },
     ],
   },
   contributionkit: {
@@ -250,8 +266,9 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
         },
         { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
-        // currently we show docs (CODE) only for contributionkit, mintkit and iekit
         const appTypeWithDocs: Partial<AppType>[] = [
+          'oraclekit',
+          'mlkit',
           'contributionkit',
           'mintkit',
           'iekit',
