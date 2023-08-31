@@ -101,3 +101,6 @@
 
 ## 0.4.3
 - Update service ids in ServiceStatusInfo
+
+## 0.4.4
+- Disable links in ServiceStatusInfo

@@ -134,9 +134,13 @@ const LINKS: LinkType = {
     ],
   },
   iekit: {
-    kit: { link: IE_KIT_DOCS, name: 'IEKIT' },
+    kit: { link: IE_KIT_DOCS, name: 'IEKIT', isDisabled: true },
     largeBuiltWith: [
-      { text: 'Run demo code', redirectTo: `${IE_KIT_DOCS}#demo` },
+      {
+        text: 'Run demo code',
+        redirectTo: `${IE_KIT_DOCS}#demo`,
+        isDisabled: true,
+      },
       {
         text: 'Get help building',
         redirectTo: ECOSYSTEM_BUILDER,
@@ -161,6 +165,7 @@ const LINKS: LinkType = {
         text: 'Service Code',
         redirectTo: 'https://github.com/valory-xyz/IEKit',
         isInternal: false,
+        isDisabled: true,
       },
       {
         text: 'Contracts',
@@ -261,27 +266,35 @@ const LINKS: LinkType = {
 const getList = (contents?: EachLink[]) => {
   if (!contents) return null;
 
-  return contents.map(({ text, redirectTo, isInternal = true }, index) => (
-    <Fragment key={`link-${redirectTo}`}>
-      <Text type="secondary">
-        {redirectTo ? (
-          <a
-            href={redirectTo}
-            target={isInternal ? '_self' : '_blank'}
-            rel="noreferrer"
-          >
-            {text}
-          </a>
-        ) : (
-          <>{`${text} (link coming soon)`}</>
-        )}
+  return contents.map(
+    ({ text, redirectTo, isInternal = true, isDisabled }, index) => (
+      <Fragment key={`link-${redirectTo}`}>
+        <Text type="secondary" disabled={!!isDisabled}>
+          {isDisabled ? (
+            <>{text}</>
+          ) : (
+            <>
+              {redirectTo ? (
+                <a
+                  href={redirectTo}
+                  target={isInternal ? '_self' : '_blank'}
+                  rel="noreferrer"
+                >
+                  {text}
+                </a>
+              ) : (
+                <>{`${text} (link coming soon)`}</>
+              )}
+            </>
+          )}
 
-        {index !== (contents || []).length - 1 && (
-          <>&nbsp;&nbsp;•&nbsp;&nbsp;</>
-        )}
-      </Text>
-    </Fragment>
-  ));
+          {index !== (contents || []).length - 1 && (
+            <>&nbsp;&nbsp;•&nbsp;&nbsp;</>
+          )}
+        </Text>
+      </Fragment>
+    ),
+  );
 };
 
 export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
@@ -290,6 +303,8 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
 
   // for mid-size
   if (isMidSize) return <>{getList(LINKS[appType].midBuiltWith)}</>;
+
+  const kitName = LINKS[appType].kit.name || '';
 
   return (
     <>
@@ -300,9 +315,15 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
           name: (
             <>
               BUILT WITH&nbsp;
-              <a href={LINKS[appType].kit.link} rel="noreferrer">
-                {LINKS[appType].kit.name || ''}
-              </a>
+              {LINKS[appType].kit.isDisabled ? (
+                <Text type="secondary" disabled>
+                  {kitName}
+                </Text>
+              ) : (
+                <a href={LINKS[appType].kit.link} rel="noreferrer">
+                  {kitName}
+                </a>
+              )}
             </>
           ),
         },

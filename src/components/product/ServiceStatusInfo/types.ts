@@ -18,6 +18,7 @@ export type EachLink = {
   text: string;
   redirectTo: string;
   isInternal?: boolean;
+  isDisabled?: boolean;
 };
 
 export type LinkType = Record<
@@ -26,6 +27,7 @@ export type LinkType = Record<
     kit: {
       link: string;
       name: string;
+      isDisabled?: boolean;
     };
     largeBuiltWith: EachLink[];
     midBuiltWith: EachLink[];
