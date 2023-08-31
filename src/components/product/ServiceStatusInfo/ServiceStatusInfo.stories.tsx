@@ -46,7 +46,7 @@ export const Default = () => {
     { name: 'Oracle Kit', type: 'oraclekit' },
     { name: 'ML kit', type: 'mlkit' },
     { name: 'Mint Kit', type: 'mintkit' },
-    { name: 'Contribution Kit', type: 'contributionkit' },
+    { name: 'Contribution Kit', type: 'coordinationkit' },
     { name: 'IEKit', type: 'iekit', hideSeconds: true },
     { name: 'GovKit', type: 'govkit', hideSeconds: true },
     { name: 'MechKit', type: 'mechkit', hideSeconds: true },

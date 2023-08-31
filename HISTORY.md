@@ -98,3 +98,6 @@
 ## 0.4.2
 - Update text in ServiceStatusInfo
 - "Service Code" in ServiceStatusInfo to be external wherever applicable
+
+## 0.4.3
+- Update service ids in ServiceStatusInfo

@@ -69,6 +69,11 @@ const LINKS: LinkType = {
     ],
     docs: [
       {
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/1',
+        isInternal: false,
+      },
+      {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/price-oracle',
         isInternal: false,
@@ -87,14 +92,19 @@ const LINKS: LinkType = {
     ],
     docs: [
       {
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/2',
+        isInternal: false,
+      },
+      {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/apy-oracle',
         isInternal: false,
       },
     ],
   },
-  contributionkit: {
-    kit: { link: COORDTINATION_KIT_URL, name: 'CONTRIBUTIONKIT' },
+  coordinationkit: {
+    kit: { link: COORDTINATION_KIT_URL, name: 'COORDINATIONKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
       GET_HELP_BUILDING_LARGE,
@@ -104,11 +114,11 @@ const LINKS: LinkType = {
       GET_HELP_BUILDING_MID,
     ],
     docs: [
-      // {
-      //   text: 'Live service',
-      //   redirectTo: 'https://registry.olas.network/services',
-      //   isInternal: false,
-      // },
+      {
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/6',
+        isInternal: false,
+      },
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/contribution-service',
@@ -142,11 +152,11 @@ const LINKS: LinkType = {
       },
     ],
     docs: [
-      // {
-      //   text: 'Live service',
-      //   redirectTo: 'https://registry.olas.network/services/1',
-      //   isInternal: false,
-      // },
+      {
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/9',
+        isInternal: false,
+      },
       {
         text: 'Service Code',
         redirectTo: 'https://github.com/valory-xyz/IEKit',
@@ -173,13 +183,13 @@ const LINKS: LinkType = {
     ],
     docs: [
       {
-        text: 'Service code',
-        redirectTo: 'https://github.com/valory-xyz/governatooorr',
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/5',
         isInternal: false,
       },
       {
-        text: 'Service on Registry',
-        redirectTo: 'https://registry.olas.network/services/5',
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/governatooorr',
         isInternal: false,
       },
     ],
@@ -196,6 +206,11 @@ const LINKS: LinkType = {
     ],
     docs: [
       {
+        text: 'Live service',
+        redirectTo: 'https://registry.olas.network/services/3',
+        isInternal: false,
+      },
+      {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/mech',
         isInternal: false,
@@ -211,6 +226,23 @@ const LINKS: LinkType = {
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${KEEPERKIT_DOCS}#demo` },
       GET_HELP_BUILDING_MID,
+    ],
+    docs: [
+      {
+        text: 'Live service 1',
+        redirectTo: 'https://registry.olas.network/services/3',
+        isInternal: false,
+      },
+      {
+        text: 'Live service 2',
+        redirectTo: 'https://registry.olas.network/services/4',
+        isInternal: false,
+      },
+      {
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/agent-academy-2',
+        isInternal: false,
+      },
     ],
   },
   messagingkit: {
