@@ -173,7 +173,7 @@ const LINKS: LinkType = {
         isInternal: false,
       },
       {
-        text: 'Contracts',
+        text: 'Service on Registry',
         redirectTo: 'https://registry.olas.network/services/5',
         isInternal: false,
       },
