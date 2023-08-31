@@ -19,11 +19,13 @@ const ECOSYSTEM_BUILDER = 'https://www.autonolas.network/#ecosystem-builders';
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
 
-const GET_HELP_BUILDING_LARGE = {
+const GET_HELP_BUILDING = {
   text: 'Get help building',
   redirectTo: PROPEL_URL,
   isInternal: false,
 };
+const GET_HELP_BUILDING_LARGE = { ...GET_HELP_BUILDING };
+const GET_HELP_BUILDING_MID = { ...GET_HELP_BUILDING, text: 'Get help' };
 
 const isGoerli = () => {
   // on server side, window is undefined.
@@ -40,7 +42,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${MINT_KIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       {
@@ -61,7 +63,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       {
@@ -78,7 +80,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       {
@@ -95,7 +97,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       // {
@@ -162,7 +164,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${GOVKIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       {
@@ -185,7 +187,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${MECHKIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
     docs: [
       {
@@ -203,7 +205,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${KEEPERKIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
   },
   messagingkit: {
@@ -214,7 +216,7 @@ const LINKS: LinkType = {
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${MESSAGINGKIT_DOCS}#demo` },
-      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_MID,
     ],
   },
 };
