@@ -90,3 +90,7 @@
 - Removed Login component & corresponding unused packages
 - Removed fonts folder
 - Removed web3 package & related functions (getBalance)
+
+## 0.4.1
+- Added govkit, mechkit, keeperkit, messagingkit links
+- downgraded few packages version

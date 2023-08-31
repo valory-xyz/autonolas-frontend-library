@@ -30,3 +30,6 @@ export const isPolygon = (chainId: number) => getChainId(chainId) === 137;
 
 export const isPolygonMumbai = (chainId: number) =>
   getChainId(chainId) === 80001;
+
+export const isGnosisChiado = (chainId: number) =>
+  getChainId(chainId) === 10200;

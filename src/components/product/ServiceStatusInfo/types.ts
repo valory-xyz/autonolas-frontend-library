@@ -1,4 +1,13 @@
-export type AppType = 'contributionkit' | 'mlkit' | 'oraclekit' | 'mintkit' | 'iekit';
+export type AppType =
+  | 'contributionkit'
+  | 'mlkit'
+  | 'oraclekit'
+  | 'mintkit'
+  | 'iekit'
+  | 'govkit'
+  | 'mechkit'
+  | 'keeperkit'
+  | 'messagingkit';
 
 export type LinksSectionType = {
   appType?: AppType;

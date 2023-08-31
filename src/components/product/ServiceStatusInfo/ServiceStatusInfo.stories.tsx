@@ -48,6 +48,10 @@ export const Default = () => {
     { name: 'Mint Kit', type: 'mintkit' },
     { name: 'Contribution Kit', type: 'contributionkit' },
     { name: 'IEKit', type: 'iekit', hideSeconds: true },
+    { name: 'GovKit', type: 'govkit', hideSeconds: true },
+    { name: 'MechKit', type: 'mechkit', hideSeconds: true },
+    { name: 'KeeperKit', type: 'keeperkit', hideSeconds: true },
+    { name: 'MessagingKit', type: 'messagingkit', hideSeconds: true },
   ];
 
   return (
@@ -61,6 +65,7 @@ export const Default = () => {
             <Divider orientation="left">{e.name}</Divider>
             <ServiceStatusInfo
               {...otherProps}
+              isDefaultMaximized
               appType={e.type}
               onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}
             />
