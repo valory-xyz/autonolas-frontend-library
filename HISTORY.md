@@ -94,3 +94,7 @@
 ## 0.4.1
 - Added govkit, mechkit, keeperkit, messagingkit links
 - downgraded few packages version
+
+## 0.4.2
+- Update text in ServiceStatusInfo
+- "Service Code" in ServiceStatusInfo to be external wherever applicable

@@ -48,10 +48,12 @@ const LINKS: LinkType = {
       {
         text: 'Live service',
         redirectTo: 'https://registry.olas.network/services/1',
+        isInternal: false,
       },
       {
         text: 'Service code',
         redirectTo: 'http://github.com/valory-xyz/agent-academy-1',
+        isInternal: false,
       },
     ],
   },
@@ -69,6 +71,7 @@ const LINKS: LinkType = {
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/price-oracle',
+        isInternal: false,
       },
     ],
   },
@@ -86,6 +89,7 @@ const LINKS: LinkType = {
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/apy-oracle',
+        isInternal: false,
       },
     ],
   },
@@ -103,6 +107,7 @@ const LINKS: LinkType = {
       // {
       //   text: 'Live service',
       //   redirectTo: 'https://registry.olas.network/services',
+      //   isInternal: false,
       // },
       {
         text: 'Service code',
@@ -173,7 +178,7 @@ const LINKS: LinkType = {
         isInternal: false,
       },
       {
-        text: 'Contracts',
+        text: 'Service on Registry',
         redirectTo: 'https://registry.olas.network/services/5',
         isInternal: false,
       },
