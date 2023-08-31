@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Typography } from 'antd';
-import { LinkType, LinksSectionType, EachLink, AppType } from './types';
+import { LinkType, LinksSectionType, EachLink } from './types';
 
 const { Text } = Typography;
 
@@ -219,8 +219,10 @@ const LINKS: LinkType = {
   },
 };
 
-const getList = (contents?: EachLink[]) =>
-  (contents || []).map(({ text, redirectTo, isInternal = true }, index) => (
+const getList = (contents?: EachLink[]) => {
+  if (!contents) return null;
+
+  return contents.map(({ text, redirectTo, isInternal = true }, index) => (
     <Fragment key={`link-${redirectTo}`}>
       <Text type="secondary">
         {redirectTo ? (
@@ -241,6 +243,7 @@ const getList = (contents?: EachLink[]) =>
       </Text>
     </Fragment>
   ));
+};
 
 export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
   // if no appType, return null
@@ -266,17 +269,9 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
         },
         { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
-        const appTypeWithDocs: Partial<AppType>[] = [
-          'oraclekit',
-          'mlkit',
-          'contributionkit',
-          'mintkit',
-          'iekit',
-          'govkit',
-          'mechkit',
-        ];
-        const isValid = appTypeWithDocs.includes(appType);
-        if (e.id === 'code' && !isValid) return null;
+        const docsList = getList(e.list);
+
+        if (!docsList) return null;
 
         return (
           <div key={e.id}>
@@ -284,7 +279,7 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
               <Text className="status-sub-header">{e.name}</Text>
             </div>
 
-            <div className="status-sub-content">{getList(e.list)}</div>
+            <div className="status-sub-content">{docsList}</div>
           </div>
         );
       })}
