@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Typography } from 'antd';
-import { LinkType, LinksSectionType, EachLink } from './types';
+import { LinkType, LinksSectionType, EachLink, AppType } from './types';
 
 const { Text } = Typography;
 
@@ -11,9 +11,19 @@ const ORACLE_KIT_DOCS = `${DOCS_LINK}/oraclekit/`;
 const MINT_KIT_DOCS = `${DOCS_LINK}/mintkit/`;
 const COORDTINATION_KIT_URL = `${DOCS_LINK}/coordinationkit/`;
 const IE_KIT_DOCS = `${DOCS_LINK}/iekit/`;
+const GOVKIT_DOCS = `${DOCS_LINK}/govkit/`;
+const MECHKIT_DOCS = `${DOCS_LINK}/mechkit/`;
+const KEEPERKIT_DOCS = `${DOCS_LINK}/keeperkit/`;
+const MESSAGINGKIT_DOCS = `${DOCS_LINK}/messagingkit/`;
 const ECOSYSTEM_BUILDER = 'https://www.autonolas.network/#ecosystem-builders';
 
 export const DotSpace = () => <>&nbsp;&nbsp;•&nbsp;&nbsp;</>;
+
+const GET_HELP_BUILDING_LARGE = {
+  text: 'Get help building',
+  redirectTo: PROPEL_URL,
+  isInternal: false,
+};
 
 const isGoerli = () => {
   // on server side, window is undefined.
@@ -26,7 +36,7 @@ const LINKS: LinkType = {
     kit: { link: MINT_KIT_DOCS, name: 'MINTKIT' },
     largeBuiltWith: [
       { text: 'Run the Code', redirectTo: `${MINT_KIT_DOCS}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_LARGE,
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${MINT_KIT_DOCS}#demo` },
@@ -35,7 +45,7 @@ const LINKS: LinkType = {
     docs: [
       {
         text: 'Live service',
-        redirectTo: 'https://protocol.autonolas.network/services/1',
+        redirectTo: 'https://registry.olas.network/services/1',
       },
     ],
   },
@@ -43,7 +53,7 @@ const LINKS: LinkType = {
     kit: { link: ORACLE_KIT_DOCS, name: 'ORACLEKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_LARGE,
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ORACLE_KIT_DOCS}#demo` },
@@ -54,7 +64,7 @@ const LINKS: LinkType = {
     kit: { link: ML_KIT_DOCS, name: 'MLKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_LARGE,
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${ML_KIT_DOCS}#demo` },
@@ -65,7 +75,7 @@ const LINKS: LinkType = {
     kit: { link: COORDTINATION_KIT_URL, name: 'CONTRIBUTIONKIT' },
     largeBuiltWith: [
       { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
-      { text: 'Get help building', redirectTo: PROPEL_URL, isInternal: false },
+      GET_HELP_BUILDING_LARGE,
     ],
     midBuiltWith: [
       { text: 'Run demo code', redirectTo: `${COORDTINATION_KIT_URL}#demo` },
@@ -74,7 +84,7 @@ const LINKS: LinkType = {
     docs: [
       // {
       //   text: 'Live service',
-      //   redirectTo: 'https://protocol.autonolas.network/services',
+      //   redirectTo: 'https://registry.olas.network/services',
       // },
       {
         text: 'Service code',
@@ -111,7 +121,7 @@ const LINKS: LinkType = {
     docs: [
       // {
       //   text: 'Live service',
-      //   redirectTo: 'https://protocol.autonolas.network/services/1',
+      //   redirectTo: 'https://registry.olas.network/services/1',
       //   isInternal: false,
       // },
       {
@@ -126,6 +136,69 @@ const LINKS: LinkType = {
           : 'https://etherscan.io/address/0x02c26437b292d86c5f4f21bbcce0771948274f84',
         isInternal: false,
       },
+    ],
+  },
+  govkit: {
+    kit: { link: GOVKIT_DOCS, name: 'GOVKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${GOVKIT_DOCS}#demo` },
+      GET_HELP_BUILDING_LARGE,
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${GOVKIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    docs: [
+      {
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/governatooorr',
+        isInternal: false,
+      },
+      {
+        text: 'Contracts',
+        redirectTo: 'https://registry.olas.network/services/5',
+        isInternal: false,
+      },
+    ],
+  },
+  mechkit: {
+    kit: { link: MECHKIT_DOCS, name: 'MECHKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${MECHKIT_DOCS}#demo` },
+      GET_HELP_BUILDING_LARGE,
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${MECHKIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+    docs: [
+      {
+        text: 'Service code',
+        redirectTo: 'https://github.com/valory-xyz/mech',
+        isInternal: false,
+      },
+    ],
+  },
+  keeperkit: {
+    kit: { link: KEEPERKIT_DOCS, name: 'KEEPERKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${KEEPERKIT_DOCS}#demo` },
+      GET_HELP_BUILDING_LARGE,
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${KEEPERKIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
+    ],
+  },
+  messagingkit: {
+    kit: { link: MESSAGINGKIT_DOCS, name: 'MESSAGINGKIT' },
+    largeBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${MESSAGINGKIT_DOCS}#demo` },
+      GET_HELP_BUILDING_LARGE,
+    ],
+    midBuiltWith: [
+      { text: 'Run demo code', redirectTo: `${MESSAGINGKIT_DOCS}#demo` },
+      { text: 'Get help', redirectTo: PROPEL_URL, isInternal: false },
     ],
   },
 };
@@ -177,10 +250,15 @@ export const LinksSection = ({ appType, isMidSize }: LinksSectionType) => {
         },
         { id: 'code', name: 'CODE', list: LINKS[appType].docs },
       ].map((e) => {
-        // currently we show docs only for contributionkit, mintkit and iekit
-        const isValid = ['contributionkit', 'mintkit', 'iekit'].includes(
-          appType,
-        );
+        // currently we show docs (CODE) only for contributionkit, mintkit and iekit
+        const appTypeWithDocs: Partial<AppType>[] = [
+          'contributionkit',
+          'mintkit',
+          'iekit',
+          'govkit',
+          'mechkit',
+        ];
+        const isValid = appTypeWithDocs.includes(appType);
         if (e.id === 'code' && !isValid) return null;
 
         return (
