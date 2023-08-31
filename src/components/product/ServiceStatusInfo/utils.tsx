@@ -48,6 +48,7 @@ const LINKS: LinkType = {
       {
         text: 'Live service',
         redirectTo: 'https://registry.olas.network/services/1',
+        isInternal: false,
       },
       {
         text: 'Service code',
@@ -106,6 +107,7 @@ const LINKS: LinkType = {
       // {
       //   text: 'Live service',
       //   redirectTo: 'https://registry.olas.network/services',
+      //   isInternal: false,
       // },
       {
         text: 'Service code',
