@@ -1,5 +1,5 @@
 export type AppType =
-  | 'contributionkit'
+  | 'coordinationkit'
   | 'mlkit'
   | 'oraclekit'
   | 'mintkit'
