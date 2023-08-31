@@ -52,6 +52,7 @@ const LINKS: LinkType = {
       {
         text: 'Service code',
         redirectTo: 'http://github.com/valory-xyz/agent-academy-1',
+        isInternal: false,
       },
     ],
   },
@@ -69,6 +70,7 @@ const LINKS: LinkType = {
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/price-oracle',
+        isInternal: false,
       },
     ],
   },
@@ -86,6 +88,7 @@ const LINKS: LinkType = {
       {
         text: 'Service code',
         redirectTo: 'https://github.com/valory-xyz/apy-oracle',
+        isInternal: false,
       },
     ],
   },
