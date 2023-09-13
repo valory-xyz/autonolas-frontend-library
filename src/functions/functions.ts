@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { toLower } from 'lodash';
+import { notification } from 'antd';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
@@ -131,3 +132,11 @@ export const areAddressesEqual = (a1: string, a2: string) =>
 
 export const isValidAddress = (address: string) =>
   ethers.utils.isAddress(address);
+
+// notifications
+export const notifySuccess = (message = 'Successful') =>
+  notification.success({ message });
+export const notifyError = (message = 'Some error occured') =>
+  notification.error({ message });
+export const notifyWarning = (message = 'Some error occured') =>
+  notification.warning({ message });

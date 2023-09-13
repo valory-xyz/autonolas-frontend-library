@@ -1,4 +1,5 @@
 import { ethers, Contract } from 'ethers';
+import { Chain } from 'viem';
 import * as HELPER_METHODS from './helpers';
 import { getUrl, SAFE_API_MAINNET, SAFE_API_GOERLI, sendTransaction } from '.';
 
@@ -22,12 +23,13 @@ const safeTxHash =
   '0x35f0ff5811e996167e3266b6339f2410bdb26c8e7d8165dffb2b945a76998112';
 
 // mock the helper methods
-const mockGetProvider = jest.spyOn(HELPER_METHODS, 'getProvider');
+const mockGetProvider = jest.spyOn(HELPER_METHODS, 'getEthersProvider');
 const mockChainId = jest.spyOn(HELPER_METHODS, 'getChainId');
 const mockPollTransactionDetails = jest.spyOn(
   HELPER_METHODS,
   'pollTransactionDetails',
 );
+const mockSupportedChains = [{ id: 1, name: 'ETH' }] as Chain[];
 
 // to suppress the console.error in the test output
 console.error = jest.fn();
@@ -37,10 +39,13 @@ describe('getUrl', () => {
     { chainId: 1, hash: 'aaaa', url: `${SAFE_API_MAINNET}/aaaa` },
     { chainId: 5, hash: 'bbbb', url: `${SAFE_API_GOERLI}/bbbb` },
     { chainId: 31337, hash: 'cccc', url: `${SAFE_API_MAINNET}/cccc` },
-  ])('should return the correct url for chainId $chainId', async ({ chainId, hash, url }) => {
-    const temp = getUrl(hash, chainId);
-    expect(temp).toBe(url);
-  });
+  ])(
+    'should return the correct url for chainId $chainId',
+    async ({ chainId, hash, url }) => {
+      const temp = getUrl(hash, chainId);
+      expect(temp).toBe(url);
+    },
+  );
 });
 
 describe('sendTransaction', () => {
@@ -55,7 +60,11 @@ describe('sendTransaction', () => {
     // resolving the callback function `sendFn` with a dummy receipt
     const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount);
+    const receiptReceived = await sendTransaction(
+      dummySendFn,
+      dummyAccount,
+      mockSupportedChains,
+    );
 
     // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
@@ -69,7 +78,7 @@ describe('sendTransaction', () => {
       } as unknown as ethers.providers.Web3Provider;
     });
 
-    mockChainId.mockImplementation(() => Promise.resolve(5));
+    mockChainId.mockImplementation(() => 5);
 
     // mock the pollTransactionDetails to return a dummy receipt
     mockPollTransactionDetails.mockImplementation(() =>
@@ -86,7 +95,11 @@ describe('sendTransaction', () => {
       }),
     } as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount);
+    const receiptReceived = await sendTransaction(
+      dummySendFn,
+      dummyAccount,
+      mockSupportedChains,
+    );
 
     // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
@@ -103,9 +116,9 @@ describe('sendTransaction', () => {
     // resolving the callback function `sendFn` with `on` function
     const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
-    await expect(sendTransaction(dummySendFn, dummyAccount)).rejects.toThrow(
-      'getCode error',
-    );
+    await expect(
+      sendTransaction(dummySendFn, dummyAccount, mockSupportedChains),
+    ).rejects.toThrow('getCode error');
   });
 
   it('should throw an error if `pollTransactionDetails` function throws an error', async () => {
@@ -116,7 +129,7 @@ describe('sendTransaction', () => {
       } as unknown as ethers.providers.Web3Provider;
     });
 
-    mockChainId.mockImplementation(() => Promise.resolve(5));
+    mockChainId.mockImplementation(() => 5);
 
     // mock the pollTransactionDetails to throw an error
     mockPollTransactionDetails.mockImplementation(() =>
@@ -133,8 +146,8 @@ describe('sendTransaction', () => {
       }),
     } as unknown as Contract;
 
-    await expect(sendTransaction(dummySendFn, dummyAccount)).rejects.toThrow(
-      'pollTransactionDetails error',
-    );
+    await expect(
+      sendTransaction(dummySendFn, dummyAccount, mockSupportedChains),
+    ).rejects.toThrow('pollTransactionDetails error');
   });
 });
