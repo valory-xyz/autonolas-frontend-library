@@ -12,3 +12,10 @@ export type Web3ReceiptType = {
   transactionHash: string;
   transactionIndex: number;
 };
+
+// refer to { Chain } from 'view' to see all the fields
+// TODO: Chain should represent the "Chain from viem"
+// eg. Chain = { id: 1, name: 'mainnet', rpcUrl: 'https://mainnet.infura.io/v3/...' }
+export type Chain = {
+  id: number;
+};

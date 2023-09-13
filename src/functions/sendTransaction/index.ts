@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contract } from 'ethers';
-import { Web3ReceiptType } from '../../types';
+import { Web3ReceiptType, Chain } from '../../types';
 import {
   getChainId,
   getEthersProvider,
   pollTransactionDetails,
 } from './helpers';
 import { notifyWarning, notifyError } from '../functions';
-import { Chain } from 'viem';
 
 export const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';

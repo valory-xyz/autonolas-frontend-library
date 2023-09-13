@@ -1,5 +1,5 @@
 import { ethers, Contract } from 'ethers';
-import { Chain } from 'viem';
+import { Chain } from '../../types/types';
 import * as HELPER_METHODS from './helpers';
 import { getUrl, SAFE_API_MAINNET, SAFE_API_GOERLI, sendTransaction } from '.';
 
@@ -29,7 +29,7 @@ const mockPollTransactionDetails = jest.spyOn(
   HELPER_METHODS,
   'pollTransactionDetails',
 );
-const mockSupportedChains = [{ id: 1, name: 'ETH' }] as Chain[];
+const mockSupportedChains: Chain[] = [{ id: 1 }];
 
 // to suppress the console.error in the test output
 console.error = jest.fn();

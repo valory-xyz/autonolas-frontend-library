@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ethers } from 'ethers';
 import { getUrl } from './index';
-import { Chain } from 'wagmi';
+import { Chain } from '../../types/types';
 import { DEFAULT_CHAIN_ID } from '../../utils/constants';
 
 /**
@@ -128,6 +128,7 @@ export const getChainIdOrDefaultToMainnet = (
 
 /**
  * get chainId from the providers or fallback to default chainId (mainnet)
+ * first element of supportedChains is the default chainId
  */
 export const getChainId = (
   supportedChains: Chain[],
@@ -158,5 +159,5 @@ export const getChainId = (
   }
 
   // has no wallet (eg. incognito mode or no wallet installed)
-  return DEFAULT_CHAIN_ID;
+  return supportedChains[0].id || DEFAULT_CHAIN_ID;
 };
