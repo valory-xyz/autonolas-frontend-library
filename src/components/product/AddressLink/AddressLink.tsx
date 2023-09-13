@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, TooltipProps } from 'antd';
 import { GATEWAY_URL } from '../../../utils/constants';
-import { getExplorerURL, getChainId } from '../../../functions';
+import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
 /**
  * function to get the trimmed text
@@ -34,15 +34,21 @@ const getText = (str: string, isIpfsLink: boolean) => {
  *
  * input: '0x02c26437b292d86c5f4f21bbcce0771948274f84', true
  * output: 'https://GATEWAY_URL/ipfs/f01701220e0ed9d9a7e4ec046989c1c91f8fe367cf63681e75f75d6d0606105043048f5f9'
+ *
+ * chainId as param to be deprecated
  */
-const getRedirectLink = (text: string, isIpfsLink: boolean) => {
+const getRedirectLink = (
+  text: string,
+  isIpfsLink: boolean,
+  chainId?: string | number,
+) => {
   if (isIpfsLink) {
     return `${GATEWAY_URL}/${text}`;
   }
 
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
-  const chainId = getChainId() || 1; // default to mainnet
-  const explorerUrl = getExplorerURL(chainId);
+  const currentChainId = getCurrentChainId(chainId);
+  const explorerUrl = getExplorerURL(currentChainId);
 
   return isTransaction
     ? `${explorerUrl}/tx/${text}`

@@ -1,12 +1,42 @@
-import { STAGING_CHAIN_ID } from '../utils/constants';
+import { STAGING_CHAIN_ID, LOCAL_FORK_ID } from '../utils/constants';
+import { getModalProvider, getWindowEthereum } from './sendTransaction/helpers';
 
-export const getChainId = (chainId?: number | null) => {
-  if (typeof window === 'undefined') return null;
+export const getCurrentChainId = (chainId?: string | number | null) => {
+  // if chainId is provided, return it
+  if (chainId) {
+    return Number(chainId);
+  }
 
-  return Number(
-    chainId ||
-      (window as any).MODAL_PROVIDER?.chainId ||
-      (window as any)?.ethereum?.chainId,
+  if (typeof window === 'undefined') {
+    console.error('No provider found to find chainId');
+  }
+
+  return Number(getModalProvider()?.chainId || getWindowEthereum()?.chainId);
+};
+
+export const isGoerli = (chainId: number) => getCurrentChainId(chainId) === 5;
+
+export const isGnosis = (chainId: number) => getCurrentChainId(chainId) === 100;
+
+export const isPolygon = (chainId: number) =>
+  getCurrentChainId(chainId) === 137;
+
+export const isPolygonMumbai = (chainId: number) =>
+  getCurrentChainId(chainId) === 80001;
+
+export const isGnosisChiado = (chainId: number) =>
+  getCurrentChainId(chainId) === 10200;
+
+export const isLocalNetwork = (chainId: number) =>
+  getCurrentChainId(chainId) === STAGING_CHAIN_ID;
+
+export const isL1OnlyNetwork = (chainId?: number) => {
+  const chain = getCurrentChainId(chainId);
+  return (
+    chain === 1 ||
+    chain === 5 ||
+    chain === STAGING_CHAIN_ID ||
+    chain === LOCAL_FORK_ID
   );
 };
 
@@ -14,22 +44,8 @@ export const getChainId = (chainId?: number | null) => {
  * returns true if the chain is goerli or mainnet or local or null
  */
 export const isL1Network = (chainId?: number) => {
-  const chain = getChainId(chainId);
+  const chain = getCurrentChainId(chainId);
 
   // even if chainId is null, we still show everything as shown in goerli or mainnet
-  return (
-    chain === 5 || chain === 1 || chain === STAGING_CHAIN_ID || chainId === null
-  );
+  return isL1OnlyNetwork(chain) || chain === null;
 };
-
-export const isGoerli = (chainId: number) => getChainId(chainId) === 5;
-
-export const isGnosis = (chainId: number) => getChainId(chainId) === 100;
-
-export const isPolygon = (chainId: number) => getChainId(chainId) === 137;
-
-export const isPolygonMumbai = (chainId: number) =>
-  getChainId(chainId) === 80001;
-
-export const isGnosisChiado = (chainId: number) =>
-  getChainId(chainId) === 10200;
