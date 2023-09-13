@@ -1,6 +1,6 @@
 {
   "name": "@autonolas/frontend-library",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Codebase to common style, components, settings, etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,25 +29,25 @@
   "author": "Autonolas",
   "homepage": "https://github.com/valory-xyz/autonolas-frontend-library#readme",
   "dependencies": {
-    "@ant-design/icons": "^4.8.0",
-    "@storybook/builder-webpack5": "^7.0.15",
-    "@wagmi/core": "^1.0.5",
-    "@web3-react/core": "^6.1.9",
-    "antd": "^4.12.3",
-    "ethers": "^5",
+    "@ant-design/icons": "^5.2.6",
+    "@storybook/builder-webpack5": "^7.4.1",
+    "@wagmi/core": "^1.4.1",
+    "antd": "^5.9.0",
+    "ethers": "^5.7.2",
     "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7",
     "viem": "^0.3.35",
-    "wagmi": "^1.0.5"
+    "wagmi": "^1.4.1",
+    "web3": "1.7.3"
   },
   "peerDependencies": {
-    "antd": "^4.12.3",
+    "antd": "^5.9.0",
     "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

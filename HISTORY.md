@@ -104,3 +104,6 @@
 
 ## 0.4.4
 - Disable links in ServiceStatusInfo
+
+## 0.4.5
+- Update dependencies & peerDependencies (eg. react, antd, etc)
