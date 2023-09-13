@@ -33,13 +33,14 @@
     "@storybook/builder-webpack5": "^7.4.1",
     "@wagmi/core": "^1.4.1",
     "antd": "^5.9.0",
-    "ethers": "^5",
+    "ethers": "^5.7.2",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.0.7",
     "viem": "^0.3.35",
-    "wagmi": "^1.4.1"
+    "wagmi": "^1.4.1",
+    "web3": "1.7.3"
   },
   "peerDependencies": {
     "antd": "^5.9.0",
