@@ -13,7 +13,7 @@ export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 export const getTrimmedText = (str: string, suffixCount: number) => {
   const text = str.trim();
 
-  if(text.length <= suffixCount * 2) return text;
+  if (text.length <= suffixCount * 2) return text;
 
   const frontText = text.slice(0, suffixCount);
   const backText = text.slice(text.length - suffixCount, text.length);
@@ -105,6 +105,9 @@ export const getExplorerURL = (chainId = 1) => {
   }
 };
 
+/**
+ * returns the env name from process.env for the given chainId
+ */
 export const getNextEnvName = (chainId: number) => {
   switch (chainId) {
     case 1:
@@ -124,8 +127,14 @@ export const getNextEnvName = (chainId: number) => {
     default:
       return null;
   }
-}
+};
 
+/**
+ * removes the subdomain from a url
+ * @example
+ * i/p: removeSubdomainFrom("https://sub.domain.com");
+ * o/p: https://domain.com
+ */
 export function removeSubdomainFrom(urlPassed?: string): string {
   const currentURL =
     urlPassed || (typeof window !== 'undefined' ? window.location.origin : '');

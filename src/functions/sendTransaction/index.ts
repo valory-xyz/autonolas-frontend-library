@@ -19,6 +19,11 @@ export const SAFE_API_GNOSIS =
 export const SAFE_API_POLYGON =
   'https://safe-transaction-polygon.safe.global/api/v1/multisig-transactions';
 
+/**
+ * returns the gnosis-safe API url based on the chainId.
+ * Here is the ist of available gnosis safe transaction service
+ * https://docs.safe.global/safe-core-api/available-services
+ */
 export const getUrl = (hash: string, chainId: number) => {
   switch (chainId) {
     case 5:

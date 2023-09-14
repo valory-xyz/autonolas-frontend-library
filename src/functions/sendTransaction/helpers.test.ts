@@ -35,7 +35,7 @@ afterEach(() => {
   (window as any).ethereum = undefined;
 });
 
-describe('pollTransactionDetails', () => {
+describe('pollTransactionDetails()', () => {
   it('should return valid transaction details', async () => {
     const hash = '0x123';
     const chainId = 1;
@@ -71,7 +71,7 @@ describe('pollTransactionDetails', () => {
   });
 });
 
-describe('getIsValidChainId', () => {
+describe('getIsValidChainId()', () => {
   it('should return true if chainId is valid', () => {
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
     const chainId = 1;
@@ -87,7 +87,7 @@ describe('getIsValidChainId', () => {
   });
 });
 
-describe('getProvider', () => {
+describe('getProvider()', () => {
   it('should throw an error if supported chain is empty array', () => {
     expect(() => getProvider([])).toThrowError(
       'Supported chains cannot be empty',
@@ -95,6 +95,8 @@ describe('getProvider', () => {
   });
 
   it('should return RPC URL from process.env if window is undefined', () => {
+    global.window = undefined as any;
+
     const SUPPORTED_CHAINS = [{ id: 5 }];
     const result = getProvider(SUPPORTED_CHAINS);
 
@@ -150,7 +152,7 @@ describe('getProvider', () => {
   });
 });
 
-describe('getChainIdOrDefaultToMainnet', () => {
+describe('getChainIdOrDefaultToMainnet()', () => {
   it('should return chainId if valid chainId is passed', () => {
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
     const chainId = 5;
@@ -168,7 +170,7 @@ describe('getChainIdOrDefaultToMainnet', () => {
   });
 });
 
-describe('getChainId', () => {
+describe('getChainId()', () => {
   it('should return chainId if valid chainId is passed', () => {
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
     const chainId = 1;
