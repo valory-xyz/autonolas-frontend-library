@@ -9,7 +9,7 @@ export const getCurrentChainId = (chainId?: string | number | null) => {
 
   if (typeof window === 'undefined') {
     console.error('No provider found to find chainId');
-    return null;
+    return undefined;
   }
 
   return Number(getModalProvider()?.chainId || getWindowEthereum()?.chainId);
