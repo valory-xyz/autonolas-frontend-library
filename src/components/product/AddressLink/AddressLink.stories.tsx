@@ -27,6 +27,7 @@ export const Default = (): JSX.Element => {
       textToShow: 'IPFS 1',
       text: IPFS_1,
       isIpfsLink: true,
+      canCopy: true,
     },
   ];
 

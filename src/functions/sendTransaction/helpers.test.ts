@@ -21,6 +21,8 @@ const mockEthereumProvider = {
   request: jest.fn(),
 };
 
+const mockRpcUrls = { 1: 'https://mainnet.infura.io/v3/' };
+
 let originalWindow: Window | undefined;
 
 beforeEach(() => {
@@ -89,25 +91,28 @@ describe('getIsValidChainId()', () => {
 
 describe('getProvider()', () => {
   it('should throw an error if supported chain is empty array', () => {
-    expect(() => getProvider([])).toThrowError(
+    expect(() => getProvider([], {})).toThrowError(
       'Supported chains cannot be empty',
     );
   });
 
-  it('should return RPC URL from process.env if window is undefined', () => {
-    global.window = undefined as any;
+  it('should throw an error if RPC urls passed is empty', async () => {
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
 
-    const SUPPORTED_CHAINS = [{ id: 5 }];
-    const result = getProvider(SUPPORTED_CHAINS);
+    async function fetchProvider() {
+      getProvider(SUPPORTED_CHAINS, {});
+    }
 
-    expect(result).toBe('https://eth-goerli.g.alchemy.com/v2/demo');
+    await expect(fetchProvider).rejects.toThrowError(
+      'No RPC URL found for chainId: 1',
+    );
   });
 
-  it('should throw an error if the supported chain passed does not have a corresponding RPC URL defined in process.env', async () => {
+  it('should throw an error if the supported chain passed does not have a corresponding RPC URL is not passed', async () => {
     const SUPPORTED_CHAINS = [{ id: 11111 }];
 
     async function fetchProvider() {
-      getProvider(SUPPORTED_CHAINS);
+      getProvider(SUPPORTED_CHAINS, mockRpcUrls);
     }
 
     await expect(fetchProvider).rejects.toThrowError(
@@ -119,7 +124,7 @@ describe('getProvider()', () => {
     (window as any).MODAL_PROVIDER = mockWalletProvider;
 
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getProvider(SUPPORTED_CHAINS);
+    const result = getProvider(SUPPORTED_CHAINS, mockRpcUrls);
 
     expect(result).toBe(mockWalletProvider);
   });
@@ -128,16 +133,16 @@ describe('getProvider()', () => {
     (window as any).MODAL_PROVIDER = { chainId: 4 };
 
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getProvider(SUPPORTED_CHAINS);
+    const result = getProvider(SUPPORTED_CHAINS, mockRpcUrls);
 
-    expect(result).toBe('https://eth-mainnet.g.alchemy.com/v2/demo');
+    expect(result).toBe(mockRpcUrls[1]);
   });
 
   it('should return provider from `ethereum` if it is defined', () => {
     (window as any).ethereum = mockEthereumProvider;
 
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getProvider(SUPPORTED_CHAINS);
+    const result = getProvider(SUPPORTED_CHAINS, mockRpcUrls);
 
     expect(result).toBe(mockEthereumProvider);
   });
@@ -146,9 +151,9 @@ describe('getProvider()', () => {
     (window as any).ethereum = { chainId: 4 };
 
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getProvider(SUPPORTED_CHAINS);
+    const result = getProvider(SUPPORTED_CHAINS, mockRpcUrls);
 
-    expect(result).toBe('https://eth-mainnet.g.alchemy.com/v2/demo');
+    expect(result).toBe(mockRpcUrls[1]);
   });
 });
 

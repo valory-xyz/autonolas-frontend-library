@@ -19,7 +19,7 @@ export const Footer = ({
   rightContent,
   centerContent,
 }: FooterProps) => (
-  <FooterContainer>
+  <FooterContainer className="autonolas-footer">
     <div className="footer-left-content">{leftContent}</div>
 
     <div className="footer-center">{centerContent || defaultCenterContent}</div>

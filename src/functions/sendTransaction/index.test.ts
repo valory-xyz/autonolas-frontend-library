@@ -30,6 +30,7 @@ const mockPollTransactionDetails = jest.spyOn(
   'pollTransactionDetails',
 );
 const mockSupportedChains: Chain[] = [{ id: 1 }];
+const mockRpcUrls = { 1: 'https://mainnet.infura.io/v3/' };
 
 // to suppress the console.error in the test output
 console.error = jest.fn();
@@ -60,11 +61,10 @@ describe('sendTransaction', () => {
     // resolving the callback function `sendFn` with a dummy receipt
     const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(
-      dummySendFn,
-      dummyAccount,
-      mockSupportedChains,
-    );
+    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount, {
+      supportedChains: mockSupportedChains,
+      rpcUrls: mockRpcUrls,
+    });
 
     // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
@@ -95,11 +95,10 @@ describe('sendTransaction', () => {
       }),
     } as unknown as Contract;
 
-    const receiptReceived = await sendTransaction(
-      dummySendFn,
-      dummyAccount,
-      mockSupportedChains,
-    );
+    const receiptReceived = await sendTransaction(dummySendFn, dummyAccount, {
+      supportedChains: mockSupportedChains,
+      rpcUrls: mockRpcUrls,
+    });
 
     // receipt should be returned
     expect(receiptReceived).toBe(dummyReceipt);
@@ -117,7 +116,10 @@ describe('sendTransaction', () => {
     const dummySendFn = Promise.resolve(dummyReceipt) as unknown as Contract;
 
     await expect(
-      sendTransaction(dummySendFn, dummyAccount, mockSupportedChains),
+      sendTransaction(dummySendFn, dummyAccount, {
+        supportedChains: mockSupportedChains,
+        rpcUrls: mockRpcUrls,
+      }),
     ).rejects.toThrow('getCode error');
   });
 
@@ -147,7 +149,10 @@ describe('sendTransaction', () => {
     } as unknown as Contract;
 
     await expect(
-      sendTransaction(dummySendFn, dummyAccount, mockSupportedChains),
+      sendTransaction(dummySendFn, dummyAccount, {
+        supportedChains: mockSupportedChains,
+        rpcUrls: mockRpcUrls,
+      }),
     ).rejects.toThrow('pollTransactionDetails error');
   });
 });

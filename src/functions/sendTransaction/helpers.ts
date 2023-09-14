@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ethers } from 'ethers';
 import { getUrl } from './index';
-import { Chain } from '../../types/types';
-import { getNextEnvName } from '../functions';
+import { Chain, RpcUrl } from '../../types/types';
 
 /**
  * poll gnosis-safe API every 3 seconds
@@ -47,15 +46,6 @@ export const getIsValidChainId = (
   return SUPPORTED_CHAINS.some((e) => e.id === Number(chainId));
 };
 
-const getRpcUrlBasedOnChainId = (chainId: number) => {
-  const envName = getNextEnvName(chainId);
-  if (!envName || !process.env[envName]) {
-    throw new Error(`No RPC URL found for chainId: ${chainId}`);
-  }
-
-  return process.env[envName];
-};
-
 /**
  * provider
  */
@@ -66,12 +56,17 @@ export const getWindowEthereum = () => (window as any)?.ethereum;
 /**
  * gets provider from the connected wallet or installed wallet or fallback to mainnet
  */
-export const getProvider = (supportedChains: Chain[]) => {
+export const getProvider = (supportedChains: Chain[], rpcUrls: RpcUrl) => {
   if (supportedChains?.length === 0) {
     throw new Error('Supported chains cannot be empty');
   }
 
-  const rpcUrl = getRpcUrlBasedOnChainId(supportedChains[0].id);
+  const defaultChainId = supportedChains[0].id;
+  const rpcUrl = rpcUrls[defaultChainId];
+
+  if (!rpcUrl) {
+    throw new Error(`No RPC URL found for chainId: ${defaultChainId}`);
+  }
 
   if (typeof window === 'undefined') {
     console.warn(
@@ -110,8 +105,11 @@ export const getProvider = (supportedChains: Chain[]) => {
  * gets ethers provider from the connected wallet or
  * installed wallet or fallback to mainnet
  */
-export const getEthersProvider = (supportedChains: Chain[]) => {
-  const provider = getProvider(supportedChains);
+export const getEthersProvider = (
+  supportedChains: Chain[],
+  rpcUrls: RpcUrl,
+) => {
+  const provider = getProvider(supportedChains, rpcUrls);
   return new ethers.providers.Web3Provider(provider, 'any');
 };
 
