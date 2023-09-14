@@ -175,7 +175,7 @@ export const notifyError = (message = 'Some error occured') =>
 export const notifyWarning = (message = 'Some error occured') =>
   notification.warning({ message });
 
-export const getIpfsResponse = async (hash: string) => {
+export const getIpfsDetails = async (hash: string) => {
   try {
     const ipfsUrl = `${GATEWAY_URL}f01701220${hash.substring(2)}`;
     const response = await fetch(ipfsUrl);
