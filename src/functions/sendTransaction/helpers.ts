@@ -11,7 +11,7 @@ export const pollTransactionDetails = async (hash: string, chainId: number) => {
   return new Promise((resolve, reject) => {
     /* eslint-disable-next-line consistent-return */
     const interval = setInterval(async () => {
-      window.console.log('Fetching transaction receipt...');
+      window?.console.log('Fetching transaction receipt...');
 
       try {
         const response = await fetch(getUrl(hash, chainId));
@@ -144,6 +144,7 @@ export const getChainId = (
 ) => {
   if (typeof window === 'undefined') {
     console.error('No provider found');
+    return supportedChains[0].id;
   }
 
   // if chainId is provided, return it

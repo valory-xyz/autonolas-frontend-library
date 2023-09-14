@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { toLower } from 'lodash';
 import { notification } from 'antd';
+import { GATEWAY_URL } from '../utils/constants';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
@@ -173,3 +174,15 @@ export const notifyError = (message = 'Some error occured') =>
   notification.error({ message });
 export const notifyWarning = (message = 'Some error occured') =>
   notification.warning({ message });
+
+export const getIpfsResponse = async (hash: string) => {
+  try {
+    const ipfsUrl = `${GATEWAY_URL}f01701220${hash.substring(2)}`;
+    const response = await fetch(ipfsUrl);
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    window.console.error('Error fetching metadata from IPFS', e);
+    return e;
+  }
+};

@@ -9,6 +9,7 @@ export const getCurrentChainId = (chainId?: string | number | null) => {
 
   if (typeof window === 'undefined') {
     console.error('No provider found to find chainId');
+    return null;
   }
 
   return Number(getModalProvider()?.chainId || getWindowEthereum()?.chainId);
@@ -47,5 +48,5 @@ export const isL1Network = (chainId?: number) => {
   const chain = getCurrentChainId(chainId);
 
   // even if chainId is null, we still show everything as shown in goerli or mainnet
-  return isL1OnlyNetwork(chain) || chain === null;
+  return chain === null || isL1OnlyNetwork(chain);
 };
