@@ -118,3 +118,4 @@
 ## 0.4.8
 - fix a bug `window: not defined` error in `getCurrentChainId`
 - add `getIpfsDetails`
+- add `<Loader />` component
