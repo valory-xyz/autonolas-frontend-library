@@ -19,3 +19,7 @@ export type Web3ReceiptType = {
 export type Chain = {
   id: number;
 };
+
+export type RpcUrl = {
+  [key: number]: string;
+};

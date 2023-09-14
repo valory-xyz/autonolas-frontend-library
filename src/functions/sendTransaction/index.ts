@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contract } from 'ethers';
-import { Web3ReceiptType, Chain } from '../../types';
+import { Web3ReceiptType, Chain, RpcUrl } from '../../types';
 import {
   getChainId,
   getEthersProvider,
@@ -51,10 +51,10 @@ export const getUrl = (hash: string, chainId: number) => {
 export const sendTransaction = (
   sendFn: Contract,
   account = (window as any)?.MODAL_PROVIDER?.accounts[0],
-  supportedChains: Chain[],
+  { supportedChains, rpcUrls }: { supportedChains: Chain[]; rpcUrls: RpcUrl },
 ) =>
   new Promise((resolve, reject) => {
-    const provider = getEthersProvider(supportedChains);
+    const provider = getEthersProvider(supportedChains, rpcUrls);
 
     provider
       .getCode(account)

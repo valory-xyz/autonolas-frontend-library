@@ -107,30 +107,6 @@ export const getExplorerURL = (chainId = 1) => {
 };
 
 /**
- * returns the env name from process.env for the given chainId
- */
-export const getNextEnvName = (chainId: number) => {
-  switch (chainId) {
-    case 1:
-      return 'NEXT_PUBLIC_MAINNET_URL';
-    case 5:
-      return 'NEXT_PUBLIC_GOERLI_URL';
-    case 100:
-      return 'NEXT_PUBLIC_GNOSIS_URL';
-    case 137:
-      return 'NEXT_PUBLIC_POLYGON_URL';
-    case 80001:
-      return 'NEXT_PUBLIC_POLYGON_MUMBAI_URL';
-    case 10200:
-      return 'NEXT_PUBLIC_GNOSIS_CHIADO_URL';
-    case 31337:
-      return 'NEXT_PUBLIC_AUTONOLAS_URL';
-    default:
-      return null;
-  }
-};
-
-/**
  * removes the subdomain from a url
  * @example
  * i/p: removeSubdomainFrom("https://sub.domain.com");
