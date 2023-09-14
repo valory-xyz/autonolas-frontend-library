@@ -144,6 +144,7 @@ export const getChainId = (
 ) => {
   if (typeof window === 'undefined') {
     console.error('No provider found');
+    return supportedChains[0].id;
   }
 
   // if chainId is provided, return it
