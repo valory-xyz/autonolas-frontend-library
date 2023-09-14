@@ -1,21 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contract } from 'ethers';
-import { notification } from 'antd';
-import { Web3ReceiptType } from '../../types';
-import { getChainId, getProvider, pollTransactionDetails } from './helpers';
+import { Web3ReceiptType, Chain } from '../../types';
+import {
+  getChainId,
+  getEthersProvider,
+  pollTransactionDetails,
+} from './helpers';
+import { notifyWarning, notifyError } from '../functions';
 
 export const SAFE_API_MAINNET =
   'https://safe-transaction-mainnet.safe.global/api/v1/multisig-transactions';
 export const SAFE_API_GOERLI =
   'https://safe-transaction-goerli.safe.global/api/v1/multisig-transactions';
 
-export const getUrl = (hash: string, chainId: number) => {
-  const mainnetUrl =
-    process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_MAINNET || SAFE_API_MAINNET;
-  const goerliUrl =
-    process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_GOERLI || SAFE_API_GOERLI;
+export const SAFE_API_GNOSIS =
+  'https://safe-transaction-gnosis-chain.safe.global/api/v1/multisig-transactions';
 
-  return chainId === 5 ? `${goerliUrl}/${hash}` : `${mainnetUrl}/${hash}`;
+export const SAFE_API_POLYGON =
+  'https://safe-transaction-polygon.safe.global/api/v1/multisig-transactions';
+
+/**
+ * returns the gnosis-safe API url based on the chainId.
+ * Here is the ist of available gnosis safe transaction service
+ * https://docs.safe.global/safe-core-api/available-services
+ */
+export const getUrl = (hash: string, chainId: number) => {
+  switch (chainId) {
+    case 5:
+      return `${
+        process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_GOERLI || SAFE_API_GOERLI
+      }/${hash}`;
+    case 100:
+      return `${
+        process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_GNOSIS || SAFE_API_GNOSIS
+      }/${hash}`;
+    case 137:
+      return `${
+        process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_POLYGON || SAFE_API_POLYGON
+      }/${hash}`;
+    default:
+      return `${
+        process.env.NEXT_PUBLIC_GNOSIS_SAFE_API_MAINNET || SAFE_API_MAINNET
+      }/${hash}`;
+  }
 };
 
 /**
@@ -24,9 +51,10 @@ export const getUrl = (hash: string, chainId: number) => {
 export const sendTransaction = (
   sendFn: Contract,
   account = (window as any)?.MODAL_PROVIDER?.accounts[0],
-) => {
-  return new Promise((resolve, reject) => {
-    const provider = getProvider();
+  supportedChains: Chain[],
+) =>
+  new Promise((resolve, reject) => {
+    const provider = getEthersProvider(supportedChains);
 
     provider
       .getCode(account)
@@ -40,9 +68,7 @@ export const sendTransaction = (
            * - poll until transaction is completed
            * - return response
            */
-          notification.warning({
-            message: 'Please submit the transaction in your safe app.',
-          });
+          notifyWarning('Please submit the transaction in your safe app.');
 
           sendFn
             .on('transactionHash', async (safeTx: string) => {
@@ -52,8 +78,7 @@ export const sendTransaction = (
                * use `transactionHash`, get the hash, then poll until
                * it resolves with Output
                */
-              const chainId = await getChainId();
-
+              const chainId = getChainId(supportedChains);
               pollTransactionDetails(safeTx, chainId)
                 .then((receipt) => {
                   resolve(receipt);
@@ -63,22 +88,16 @@ export const sendTransaction = (
                   reject(e);
                 });
             })
-            .catch((e: Error) => {
-              reject(e);
-            });
+            .catch((e: Error) => reject(e));
         } else {
+          // usual send function
           sendFn
-            .then((receipt: Web3ReceiptType) => {
-              resolve(receipt);
-            })
-            .catch((e: Error) => {
-              reject(e);
-            });
+            .then((receipt: Web3ReceiptType) => resolve(receipt))
+            .catch((e: Error) => reject(e));
         }
       })
-      .catch((error: Error) => {
-        console.error('Error on fetching code');
-        reject(error);
+      .catch((e: Error) => {
+        notifyError('Error occurred while sending transaction');
+        reject(e);
       });
   });
-};

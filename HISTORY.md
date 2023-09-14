@@ -107,3 +107,6 @@
 
 ## 0.4.5
 - Update dependencies & peerDependencies (eg. react, antd, etc)
+
+## 0.4.6
+- Move common functions from `regitry-app` to be re-used in other apps

@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { toLower } from 'lodash';
+import { notification } from 'antd';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
@@ -11,6 +12,9 @@ export const convertToEth = (value: string) => ethers.utils.formatEther(value);
  */
 export const getTrimmedText = (str: string, suffixCount: number) => {
   const text = str.trim();
+
+  if (text.length <= suffixCount * 2) return text;
+
   const frontText = text.slice(0, suffixCount);
   const backText = text.slice(text.length - suffixCount, text.length);
   return `${frontText}...${backText}`;
@@ -101,6 +105,36 @@ export const getExplorerURL = (chainId = 1) => {
   }
 };
 
+/**
+ * returns the env name from process.env for the given chainId
+ */
+export const getNextEnvName = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return 'NEXT_PUBLIC_MAINNET_URL';
+    case 5:
+      return 'NEXT_PUBLIC_GOERLI_URL';
+    case 100:
+      return 'NEXT_PUBLIC_GNOSIS_URL';
+    case 137:
+      return 'NEXT_PUBLIC_POLYGON_URL';
+    case 80001:
+      return 'NEXT_PUBLIC_POLYGON_MUMBAI_URL';
+    case 10200:
+      return 'NEXT_PUBLIC_GNOSIS_CHIADO_URL';
+    case 31337:
+      return 'NEXT_PUBLIC_AUTONOLAS_URL';
+    default:
+      return null;
+  }
+};
+
+/**
+ * removes the subdomain from a url
+ * @example
+ * i/p: removeSubdomainFrom("https://sub.domain.com");
+ * o/p: https://domain.com
+ */
 export function removeSubdomainFrom(urlPassed?: string): string {
   const currentURL =
     urlPassed || (typeof window !== 'undefined' ? window.location.origin : '');
@@ -131,3 +165,11 @@ export const areAddressesEqual = (a1: string, a2: string) =>
 
 export const isValidAddress = (address: string) =>
   ethers.utils.isAddress(address);
+
+// notifications
+export const notifySuccess = (message = 'Successful') =>
+  notification.success({ message });
+export const notifyError = (message = 'Some error occured') =>
+  notification.error({ message });
+export const notifyWarning = (message = 'Some error occured') =>
+  notification.warning({ message });
