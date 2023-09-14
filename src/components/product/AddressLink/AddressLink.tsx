@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tooltip, TooltipProps } from 'antd';
+import { Tooltip, Button, TooltipProps } from 'antd';
+import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
@@ -49,11 +50,12 @@ const getRedirectLink = (
     : `${explorerUrl}/address/${text}`;
 };
 
-type AddressLinkType = {
+ type AddressLinkType = {
   text: string;
   isTransaction?: boolean;
   suffixCount?: number;
   isIpfsLink?: boolean;
+  canCopy?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
 };
 
@@ -61,6 +63,7 @@ export const AddressLink = ({
   text,
   suffixCount = 6,
   isIpfsLink = false,
+  canCopy = false,
   tooltipPlacement = 'bottom',
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
@@ -74,6 +77,15 @@ export const AddressLink = ({
       >
         {trimmedText}
       </a>
+      {canCopy && (
+        <>
+          &nbsp;
+          <Button
+            onClick={() => navigator.clipboard.writeText(text)}
+            icon={<CopyOutlined rev=""/>}
+          />
+        </>
+      )}
     </Tooltip>
   );
 };
