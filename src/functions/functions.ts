@@ -12,6 +12,9 @@ export const convertToEth = (value: string) => ethers.utils.formatEther(value);
  */
 export const getTrimmedText = (str: string, suffixCount: number) => {
   const text = str.trim();
+
+  if(text.length <= suffixCount * 2) return text;
+
   const frontText = text.slice(0, suffixCount);
   const backText = text.slice(text.length - suffixCount, text.length);
   return `${frontText}...${backText}`;

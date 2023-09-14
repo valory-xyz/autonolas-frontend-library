@@ -21,8 +21,16 @@ const mockEthereumProvider = {
   request: jest.fn(),
 };
 
+let originalWindow: Window | undefined;
+
+beforeEach(() => {
+  // Store the original window object
+  originalWindow = global.window;
+});
+
 afterEach(() => {
   jest.resetAllMocks();
+  (global as any).window = originalWindow;
   (window as any).MODAL_PROVIDER = undefined;
   (window as any).ethereum = undefined;
 });
@@ -93,6 +101,18 @@ describe('getProvider', () => {
     expect(result).toBe('https://eth-goerli.g.alchemy.com/v2/demo');
   });
 
+  it('should throw an error if the supported chain passed does not have a corresponding RPC URL defined in process.env', async () => {
+    const SUPPORTED_CHAINS = [{ id: 11111 }];
+
+    async function fetchProvider() {
+      getProvider(SUPPORTED_CHAINS);
+    }
+
+    await expect(fetchProvider).rejects.toThrowError(
+      'No RPC URL found for chainId: 11111',
+    );
+  });
+
   it('should return provider from `MODAL_PROVIDER` if it is defined', () => {
     (window as any).MODAL_PROVIDER = mockWalletProvider;
 
@@ -156,35 +176,8 @@ describe('getChainId', () => {
     expect(result).toBe(1);
   });
 
-  it('should return chainId from `MODAL_PROVIDER` if chainId is not passed & it is supported', () => {
-    (window as any).MODAL_PROVIDER = { chainId: 1 };
-
-    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getChainId(SUPPORTED_CHAINS);
-
-    expect(result).toBe(1);
-  });
-
-  it('should return default chainId (mainnet) if chainId from `MODAL_PROVIDER` is NOT supported', () => {
-    (window as any).MODAL_PROVIDER = { chainId: 4 };
-
-    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getChainId(SUPPORTED_CHAINS);
-
-    expect(result).toBe(1);
-  });
-
-  it('should return chainId from `ethereum` if chainId is not passed & it is supported', () => {
-    (window as any).ethereum = { chainId: 1 };
-
-    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
-    const result = getChainId(SUPPORTED_CHAINS);
-
-    expect(result).toBe(1);
-  });
-
-  it('should return default chainId (mainnet) if chainId from `ethereum` is NOT supported', () => {
-    (window as any).ethereum = { chainId: 4 };
+  it('should return default chainId from passed SUPPORTED_NETWORK if window is not defined', () => {
+    global.window = undefined as any;
 
     const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
     const result = getChainId(SUPPORTED_CHAINS);
@@ -197,5 +190,45 @@ describe('getChainId', () => {
     const result = getChainId(SUPPORTED_CHAINS);
 
     expect(result).toBe(1);
+  });
+
+  describe('modal-provider', () => {
+    it('should return chainId from `MODAL_PROVIDER` if chainId is not passed & it is supported', () => {
+      (window as any).MODAL_PROVIDER = { chainId: 1 };
+
+      const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+      const result = getChainId(SUPPORTED_CHAINS);
+
+      expect(result).toBe(1);
+    });
+
+    it('should return default chainId (mainnet) if chainId from `MODAL_PROVIDER` is NOT supported', () => {
+      (window as any).MODAL_PROVIDER = { chainId: 4 };
+
+      const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+      const result = getChainId(SUPPORTED_CHAINS);
+
+      expect(result).toBe(1);
+    });
+  });
+
+  describe('ethereum', () => {
+    it('should return chainId from `ethereum` if chainId is not passed & it is supported', () => {
+      (window as any).ethereum = { chainId: 1 };
+
+      const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+      const result = getChainId(SUPPORTED_CHAINS);
+
+      expect(result).toBe(1);
+    });
+
+    it('should return default chainId (mainnet) if chainId from `ethereum` is NOT supported', () => {
+      (window as any).ethereum = { chainId: 4 };
+
+      const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+      const result = getChainId(SUPPORTED_CHAINS);
+
+      expect(result).toBe(1);
+    });
   });
 });

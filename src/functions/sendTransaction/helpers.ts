@@ -2,7 +2,6 @@
 import { ethers } from 'ethers';
 import { getUrl } from './index';
 import { Chain } from '../../types/types';
-import { DEFAULT_CHAIN_ID } from '../../utils/constants';
 import { getNextEnvName } from '../functions';
 
 /**
@@ -72,9 +71,7 @@ export const getProvider = (supportedChains: Chain[]) => {
     throw new Error('Supported chains cannot be empty');
   }
 
-  const rpcUrl = getRpcUrlBasedOnChainId(
-    supportedChains[0].id || DEFAULT_CHAIN_ID,
-  );
+  const rpcUrl = getRpcUrlBasedOnChainId(supportedChains[0].id);
 
   if (typeof window === 'undefined') {
     console.warn(
@@ -134,7 +131,7 @@ export const getChainIdOrDefaultToMainnet = (
   const chain = Number(chainIdPassed);
   return getIsValidChainId(SUPPORTED_CHAINS, chain)
     ? chain
-    : SUPPORTED_CHAINS[0].id || DEFAULT_CHAIN_ID;
+    : SUPPORTED_CHAINS[0].id;
 };
 
 /**
@@ -170,5 +167,5 @@ export const getChainId = (
   }
 
   // has no wallet (eg. incognito mode or no wallet installed)
-  return supportedChains[0].id || DEFAULT_CHAIN_ID;
+  return supportedChains[0].id;
 };
