@@ -50,13 +50,17 @@ const getRedirectLink = (
     : `${explorerUrl}/address/${text}`;
 };
 
- type AddressLinkType = {
+type AddressLinkType = {
   text: string;
   isTransaction?: boolean;
   suffixCount?: number;
   isIpfsLink?: boolean;
   canCopy?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
+  // TODO
+  textMinWidth?: number;
+  onClick?: () => void;
+  cannotClick?: boolean;
 };
 
 export const AddressLink = ({
@@ -65,6 +69,7 @@ export const AddressLink = ({
   isIpfsLink = false,
   canCopy = false,
   tooltipPlacement = 'bottom',
+  textMinWidth,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
 
@@ -74,6 +79,11 @@ export const AddressLink = ({
         href={getRedirectLink(text, isIpfsLink)}
         target="_blank"
         rel="noopener noreferrer"
+        style={
+          textMinWidth
+            ? { display: 'inline-block', minWidth: textMinWidth }
+            : {}
+        }
       >
         {trimmedText}
       </a>
@@ -82,7 +92,7 @@ export const AddressLink = ({
           &nbsp;
           <Button
             onClick={() => navigator.clipboard.writeText(text)}
-            icon={<CopyOutlined rev=""/>}
+            icon={<CopyOutlined rev="" />}
           />
         </>
       )}

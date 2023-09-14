@@ -58,20 +58,26 @@ export const THEME_CONFIG: ThemeConfig = {
     controlHeight: 42,
   },
   components: {
+    Anchor: {
+      linkPaddingBlock: 8,
+    },
     Layout: {
       headerBg: COLOR.WHITE,
       bodyBg: COLOR.WHITE,
+    },
+    Pagination: {
+      itemSize: 30,
     },
     Tabs: {
       motionDurationMid: '0.1s',
       motionDurationSlow: '0.1s',
     },
-    Pagination: {
-      itemSize: 30,
-    },
     Table: {
       padding: 12,
       fontWeightStrong: 500,
+    },
+    Typography: {
+      lineHeight: 1,
     },
   },
 };
