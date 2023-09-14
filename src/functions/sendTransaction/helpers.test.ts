@@ -2,8 +2,30 @@
 import {
   pollTransactionDetails,
   getIsValidChainId,
+  getProvider,
+  getChainIdOrDefaultToMainnet,
   getChainId,
 } from './helpers';
+
+const mockWalletProvider = {
+  chainId: 1,
+  isMetaMask: false,
+  isConnected: () => true,
+  request: jest.fn(),
+};
+
+const mockEthereumProvider = {
+  chainId: 1,
+  isMetaMask: false,
+  isConnected: () => true,
+  request: jest.fn(),
+};
+
+afterEach(() => {
+  jest.resetAllMocks();
+  (window as any).MODAL_PROVIDER = undefined;
+  (window as any).ethereum = undefined;
+});
 
 describe('pollTransactionDetails', () => {
   it('should return valid transaction details', async () => {
@@ -57,10 +79,73 @@ describe('getIsValidChainId', () => {
   });
 });
 
-afterEach(() => {
-  jest.resetAllMocks();
-  (window as any).MODAL_PROVIDER = undefined;
-  (window as any).ethereum = undefined;
+describe('getProvider', () => {
+  it('should throw an error if supported chain is empty array', () => {
+    expect(() => getProvider([])).toThrowError(
+      'Supported chains cannot be empty',
+    );
+  });
+
+  it('should return RPC URL from process.env if window is undefined', () => {
+    const SUPPORTED_CHAINS = [{ id: 5 }];
+    const result = getProvider(SUPPORTED_CHAINS);
+
+    expect(result).toBe('https://eth-goerli.g.alchemy.com/v2/demo');
+  });
+
+  it('should return provider from `MODAL_PROVIDER` if it is defined', () => {
+    (window as any).MODAL_PROVIDER = mockWalletProvider;
+
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+    const result = getProvider(SUPPORTED_CHAINS);
+
+    expect(result).toBe(mockWalletProvider);
+  });
+
+  it('should return RPC URL if chainId from `MODAL_PROVIDER` is not supported', () => {
+    (window as any).MODAL_PROVIDER = { chainId: 4 };
+
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+    const result = getProvider(SUPPORTED_CHAINS);
+
+    expect(result).toBe('https://eth-mainnet.g.alchemy.com/v2/demo');
+  });
+
+  it('should return provider from `ethereum` if it is defined', () => {
+    (window as any).ethereum = mockEthereumProvider;
+
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+    const result = getProvider(SUPPORTED_CHAINS);
+
+    expect(result).toBe(mockEthereumProvider);
+  });
+
+  it('should return RPC URL if chainId from `ethereum` is not supported', () => {
+    (window as any).ethereum = { chainId: 4 };
+
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+    const result = getProvider(SUPPORTED_CHAINS);
+
+    expect(result).toBe('https://eth-mainnet.g.alchemy.com/v2/demo');
+  });
+});
+
+describe('getChainIdOrDefaultToMainnet', () => {
+  it('should return chainId if valid chainId is passed', () => {
+    const SUPPORTED_CHAINS = [{ id: 1 }, { id: 5 }];
+    const chainId = 5;
+    const result = getChainIdOrDefaultToMainnet(SUPPORTED_CHAINS, chainId);
+
+    expect(result).toBe(5);
+  });
+
+  it('should return chainId from `MODAL_PROVIDER` if chainId is not passed & it is supported', () => {
+    const SUPPORTED_CHAINS = [{ id: 5 }, { id: 31337 }];
+    const chainId = 10;
+    const result = getChainIdOrDefaultToMainnet(SUPPORTED_CHAINS, chainId);
+
+    expect(result).toBe(5);
+  });
 });
 
 describe('getChainId', () => {

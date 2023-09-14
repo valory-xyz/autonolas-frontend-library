@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { getUrl } from './index';
 import { Chain } from '../../types/types';
 import { DEFAULT_CHAIN_ID } from '../../utils/constants';
+import { getNextEnvName } from '../functions';
 
 /**
  * poll gnosis-safe API every 3 seconds
@@ -47,10 +48,13 @@ export const getIsValidChainId = (
   return SUPPORTED_CHAINS.some((e) => e.id === Number(chainId));
 };
 
-const getMainnetRpcUrl = () => {
-  if (!process.env.NEXT_PUBLIC_MAINNET_URL)
-    throw new Error('NEXT_PUBLIC_MAINNET_URL not set');
-  return process.env.NEXT_PUBLIC_MAINNET_URL;
+const getRpcUrlBasedOnChainId = (chainId: number) => {
+  const envName = getNextEnvName(chainId);
+  if (!envName || !process.env[envName]) {
+    throw new Error(`No RPC URL found for chainId: ${chainId}`);
+  }
+
+  return process.env[envName];
 };
 
 /**
@@ -64,15 +68,20 @@ export const getWindowEthereum = () => (window as any)?.ethereum;
  * gets provider from the connected wallet or installed wallet or fallback to mainnet
  */
 export const getProvider = (supportedChains: Chain[]) => {
-  if (typeof window === 'undefined') {
-    console.error('No provider found');
-  }
-
   if (supportedChains?.length === 0) {
-    throw new Error('Supported chains should be provided');
+    throw new Error('Supported chains cannot be empty');
   }
 
-  const mainnetRpcUrl = getMainnetRpcUrl();
+  const rpcUrl = getRpcUrlBasedOnChainId(
+    supportedChains[0].id || DEFAULT_CHAIN_ID,
+  );
+
+  if (typeof window === 'undefined') {
+    console.warn(
+      'No provider found, fetching RPC URL from first supported chain',
+    );
+    return rpcUrl;
+  }
 
   // connected via wallet-connect
   const walletProvider = getModalProvider();
@@ -83,7 +92,7 @@ export const getProvider = (supportedChains: Chain[]) => {
     // default to mainnet (ie. Use JSON-RPC provider)
     return getIsValidChainId(supportedChains, walletConnectChainId)
       ? walletProvider
-      : mainnetRpcUrl;
+      : rpcUrl;
   }
 
   // NOT logged in but has wallet installed (eg. Metamask).
@@ -93,15 +102,15 @@ export const getProvider = (supportedChains: Chain[]) => {
     const walletChainId = Number(windowEthereum.chainId);
     return getIsValidChainId(supportedChains, walletChainId)
       ? windowEthereum
-      : mainnetRpcUrl;
+      : rpcUrl;
   }
 
   // fallback to mainnet JSON RPC provider
-  return mainnetRpcUrl;
+  return rpcUrl;
 };
 
 /**
- * gets ethers provider from the connected wallet or 
+ * gets ethers provider from the connected wallet or
  * installed wallet or fallback to mainnet
  */
 export const getEthersProvider = (supportedChains: Chain[]) => {
@@ -123,7 +132,9 @@ export const getChainIdOrDefaultToMainnet = (
   }
 
   const chain = Number(chainIdPassed);
-  return getIsValidChainId(SUPPORTED_CHAINS, chain) ? chain : DEFAULT_CHAIN_ID;
+  return getIsValidChainId(SUPPORTED_CHAINS, chain)
+    ? chain
+    : SUPPORTED_CHAINS[0].id || DEFAULT_CHAIN_ID;
 };
 
 /**
