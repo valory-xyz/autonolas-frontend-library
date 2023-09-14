@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip, TooltipProps } from 'antd';
-import { GATEWAY_URL } from '../../../utils/constants';
+import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
 /**
@@ -14,16 +14,6 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
   const frontText = text.slice(0, suffixCount);
   const backText = text.slice(text.length - suffixCount, text.length);
   return `${frontText}...${backText}`;
-};
-
-/**
- * returns the text to be displayed
- */
-const getText = (str: string, isIpfsLink: boolean) => {
-  if (!isIpfsLink) return str;
-
-  const hash = str.substring(2);
-  return `f01701220${hash}`;
 };
 
 /**
@@ -43,7 +33,11 @@ const getRedirectLink = (
   chainId?: string | number,
 ) => {
   if (isIpfsLink) {
-    return `${GATEWAY_URL}/${text}`;
+    const hash = text.substring(2);
+    if (hash.length === 64) {
+      return `${GATEWAY_URL}${HASH_PREFIXES.type1}${hash}`;
+    }
+    return `${GATEWAY_URL}${text}`;
   }
 
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
@@ -69,10 +63,7 @@ export const AddressLink = ({
   isIpfsLink = false,
   tooltipPlacement = 'bottom',
 }: AddressLinkType) => {
-  const trimmedText = getTrimmedText(
-    getText(text as string, isIpfsLink),
-    suffixCount,
-  );
+  const trimmedText = getTrimmedText(text, suffixCount);
 
   return (
     <Tooltip title={text} placement={tooltipPlacement}>

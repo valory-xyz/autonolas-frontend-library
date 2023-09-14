@@ -1,3 +1,5 @@
+import { ThemeConfig } from 'antd';
+
 export const COLOR = {
   PRIMARY: '#7A00F4',
   RED: '#EA3324',
@@ -7,6 +9,7 @@ export const COLOR = {
   GREEN_1: '#00FC82',
   GREEN_2: '#00F422',
   GREEN_3: '#33FF00',
+  GREEN_4: '#52C41A',
 
   GREY_1: '#C4C4C4',
   GREY_2: '#9A9A9A',
@@ -42,4 +45,33 @@ export const BORDER_RADIUS = '5px';
 
 export const BOX_SHADOW = {
   light: '0px 1px 6px rgba(0, 0, 0, 0.15)',
+};
+
+export const THEME_CONFIG: ThemeConfig = {
+  token: {
+    colorPrimary: COLOR.PRIMARY,
+    fontSize: 18,
+    borderRadius: 5,
+    colorBgBase: COLOR.WHITE,
+    colorTextPlaceholder: COLOR.GREY_2,
+    colorLink: COLOR.PRIMARY,
+    controlHeight: 42,
+  },
+  components: {
+    Layout: {
+      headerBg: COLOR.WHITE,
+      bodyBg: COLOR.WHITE,
+    },
+    Tabs: {
+      motionDurationMid: '0.1s',
+      motionDurationSlow: '0.1s',
+    },
+    Pagination: {
+      itemSize: 30,
+    },
+    Table: {
+      padding: 12,
+      fontWeightStrong: 500,
+    },
+  },
 };
