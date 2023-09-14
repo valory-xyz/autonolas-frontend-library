@@ -119,3 +119,6 @@
 - fix a bug `window: not defined` error in `getCurrentChainId`
 - add `getIpfsDetails`
 - add `<Loader />` component
+
+## 0.4.9
+- update `getProvider` function to pass RPL urls
