@@ -110,3 +110,7 @@
 
 ## 0.4.6
 - Move common functions from `regitry-app` to be re-used in other apps
+
+## 0.4.7
+- export the functions to be used in other apps
+- add `antd` theme 
