@@ -1,6 +1,8 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import styled from 'styled-components';
 import { Button, Skeleton } from 'antd';
+import styled from 'styled-components';
+import { isNil } from 'lodash';
+import { CustomThemeProvider } from '../../common/ThemeProvider';
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +22,7 @@ const DEFAULT_MESSAGE = 'Items couldn’t be loaded';
 
 type LoaderProps = {
   account?: string | null;
+  timeoutSeconds?: number;
   isAccountRequired?: boolean;
   notConnectedMessage?: ReactNode;
   timeoutMessage?: ReactNode;
@@ -27,11 +30,16 @@ type LoaderProps = {
 
 export const Loader = ({
   account,
+  timeoutSeconds,
   isAccountRequired,
   notConnectedMessage,
   timeoutMessage,
 }: LoaderProps) => {
-  const [seconds, setSeconds] = useState(TIMEOUT_IN_SECONDS);
+  const [seconds, setSeconds] = useState(timeoutSeconds || TIMEOUT_IN_SECONDS);
+
+  useEffect(() => {
+    setSeconds(isNil(timeoutSeconds) ? TIMEOUT_IN_SECONDS : timeoutSeconds);
+  }, [timeoutSeconds]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -48,26 +56,32 @@ export const Loader = ({
     };
   }, [seconds]);
 
-  if (isAccountRequired && !account) {
-    return (
-      <Container>
-        <p>{notConnectedMessage || 'Please connect your wallet'}</p>
-      </Container>
-    );
-  }
-
-  if (seconds === 0) {
-    return (
-      <Container>
-        <div className="timeout-message">
-          {timeoutMessage || DEFAULT_MESSAGE}
-        </div>
-        <Button ghost type="primary" onClick={() => window.location.reload()}>
-          Reload
-        </Button>
-      </Container>
-    );
-  }
-
-  return <Skeleton active />;
+  return (
+    <CustomThemeProvider>
+      {isAccountRequired && !account ? (
+        <Container>
+          <p>{notConnectedMessage || 'Please connect your wallet'}</p>
+        </Container>
+      ) : (
+        <>
+          {seconds === 0 ? (
+            <Container>
+              <div className="timeout-message">
+                {timeoutMessage || DEFAULT_MESSAGE}
+              </div>
+              <Button
+                ghost
+                type="primary"
+                onClick={() => window.location.reload()}
+              >
+                Reload
+              </Button>
+            </Container>
+          ) : (
+            <Skeleton active />
+          )}
+        </>
+      )}
+    </CustomThemeProvider>
+  );
 };

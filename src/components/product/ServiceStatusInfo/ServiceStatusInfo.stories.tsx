@@ -13,7 +13,6 @@ const { Text } = Typography;
 const DummyContianer = styled.div`
   font-family: system-ui;
   a {
-    color: inherit;
     text-decoration: underline;
     text-underline-offset: 4px;
     line-height: 1.5715;

@@ -68,7 +68,7 @@ const columns: ColumnsType<DataType> = [
     key: 'owner',
     width: 140,
     render: (text) => (
-      <AddressLink text={text} suffixCount={6} canCopy textMinWidth={110} />
+      <AddressLink text={text} suffixCount={6} canCopy textMinWidth={160} />
     ),
   },
   {
@@ -82,7 +82,7 @@ const columns: ColumnsType<DataType> = [
         suffixCount={15}
         isIpfsLink
         canCopy
-        textMinWidth={285}
+        textMinWidth={350}
       />
     ),
   },
@@ -95,7 +95,7 @@ const columns: ColumnsType<DataType> = [
       <AddressLink
         text={text}
         suffixCount={12}
-        textMinWidth={250}
+        textMinWidth={350}
         extraRightContent={<StarOutlined />}
         onClick={(e) => {
           notifySuccess(`You clicked on ${e}`);

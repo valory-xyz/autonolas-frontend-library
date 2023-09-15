@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Tooltip, Button, TooltipProps } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import styled from 'styled-components';
+import { CustomThemeProvider } from '../../common/ThemeProvider';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
@@ -58,14 +59,14 @@ const TextContainer = styled.div<{ minwidth?: number }>`
 
 type AddressLinkType = {
   text: string;
-  /** 
-   * redirects to transaction page 
+  /**
+   * redirects to transaction page
    * eg. https://etherscan.io/tx/${text}
    * */
   isTransaction?: boolean;
   suffixCount?: number;
-    /** 
-   * redirects to IPFS page 
+  /**
+   * redirects to IPFS page
    * eg. https://gateway.autonolas.tech/ipfs/${text}
    * */
   isIpfsLink?: boolean;
@@ -96,42 +97,44 @@ export const AddressLink = ({
   const trimmedText = getTrimmedText(text, suffixCount);
 
   return (
-    <Tooltip title={text} placement={tooltipPlacement}>
-      <TextContainer minwidth={textMinWidth}>
-        {cannotClick ? (
-          trimmedText
-        ) : (
-          <Button
-            type="link"
-            onClick={() => {
-              if (typeof onClick === 'function') {
-                onClick(text);
-              } else {
-                window.open(getRedirectLink(text, isIpfsLink), '_blank');
-              }
-            }}
-          >
-            {trimmedText}
-          </Button>
+    <CustomThemeProvider>
+      <Tooltip title={text} placement={tooltipPlacement}>
+        <TextContainer minwidth={textMinWidth}>
+          {cannotClick ? (
+            trimmedText
+          ) : (
+            <Button
+              type="link"
+              onClick={() => {
+                if (typeof onClick === 'function') {
+                  onClick(text);
+                } else {
+                  window.open(getRedirectLink(text, isIpfsLink), '_blank');
+                }
+              }}
+            >
+              {trimmedText}
+            </Button>
+          )}
+        </TextContainer>
+
+        {canCopy && (
+          <>
+            &nbsp;
+            <Button
+              onClick={() => navigator.clipboard.writeText(text)}
+              icon={<CopyOutlined />}
+            />
+          </>
         )}
-      </TextContainer>
 
-      {canCopy && (
-        <>
-          &nbsp;
-          <Button
-            onClick={() => navigator.clipboard.writeText(text)}
-            icon={<CopyOutlined rev="" />}
-          />
-        </>
-      )}
-
-      {extraRightContent ? (
-        <>
-          &nbsp;
-          {extraRightContent}
-        </>
-      ) : null}
-    </Tooltip>
+        {extraRightContent ? (
+          <>
+            &nbsp;
+            {extraRightContent}
+          </>
+        ) : null}
+      </Tooltip>
+    </CustomThemeProvider>
   );
 };

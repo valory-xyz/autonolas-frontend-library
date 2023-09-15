@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import ShrinkOutlined from '@ant-design/icons/ShrinkOutlined';
 import { isUndefined, isNil } from 'lodash';
+import { CustomThemeProvider } from '../../common/ThemeProvider';
 import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
 import { DotSpace, LinksSection } from './utils';
@@ -114,67 +115,70 @@ export const ServiceStatusInfo = ({
     );
 
   return (
-    <ContractsInfoContainer
-      className="service-status-maximized"
-      canMinimize={canMinimize}
-    >
-      <Badge canMinimize={canMinimize}>
-        <a href="https://autonolas.network" target="_blank" rel="noreferrer">
-          {canMinimize ? <PoweredByForSmallDevice /> : <PoweredBy />}
-        </a>
-      </Badge>
-
-      {/* status (green/orange dot) & timers */}
-      {canMinimize ? (
-        <MobileOffChainContainer>
-          <div>
-            {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
-            <LinksSection appType={appType} isMidSize={true} />
-          </div>
-          <div className="extra-md-view">
-            <div>{extraMd || null}</div>
-          </div>
-        </MobileOffChainContainer>
-      ) : (
-        <>
-          {showOperationStatus && (
-            <OffChainContainer>
-              <Text className="status-sub-header">
-                Off-chain Service Status
-              </Text>
-              <div className="status-sub-content">
-                {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
-
-                {!isUndefined(secondsLeftReceived) && (
-                  <>
-                    <DotSpace />
-                    <NextUpdateTimer>
-                      Next update:&nbsp;
-                      {isNil(seconds) ? <Dash /> : timerCountdown}
-                    </NextUpdateTimer>
-                  </>
-                )}
-              </div>
-            </OffChainContainer>
-          )}
-          <ExtraContent>
-            <LinksSection appType={appType} isMidSize={false} />
-            {extra || null}
-          </ExtraContent>
-        </>
-      )}
-
-      <Button
-        type="link"
-        icon={<ShrinkOutlined rev="" />}
-        onClick={() => {
-          setIsMinimized(true);
-          if (onMinimizeToggle) onMinimizeToggle(true);
-        }}
-        className="minimize-btn"
+    <CustomThemeProvider>
+      <ContractsInfoContainer
+        className="service-status-maximized"
+        canMinimize={canMinimize}
       >
-        {canMinimize ? '' : 'Minimize'}
-      </Button>
-    </ContractsInfoContainer>
+        <Badge canMinimize={canMinimize}>
+          <a href="https://autonolas.network" target="_blank" rel="noreferrer">
+            {canMinimize ? <PoweredByForSmallDevice /> : <PoweredBy />}
+          </a>
+        </Badge>
+
+        {/* status (green/orange dot) & timers */}
+        {canMinimize ? (
+          <MobileOffChainContainer>
+            <div>
+              {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
+              <LinksSection appType={appType} isMidSize={true} />
+            </div>
+            <div className="extra-md-view">
+              <div>{extraMd || null}</div>
+            </div>
+          </MobileOffChainContainer>
+        ) : (
+          <>
+            {showOperationStatus && (
+              <OffChainContainer>
+                <Text className="status-sub-header">
+                  Off-chain Service Status
+                </Text>
+                <div className="status-sub-content">
+                  {!isUndefined(isHealthy) && <div>{actualStatus}</div>}
+
+                  {!isUndefined(secondsLeftReceived) && (
+                    <>
+                      <DotSpace />
+                      <NextUpdateTimer>
+                        Next update:&nbsp;
+                        {isNil(seconds) ? <Dash /> : timerCountdown}
+                      </NextUpdateTimer>
+                    </>
+                  )}
+                </div>
+              </OffChainContainer>
+            )}
+            <ExtraContent>
+              <LinksSection appType={appType} isMidSize={false} />
+              {extra || null}
+            </ExtraContent>
+          </>
+        )}
+
+        <Button
+          type="link"
+          icon={<ShrinkOutlined />}
+          size="small"
+          className="minimize-btn"
+          onClick={() => {
+            setIsMinimized(true);
+            if (onMinimizeToggle) onMinimizeToggle(true);
+          }}
+        >
+          {canMinimize ? '' : 'Minimize'}
+        </Button>
+      </ContractsInfoContainer>
+    </CustomThemeProvider>
   );
 };

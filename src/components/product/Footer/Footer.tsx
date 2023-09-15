@@ -1,5 +1,6 @@
 import React from 'react';
 import { FooterContainer } from './styles';
+import { CustomThemeProvider } from '../../common/ThemeProvider';
 
 type FooterProps = {
   leftContent?: JSX.Element;
@@ -19,11 +20,15 @@ export const Footer = ({
   rightContent,
   centerContent,
 }: FooterProps) => (
-  <FooterContainer className="autonolas-footer">
-    <div className="footer-left-content">{leftContent}</div>
+  <CustomThemeProvider>
+    <FooterContainer className="autonolas-footer">
+      <div className="footer-left-content">{leftContent}</div>
 
-    <div className="footer-center">{centerContent || defaultCenterContent}</div>
+      <div className="footer-center">
+        {centerContent || defaultCenterContent}
+      </div>
 
-    <div className="footer-right-content">{rightContent}</div>
-  </FooterContainer>
+      <div className="footer-right-content">{rightContent}</div>
+    </FooterContainer>
+  </CustomThemeProvider>
 );
