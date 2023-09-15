@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Tooltip, Button, TooltipProps } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
+import styled from 'styled-components';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
@@ -50,17 +51,27 @@ const getRedirectLink = (
     : `${explorerUrl}/address/${text}`;
 };
 
+const TextContainer = styled.div<{ minwidth?: number }>`
+  display: inline-flex;
+  min-width: ${({ minwidth }) => minwidth || 0}px;
+`;
+
 type AddressLinkType = {
   text: string;
   isTransaction?: boolean;
   suffixCount?: number;
   isIpfsLink?: boolean;
+  /** to display copy button right to the text */
   canCopy?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
-  // TODO
+  /** minimum width for the text to display any content right side of it */
   textMinWidth?: number;
-  onClick?: () => void;
+  extraRightContent?: ReactNode;
+  /** to display only the text */
   cannotClick?: boolean;
+
+  // TODO
+  onClick?: () => void;
 };
 
 export const AddressLink = ({
@@ -69,24 +80,28 @@ export const AddressLink = ({
   isIpfsLink = false,
   canCopy = false,
   tooltipPlacement = 'bottom',
+  extraRightContent,
   textMinWidth,
+  cannotClick,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
 
   return (
     <Tooltip title={text} placement={tooltipPlacement}>
-      <a
-        href={getRedirectLink(text, isIpfsLink)}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={
-          textMinWidth
-            ? { display: 'inline-block', minWidth: textMinWidth }
-            : {}
-        }
-      >
-        {trimmedText}
-      </a>
+      <TextContainer minwidth={textMinWidth}>
+        {cannotClick ? (
+          trimmedText
+        ) : (
+          <a
+            href={getRedirectLink(text, isIpfsLink)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {trimmedText}
+          </a>
+        )}
+      </TextContainer>
+
       {canCopy && (
         <>
           &nbsp;
@@ -96,6 +111,13 @@ export const AddressLink = ({
           />
         </>
       )}
+
+      {extraRightContent ? (
+        <>
+          &nbsp;
+          {extraRightContent}
+        </>
+      ) : null}
     </Tooltip>
   );
 };

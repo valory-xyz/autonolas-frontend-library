@@ -1,6 +1,7 @@
 import React from 'react';
-import { Typography, Card } from 'antd';
+import { Typography, Card, Table } from 'antd';
 import { AddressLink } from './AddressLink';
+import type { ColumnsType } from 'antd/es/table';
 
 const { Text, Title } = Typography;
 
@@ -41,5 +42,124 @@ export const Default = (): JSX.Element => {
         </div>
       ))}
     </Card>
+  );
+};
+
+interface DataType {
+  id: string;
+  description: string;
+  owner: string;
+  developer: string;
+  hash: string;
+  mech: string;
+  dependency: number;
+}
+
+const columns: ColumnsType<DataType> = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    width: 50,
+  },
+  {
+    title: 'Owner',
+    dataIndex: 'owner',
+    key: 'owner',
+    width: 160,
+    render: (text) => (
+      <AddressLink text={text} suffixCount={6} canCopy textMinWidth={110} />
+    ),
+  },
+  {
+    title: 'Hash',
+    dataIndex: 'hash',
+    key: 'hash',
+    width: 160,
+    render: (text) => (
+      <AddressLink
+        text={text}
+        suffixCount={14}
+        isIpfsLink
+        canCopy
+        textMinWidth={242}
+      />
+    ),
+  },
+  {
+    title: 'Mech',
+    dataIndex: 'mech',
+    width: 140,
+    key: 'mech',
+    render: (text, row) => (
+      <AddressLink
+        text={text}
+        suffixCount={14}
+        textMinWidth={250}
+        canCopy
+        // onClick={(e) => {
+        //   if (router) router.push(`/mech/${e}/${row.hash}`);
+        // }}
+      />
+    ),
+  },
+];
+
+const dataSource = [
+  {
+    id: '1',
+    description: '-',
+    developer: '-',
+    owner: '0xEC58BEDB8DcFD77ca2BAf8B2D8D31204DD3D12ce',
+    hash: '0x714ef7dafa358c7152f6703dd764a1df40d369dcf53275dd2543b0fdbf207298',
+    mech: '0x3504fb5053ec12f748017248a395b4ed31739705',
+    dependency: 0,
+  },
+  {
+    id: '2',
+    description: '-',
+    developer: '-',
+    owner: '0x3F7276ED933F4cAA2bf5B8ca44688E4A1bbD2691',
+    hash: '0x2e855f5bb18361913bd082dabd9a16a72a65fd98ae230c5462ace360e9466aa0',
+    mech: '0x80f8cba027c830e06316e8d1fd9eb770772e3172',
+    dependency: 0,
+  },
+  {
+    id: '3',
+    description: '-',
+    developer: '-',
+    owner: '0x5e1D1eb61E1164D5a50b28C575dA73A29595dFf7',
+    hash: '0xe4686b4d286200a693e22b26d6e207eafc1b9d26bfee56ed9f054a1a5a7a77c9',
+    mech: '0xff82123dfb52ab75c417195c5fdb87630145ae81',
+    dependency: 0,
+  },
+  {
+    id: '4',
+    description: '-',
+    developer: '-',
+    owner: '0x7B2e78D4dFaABA045A167a70dA285E30E8FcA196',
+    hash: '0x1d1c57866258349e5ddbdfb94f223cbf7b63f3389ebcd1b9cf7c924f2768667d',
+    mech: '0x9e65d59eca2157eb87f95e41baaea57d647b0260',
+    dependency: 0,
+  },
+  {
+    id: '5',
+    description: '-',
+    developer: '-',
+    owner: '0xA97a53640d072642B2905da0Be798Cdd03ecEa67',
+    hash: '0x11498c65afd0172b9129263f774c2fc19d101116d77c5dc57dbfb1a0fe927883',
+    mech: '0x4e87bcea7108feae8d28c6117f30d552bae683f3',
+    dependency: 0,
+  },
+];
+
+export const LinkTable = (): JSX.Element => {
+  return (
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      scroll={{ x: scrollX || 1200 }}
+      rowKey={(record) => `row-${record.id}`}
+    />
   );
 };
