@@ -123,3 +123,6 @@
 ## 0.4.9
 - update `getProvider` function to pass RPL urls
 - copy text in `<AddressLink />` component
+
+## 0.4.10
+- add more functionality to `<AddressLink />` component

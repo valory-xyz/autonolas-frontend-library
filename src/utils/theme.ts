@@ -50,14 +50,17 @@ export const BOX_SHADOW = {
 export const THEME_CONFIG: ThemeConfig = {
   token: {
     colorPrimary: COLOR.PRIMARY,
+    colorBgBase: COLOR.WHITE,
+    colorLink: COLOR.PRIMARY,
+    colorTextPlaceholder: COLOR.GREY_2,
     fontSize: 18,
     borderRadius: 5,
-    colorBgBase: COLOR.WHITE,
-    colorTextPlaceholder: COLOR.GREY_2,
-    colorLink: COLOR.PRIMARY,
     controlHeight: 42,
   },
   components: {
+    Anchor: {
+      linkPaddingBlock: 8,
+    },
     Layout: {
       headerBg: COLOR.WHITE,
       bodyBg: COLOR.WHITE,
@@ -66,12 +69,12 @@ export const THEME_CONFIG: ThemeConfig = {
       motionDurationMid: '0.1s',
       motionDurationSlow: '0.1s',
     },
-    Pagination: {
-      itemSize: 30,
-    },
     Table: {
       padding: 12,
       fontWeightStrong: 500,
+    },
+    Typography: {
+      lineHeight: 1,
     },
   },
 };

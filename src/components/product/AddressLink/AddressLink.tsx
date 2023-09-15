@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Tooltip, Button, TooltipProps } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
+import styled from 'styled-components';
+import { CustomThemeProvider } from '../../common/ThemeProvider';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
@@ -50,13 +52,35 @@ const getRedirectLink = (
     : `${explorerUrl}/address/${text}`;
 };
 
- type AddressLinkType = {
+const TextContainer = styled.div<{ minwidth?: number }>`
+  display: inline-flex;
+  min-width: ${({ minwidth }) => minwidth || 0}px;
+`;
+
+type AddressLinkType = {
   text: string;
+  /**
+   * redirects to transaction page
+   * eg. https://etherscan.io/tx/${text}
+   * */
   isTransaction?: boolean;
   suffixCount?: number;
+  /**
+   * redirects to IPFS page
+   * eg. https://gateway.autonolas.tech/ipfs/${text}
+   * */
   isIpfsLink?: boolean;
+  /** to display copy button right to the text */
   canCopy?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
+  /** minimum width for the text to display any content right side of it */
+  textMinWidth?: number;
+  /** to display any content right side of the text */
+  extraRightContent?: ReactNode;
+  /** to display only the text and unclickable */
+  cannotClick?: boolean;
+  /** to override the default redirect link */
+  onClick?: (text: string) => void;
 };
 
 export const AddressLink = ({
@@ -65,27 +89,52 @@ export const AddressLink = ({
   isIpfsLink = false,
   canCopy = false,
   tooltipPlacement = 'bottom',
+  extraRightContent,
+  textMinWidth,
+  cannotClick,
+  onClick,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
 
   return (
-    <Tooltip title={text} placement={tooltipPlacement}>
-      <a
-        href={getRedirectLink(text, isIpfsLink)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {trimmedText}
-      </a>
-      {canCopy && (
-        <>
-          &nbsp;
-          <Button
-            onClick={() => navigator.clipboard.writeText(text)}
-            icon={<CopyOutlined rev=""/>}
-          />
-        </>
-      )}
-    </Tooltip>
+    <CustomThemeProvider>
+      <Tooltip title={text} placement={tooltipPlacement}>
+        <TextContainer minwidth={textMinWidth}>
+          {cannotClick ? (
+            trimmedText
+          ) : (
+            <Button
+              type="link"
+              onClick={() => {
+                if (typeof onClick === 'function') {
+                  onClick(text);
+                } else {
+                  window.open(getRedirectLink(text, isIpfsLink), '_blank');
+                }
+              }}
+            >
+              {trimmedText}
+            </Button>
+          )}
+        </TextContainer>
+
+        {canCopy && (
+          <>
+            &nbsp;
+            <Button
+              onClick={() => navigator.clipboard.writeText(text)}
+              icon={<CopyOutlined />}
+            />
+          </>
+        )}
+
+        {extraRightContent ? (
+          <>
+            &nbsp;
+            {extraRightContent}
+          </>
+        ) : null}
+      </Tooltip>
+    </CustomThemeProvider>
   );
 };

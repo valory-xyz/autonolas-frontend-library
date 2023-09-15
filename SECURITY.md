@@ -8,7 +8,7 @@ The following table shows which versions of `autonolas-frontend-library` are cur
 
 | Version   | Supported          |
 | --------- | ------------------ |
-| `0.4.9`   | :white_check_mark: |
+| `0.4.10`   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
