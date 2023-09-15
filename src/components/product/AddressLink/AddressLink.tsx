@@ -58,20 +58,28 @@ const TextContainer = styled.div<{ minwidth?: number }>`
 
 type AddressLinkType = {
   text: string;
+  /** 
+   * redirects to transaction page 
+   * eg. https://etherscan.io/tx/${text}
+   * */
   isTransaction?: boolean;
   suffixCount?: number;
+    /** 
+   * redirects to IPFS page 
+   * eg. https://gateway.autonolas.tech/ipfs/${text}
+   * */
   isIpfsLink?: boolean;
   /** to display copy button right to the text */
   canCopy?: boolean;
   tooltipPlacement?: TooltipProps['placement'];
   /** minimum width for the text to display any content right side of it */
   textMinWidth?: number;
+  /** to display any content right side of the text */
   extraRightContent?: ReactNode;
-  /** to display only the text */
+  /** to display only the text and unclickable */
   cannotClick?: boolean;
-
-  // TODO
-  onClick?: () => void;
+  /** to override the default redirect link */
+  onClick?: (text: string) => void;
 };
 
 export const AddressLink = ({
@@ -83,6 +91,7 @@ export const AddressLink = ({
   extraRightContent,
   textMinWidth,
   cannotClick,
+  onClick,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
 
@@ -92,13 +101,18 @@ export const AddressLink = ({
         {cannotClick ? (
           trimmedText
         ) : (
-          <a
-            href={getRedirectLink(text, isIpfsLink)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            type="link"
+            onClick={() => {
+              if (typeof onClick === 'function') {
+                onClick(text);
+              } else {
+                window.open(getRedirectLink(text, isIpfsLink), '_blank');
+              }
+            }}
           >
             {trimmedText}
-          </a>
+          </Button>
         )}
       </TextContainer>
 
