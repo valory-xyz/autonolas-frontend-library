@@ -129,3 +129,6 @@
 
 ## 0.4.11
 - add more functionality for improving `Tokenomics` App
+- update `antd` theme especially for `Alert` component
+- `useScreen` hook
+- date format function such as `getFormattedDate`, `getFullFormattedDate`, `getCommaSeparatedNumber`
