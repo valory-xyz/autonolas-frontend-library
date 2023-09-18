@@ -126,3 +126,6 @@
 
 ## 0.4.10
 - add more functionality to `<AddressLink />` component
+
+## 0.4.11
+- add more functionality for improving `Tokenomics` App
