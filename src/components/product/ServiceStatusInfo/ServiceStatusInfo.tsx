@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import ShrinkOutlined from '@ant-design/icons/ShrinkOutlined';
 import { isUndefined, isNil } from 'lodash';
-import { CustomThemeProvider } from '../../common/ThemeProvider';
+import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
 import { DotSpace, LinksSection } from './utils';
@@ -115,7 +115,7 @@ export const ServiceStatusInfo = ({
     );
 
   return (
-    <CustomThemeProvider>
+    <AutonolasThemeProvider>
       <ContractsInfoContainer
         className="service-status-maximized"
         canMinimize={canMinimize}
@@ -179,6 +179,6 @@ export const ServiceStatusInfo = ({
           {canMinimize ? '' : 'Minimize'}
         </Button>
       </ContractsInfoContainer>
-    </CustomThemeProvider>
+    </AutonolasThemeProvider>
   );
 };

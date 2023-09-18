@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Button, Skeleton } from 'antd';
 import styled from 'styled-components';
 import { isNil } from 'lodash';
-import { CustomThemeProvider } from '../../common/ThemeProvider';
+import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 
 const Container = styled.div`
   display: flex;
@@ -57,7 +57,7 @@ export const Loader = ({
   }, [seconds]);
 
   return (
-    <CustomThemeProvider>
+    <AutonolasThemeProvider>
       {isAccountRequired && !account ? (
         <Container>
           <p>{notConnectedMessage || 'Please connect your wallet'}</p>
@@ -82,6 +82,6 @@ export const Loader = ({
           )}
         </>
       )}
-    </CustomThemeProvider>
+    </AutonolasThemeProvider>
   );
 };

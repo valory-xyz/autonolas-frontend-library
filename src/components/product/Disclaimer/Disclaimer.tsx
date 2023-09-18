@@ -2,7 +2,7 @@ import React, { ReactNode, MouseEvent } from 'react';
 import { Alert, Button } from 'antd';
 import styled from 'styled-components';
 
-import { CustomThemeProvider } from '../../common/ThemeProvider';
+import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 
 const DisclaimerAlert = styled(Alert)`
   .ant-btn-link {
@@ -47,13 +47,13 @@ export const Disclaimer = ({
   );
 
   return (
-    <CustomThemeProvider>
+    <AutonolasThemeProvider>
       <DisclaimerAlert
         type="warning"
         showIcon
         closable
         message={message || defaultMessage}
       />
-    </CustomThemeProvider>
+    </AutonolasThemeProvider>
   );
 };
