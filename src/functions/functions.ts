@@ -143,14 +143,22 @@ export const areAddressesEqual = (a1: string, a2: string) =>
 export const isValidAddress = (address: string) =>
   ethers.utils.isAddress(address);
 
-// notifications
-export const notifySuccess = (message = 'Successful') =>
-  notification.success({ message });
-export const notifyError = (message = 'Some error occured') =>
-  notification.error({ message });
-export const notifyWarning = (message = 'Some error occured') =>
-  notification.warning({ message });
+// notifications for success, error and warning
 
+export const notifySuccess = (message = 'Successful', description = '') =>
+  notification.success({ message, description });
+
+export const notifyError = (message = 'Some error occured', description = '') =>
+  notification.error({ message, description });
+
+export const notifyWarning = (
+  message = 'Some error occured',
+  description = '',
+) => notification.warning({ message, description });
+
+/**
+ * Fetches metadata from IPFS
+ */
 export const getIpfsDetails = async (hash: string) => {
   try {
     const ipfsUrl = `${GATEWAY_URL}f01701220${hash.substring(2)}`;

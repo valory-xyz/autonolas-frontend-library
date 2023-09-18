@@ -1,4 +1,3 @@
-import { ThemeConfig } from 'antd';
 
 export const COLOR = {
   PRIMARY: '#7A00F4',
@@ -19,6 +18,10 @@ export const COLOR = {
 
   BLACK: '#000000',
   TABLE_BLACK: '#1B1B1B',
+
+  // colors used by Ant Design
+  ANT_PRIMARY_BG: '#F7E6FF',
+  ANT_PRIMARY_BORDER: '#CA7AFF',
 };
 
 export const BREAK_POINT = {
@@ -45,36 +48,4 @@ export const BORDER_RADIUS = '5px';
 
 export const BOX_SHADOW = {
   light: '0px 1px 6px rgba(0, 0, 0, 0.15)',
-};
-
-export const THEME_CONFIG: ThemeConfig = {
-  token: {
-    colorPrimary: COLOR.PRIMARY,
-    colorBgBase: COLOR.WHITE,
-    colorLink: COLOR.PRIMARY,
-    colorTextPlaceholder: COLOR.GREY_2,
-    fontSize: 18,
-    borderRadius: 5,
-    controlHeight: 42,
-  },
-  components: {
-    Anchor: {
-      linkPaddingBlock: 8,
-    },
-    Layout: {
-      headerBg: COLOR.WHITE,
-      bodyBg: COLOR.WHITE,
-    },
-    Tabs: {
-      motionDurationMid: '0.1s',
-      motionDurationSlow: '0.1s',
-    },
-    Table: {
-      padding: 12,
-      fontWeightStrong: 500,
-    },
-    Typography: {
-      lineHeight: 1,
-    },
-  },
 };
