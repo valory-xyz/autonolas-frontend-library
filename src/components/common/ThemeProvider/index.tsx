@@ -36,6 +36,6 @@ export const THEME_CONFIG: ThemeConfig = {
   },
 };
 
-export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
+export const AutonolasThemeProvider = ({ children }: { children: ReactNode }) => {
   return <ConfigProvider theme={THEME_CONFIG}>{children}</ConfigProvider>;
 };

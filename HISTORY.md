@@ -132,3 +132,6 @@
 - update `antd` theme especially for `Alert` component
 - `useScreen` hook
 - date format function such as `getFormattedDate`, `getFullFormattedDate`, `getCommaSeparatedNumber`
+
+## 0.4.12
+- export `AutonolasThemeProvider` component

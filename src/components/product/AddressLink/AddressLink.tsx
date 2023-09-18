@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Tooltip, Button, TooltipProps } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import styled from 'styled-components';
-import { CustomThemeProvider } from '../../common/ThemeProvider';
+import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
 import { getExplorerURL, getCurrentChainId } from '../../../functions';
 
@@ -97,7 +97,7 @@ export const AddressLink = ({
   const trimmedText = getTrimmedText(text, suffixCount);
 
   return (
-    <CustomThemeProvider>
+    <AutonolasThemeProvider>
       <Tooltip title={text} placement={tooltipPlacement}>
         <TextContainer minwidth={textMinWidth}>
           {cannotClick ? (
@@ -135,6 +135,6 @@ export const AddressLink = ({
           </>
         ) : null}
       </Tooltip>
-    </CustomThemeProvider>
+    </AutonolasThemeProvider>
   );
 };
