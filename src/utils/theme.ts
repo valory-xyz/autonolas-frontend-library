@@ -73,8 +73,5 @@ export const THEME_CONFIG: ThemeConfig = {
       padding: 12,
       fontWeightStrong: 500,
     },
-    Typography: {
-      lineHeight: 1,
-    },
   },
 };
