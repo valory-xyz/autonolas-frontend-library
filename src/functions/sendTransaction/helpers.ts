@@ -159,8 +159,11 @@ export const getChainId = (
   // if window is undefined, we are in server side
   // return undefined
   if (typeof window === 'undefined') {
-    console.error('No provider found');
-    return undefined;
+    console.warn(
+      'No provider found returning first supported chainId ',
+      supportedChains[0].id,
+    );
+    return supportedChains[0].id;
   }
 
   // if chainId is provided, return it
