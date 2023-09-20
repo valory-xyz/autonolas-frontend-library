@@ -146,7 +146,7 @@ export const getChainIdOrDefaultToFirstSupportedChain = (
   chainIdPassed: string | number,
 ) => {
   return getChainIdOrDefaultToMainnet(SUPPORTED_CHAINS, chainIdPassed);
-}
+};
 
 /**
  * get chainId from the providers or fallback to default chainId (mainnet)
@@ -159,11 +159,8 @@ export const getChainId = (
   // if window is undefined, we are in server side
   // return undefined
   if (typeof window === 'undefined') {
-    console.warn(
-      'No provider found returning first supported chainId ',
-      supportedChains[0].id,
-    );
-    return supportedChains[0].id;
+    console.warn('No provider found returning undefined');
+    return undefined;
   }
 
   // if chainId is provided, return it
