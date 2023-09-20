@@ -79,6 +79,8 @@ export const sendTransaction = (
                * it resolves with Output
                */
               const chainId = getChainId(supportedChains);
+              if(!chainId) throw new Error('Please connect your wallet');
+
               pollTransactionDetails(safeTx, chainId)
                 .then((receipt) => {
                   resolve(receipt);

@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { Typography, Divider } from 'antd';
 import { AppType } from './types';
 import { ServiceStatusInfo } from './ServiceStatusInfo';
+import { notifySuccess } from '../../../functions';
 
 export default {
   title: 'Service Status Info',
@@ -41,6 +42,8 @@ const Extra = () => (
 const ExtraMd = () => <div> Some text on md </div>;
 
 export const Default = () => {
+  const [dummySeconds, setDummySeconds] = useState(5);
+
   const list: Array<{ name: string; type: AppType; hideSeconds?: boolean }> = [
     { name: 'Oracle Kit', type: 'oraclekit' },
     { name: 'ML kit', type: 'mlkit' },
@@ -84,7 +87,12 @@ export const Default = () => {
       <Divider orientation="left">Generic without appType</Divider>
       <ServiceStatusInfo
         isHealthy={true}
-        secondsLeftReceived={15}
+        isDefaultMaximized
+        secondsLeftReceived={dummySeconds}
+        onTimerFinish={() => {
+          notifySuccess('Timer completed!');
+          setDummySeconds(15);
+        }}
         extra={<Extra />}
         extraMd={<ExtraMd />}
         onMinimizeToggle={(isMinimized) => console.log({ isMinimized })}

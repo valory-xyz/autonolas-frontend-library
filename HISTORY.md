@@ -135,3 +135,7 @@
 
 ## 0.4.12
 - export `AutonolasThemeProvider` component
+
+## 0.4.13
+- ethers provider to return JSON RPC provider on specific condition
+- countdown bug in `ServiceStatusInfo` component

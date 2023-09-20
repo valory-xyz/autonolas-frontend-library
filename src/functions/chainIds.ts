@@ -1,6 +1,9 @@
 import { STAGING_CHAIN_ID, LOCAL_FORK_ID } from '../utils/constants';
 import { getModalProvider, getWindowEthereum } from './sendTransaction/helpers';
 
+/**
+ * @deprecated use getChainId instead
+ */
 export const getCurrentChainId = (chainId?: string | number | null) => {
   // if chainId is provided, return it
   if (chainId) {

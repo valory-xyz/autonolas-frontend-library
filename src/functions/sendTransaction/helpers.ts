@@ -110,13 +110,19 @@ export const getEthersProvider = (
   rpcUrls: RpcUrl,
 ) => {
   const provider = getProvider(supportedChains, rpcUrls);
+
+  // if provider is a string, it is a JSON-RPC provider
+  if (typeof provider === 'string') {
+    return new ethers.providers.JsonRpcProvider(provider);
+  }
+
   return new ethers.providers.Web3Provider(provider, 'any');
 };
 
 /**
- * helper function to get chainId, if chainId is not supported, default to mainnet
- * @param {number | string} chainIdPassed valid chainId
- * @returns
+ * @deprecated
+ * helper function to get chainId, if chainId is not supported, default to 1st supported chainId.
+ * TODO: remove this function and use `getChainIdOrDefaultToFirstSupportedChain` instead.
  */
 export const getChainIdOrDefaultToMainnet = (
   SUPPORTED_CHAINS: Chain[],
@@ -133,6 +139,16 @@ export const getChainIdOrDefaultToMainnet = (
 };
 
 /**
+ * Same functionality as getChainIdOrDefaultToMainnet but with a different name for clarity
+ */
+export const getChainIdOrDefaultToFirstSupportedChain = (
+  SUPPORTED_CHAINS: Chain[],
+  chainIdPassed: string | number,
+) => {
+  return getChainIdOrDefaultToMainnet(SUPPORTED_CHAINS, chainIdPassed);
+};
+
+/**
  * get chainId from the providers or fallback to default chainId (mainnet)
  * first element of supportedChains is the default chainId
  */
@@ -140,9 +156,11 @@ export const getChainId = (
   supportedChains: Chain[],
   chainId?: string | number | null,
 ) => {
+  // if window is undefined, we are in server side
+  // return undefined
   if (typeof window === 'undefined') {
-    console.error('No provider found');
-    return supportedChains[0].id;
+    console.warn('No provider found returning undefined');
+    return undefined;
   }
 
   // if chainId is provided, return it

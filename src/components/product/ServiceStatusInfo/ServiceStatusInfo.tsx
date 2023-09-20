@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { Typography, Statistic, Button, Grid } from 'antd';
 import ShrinkOutlined from '@ant-design/icons/ShrinkOutlined';
 import { isUndefined, isNil } from 'lodash';
+
 import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 import { PoweredBy, PoweredByForSmallDevice } from './helpers/PoweredBySvg';
 import { MinimizedStatus } from './helpers/MinimizedStatus';
@@ -22,6 +23,9 @@ const { useBreakpoint } = Grid;
 
 type ServiceStatusInfoDetails = {
   isHealthy?: boolean;
+  /**
+   * seconds left to next update in seconds
+   */
   secondsLeftReceived?: number;
   appType?: AppType;
   extra?: ReactNode;
@@ -30,11 +34,7 @@ type ServiceStatusInfoDetails = {
    * if not defined, will use the same content as `extra`
    */
   extraMd?: ReactNode;
-  onTimerFinish?: ({
-    setSeconds,
-  }: {
-    setSeconds: (value: number | undefined) => void;
-  }) => void;
+  onTimerFinish?: () => void;
   onMinimizeToggle?: (isMinimized: boolean) => void;
   // if true, will be maximized by default
   isDefaultMaximized?: boolean;
@@ -59,6 +59,7 @@ export const ServiceStatusInfo = ({
   const canMinimize = !screens.xl;
   const [isMinimized, setIsMinimized] = useState<boolean>(!isDefaultMaximized);
   const [seconds, setSeconds] = useState<number | undefined>(0);
+  const [countdownKey, setCountdownKey] = useState<number>(0);
 
   useEffect(() => {
     if (!isUndefined(secondsLeftReceived)) {
@@ -71,13 +72,15 @@ export const ServiceStatusInfo = ({
       value={Date.now() + Math.round(seconds || 0) * 1000}
       format="s"
       suffix="s"
-      onChange={(e) => setSeconds(parseInt(`${Number(e) / 1000}`, 10))}
+      key={`service-status-counter-${countdownKey}`}
       onFinish={async () => {
         window.console.log('timer completed!');
 
-        setSeconds(0); // reseting timer to 0 as it is finished
+        setCountdownKey(countdownKey + 1);
 
-        if (onTimerFinish) onTimerFinish({ setSeconds });
+        if (typeof onTimerFinish === 'function') {
+          onTimerFinish();
+        }
       }}
       style={timerStyle}
     />
