@@ -139,3 +139,6 @@
 ## 0.4.13
 - ethers provider to return JSON RPC provider on specific condition
 - countdown bug in `ServiceStatusInfo` component
+
+## 0.4.14
+- export format functions
