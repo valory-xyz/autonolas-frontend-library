@@ -1,5 +1,6 @@
 export * from './functions';
 export * from './chainIds';
+export * from './formats';
 export { sendTransaction } from './sendTransaction';
 export {
   getChainId,
