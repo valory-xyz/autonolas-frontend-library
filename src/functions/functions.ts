@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { toLower } from 'lodash';
 import { notification } from 'antd';
 import { GATEWAY_URL } from '../utils/constants';
+import { getConnectedChainIdFromWallet } from './sendTransaction/helpers';
 
 export const convertToEth = (value: string) => ethers.utils.formatEther(value);
 
@@ -148,8 +149,18 @@ export const isValidAddress = (address: string) =>
 export const notifySuccess = (message = 'Successful', description = '') =>
   notification.success({ message, description });
 
-export const notifyError = (message = 'Some error occured', description = '') =>
+export const notifyError = (
+  message = 'Some error occured',
+  description = '',
+) => {
+  // to get more details about the error
+  console.warn({
+    message,
+    chainId: getConnectedChainIdFromWallet(),
+  });
+
   notification.error({ message, description });
+};
 
 export const notifyWarning = (
   message = 'Some error occured',

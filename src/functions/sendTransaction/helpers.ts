@@ -186,3 +186,28 @@ export const getChainId = (
   // has no wallet (eg. incognito mode or no wallet installed)
   return supportedChains[0].id;
 };
+
+/**
+ * Fetches the connected chainId from the wallet or undefined if not connected
+ * (Does not fallback to 1st supported chainId or mainnet)
+ */
+export const getConnectedChainIdFromWallet = () => {
+  if (typeof window === 'undefined') {
+    console.warn('No provider found returning undefined');
+    return undefined;
+  }
+
+  // connected via wallet-connect
+  const walletProvider = getModalProvider();
+  if (walletProvider?.chainId) {
+    return Number(walletProvider.chainId);
+  }
+
+  // NOT logged in but has wallet installed (eg. metamask)
+  const windowEthereum = getWindowEthereum();
+  if (windowEthereum?.chainId) {
+    return Number(windowEthereum.chainId);
+  }
+
+  return undefined;
+};
