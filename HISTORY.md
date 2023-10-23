@@ -142,3 +142,6 @@
 
 ## 0.4.14
 - export format functions
+
+## 0.4.15
+- update `notifyError` function to modify error message
