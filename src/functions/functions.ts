@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { ethers } from 'ethers';
 import { toLower } from 'lodash';
 import { notification } from 'antd';
@@ -146,12 +147,14 @@ export const isValidAddress = (address: string) =>
 
 // notifications for success, error and warning
 
-export const notifySuccess = (message = 'Successful', description = '') =>
-  notification.success({ message, description });
+export const notifySuccess = (
+  message: ReactNode = 'Successful',
+  description: ReactNode = '',
+) => notification.success({ message, description });
 
 export const notifyError = (
-  message = 'Some error occured',
-  description = '',
+  message: ReactNode = 'Some error occured',
+  description: ReactNode = '',
 ) => {
   // to get more details about the error
   console.warn({
@@ -163,8 +166,8 @@ export const notifyError = (
 };
 
 export const notifyWarning = (
-  message = 'Some error occured',
-  description = '',
+  message: ReactNode = 'Some error occured',
+  description: ReactNode = '',
 ) => notification.warning({ message, description });
 
 /**

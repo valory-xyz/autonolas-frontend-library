@@ -145,3 +145,6 @@
 
 ## 0.4.15
 - update `notifyError` function to modify error message
+
+## 0.4.16
+- Functions to prohibit user from prohibited countries & addresses
