@@ -4,3 +4,4 @@ export * from './Footer';
 export * from './ServiceStatusInfo';
 export * from './Loader';
 export * from './GlobalStyles';
+export * from './components';

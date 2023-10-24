@@ -148,3 +148,7 @@
 
 ## 0.4.16
 - Functions to prohibit user from prohibited countries & addresses
+
+## 0.4.17
+- Update the functions to prohibit user from prohibited countries & addresses
+- Export the JSON files for prohibited countries & addresses
