@@ -161,3 +161,4 @@
 
 ## 0.4.20
 - removed prohibited functionality
+- updated <AddressLink /> component to pass `supportedChains` as props

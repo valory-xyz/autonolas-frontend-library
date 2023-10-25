@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ethers } from 'ethers';
 import { getUrl } from './index';
-import { Chain, RpcUrl } from '../../types/types';
+import { Chain, RpcUrl } from '../../types';
 
 /**
  * poll gnosis-safe API every 3 seconds
@@ -172,7 +172,10 @@ export const getChainId = (
   const walletProvider = getModalProvider();
   if (walletProvider?.chainId) {
     const walletConnectChainId = walletProvider.chainId;
-    return getChainIdOrDefaultToMainnet(supportedChains, walletConnectChainId);
+    return getChainIdOrDefaultToFirstSupportedChain(
+      supportedChains,
+      walletConnectChainId,
+    );
   }
 
   // NOT logged in but has wallet installed (eg. metamask).
@@ -180,7 +183,10 @@ export const getChainId = (
   const windowEthereum = getWindowEthereum();
   if (windowEthereum?.chainId) {
     const walletChainId = windowEthereum.chainId;
-    return getChainIdOrDefaultToMainnet(supportedChains, walletChainId);
+    return getChainIdOrDefaultToFirstSupportedChain(
+      supportedChains,
+      walletChainId,
+    );
   }
 
   // has no wallet (eg. incognito mode or no wallet installed)

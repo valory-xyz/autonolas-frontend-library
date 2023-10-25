@@ -4,7 +4,8 @@ import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import styled from 'styled-components';
 import { AutonolasThemeProvider } from '../../common/ThemeProvider';
 import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
-import { getExplorerURL, getCurrentChainId } from '../../../functions';
+import { getExplorerURL, getChainId } from '../../../functions';
+import { Chain } from '../../../types';
 
 /**
  * function to get the trimmed text
@@ -33,7 +34,7 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
 const getRedirectLink = (
   text: string,
   isIpfsLink: boolean,
-  chainId?: string | number,
+  supportedChains?: Chain[],
 ) => {
   if (isIpfsLink) {
     const hash = text.substring(2);
@@ -44,7 +45,7 @@ const getRedirectLink = (
   }
 
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
-  const currentChainId = getCurrentChainId(chainId);
+  const currentChainId = supportedChains ? getChainId(supportedChains) : 1;
   const explorerUrl = getExplorerURL(currentChainId);
 
   return isTransaction
@@ -79,6 +80,8 @@ type AddressLinkType = {
   extraRightContent?: ReactNode;
   /** to display only the text and unclickable */
   cannotClick?: boolean;
+  /** list of supported chains */
+  supportedChains?: Chain[];
   /** to override the default redirect link */
   onClick?: (text: string) => void;
 };
@@ -92,6 +95,7 @@ export const AddressLink = ({
   extraRightContent,
   textMinWidth,
   cannotClick,
+  supportedChains,
   onClick,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
@@ -109,7 +113,10 @@ export const AddressLink = ({
                 if (typeof onClick === 'function') {
                   onClick(text);
                 } else {
-                  window.open(getRedirectLink(text, isIpfsLink), '_blank');
+                  window.open(
+                    getRedirectLink(text, isIpfsLink, supportedChains),
+                    '_blank',
+                  );
                 }
               }}
             >
