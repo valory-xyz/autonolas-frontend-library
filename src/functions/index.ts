@@ -9,3 +9,4 @@ export {
   getChainIdOrDefaultToMainnet,
   getEthersProvider,
 } from './sendTransaction/helpers';
+export * from './prohibitedCountriesAndAddresses'

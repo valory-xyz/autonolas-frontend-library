@@ -155,3 +155,6 @@
 
 ## 0.4.18
 - Updated prohibited functionality from JSON to constant
+
+## 0.4.19
+- export prohibited functionality to be used in other apps

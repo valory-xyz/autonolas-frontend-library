@@ -158,8 +158,9 @@ export const notifyError = (
 ) => {
   // to get more details about the error
   console.warn({
-    message,
     chainId: getConnectedChainIdFromWallet(),
+    message,
+    description,
   });
 
   notification.error({ message, description });
