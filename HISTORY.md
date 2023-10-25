@@ -154,4 +154,4 @@
 - Export the JSON files for prohibited countries & addresses
 
 ## 0.4.18
-- Removed prohibited functionality
+- Updated prohibited functionality from JSON to constant
