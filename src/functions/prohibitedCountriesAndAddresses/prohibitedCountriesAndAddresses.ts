@@ -1,6 +1,6 @@
 import { toLower } from 'lodash';
-import prohibitedAddresses from './prohibited-addresses.json';
-import prohibitedCountries from './prohibited-countries.json';
+import { PROHIBITED_ADDRESSES } from './prohibitedAddresses';
+import { PROHIBITED_COUNTRIES } from './prohibitedCountries';
 
 /**
  * Check if the address is prohibited
@@ -8,7 +8,7 @@ import prohibitedCountries from './prohibited-countries.json';
 export const isAddressProhibited = (address: string | null) => {
   if (!address) return false;
 
-  const addresses = prohibitedAddresses.map((e) => toLower(e));
+  const addresses = PROHIBITED_ADDRESSES.map((e) => toLower(e));
   return addresses.includes(toLower(address));
 };
 
@@ -18,6 +18,6 @@ export const isAddressProhibited = (address: string | null) => {
 export const isCountryProhibited = (country: string | null) => {
   if (!country) return false;
 
-  const prohibitedCountriesCode = Object.values(prohibitedCountries);
+  const prohibitedCountriesCode = Object.values(PROHIBITED_COUNTRIES);
   return prohibitedCountriesCode.includes(country);
 };

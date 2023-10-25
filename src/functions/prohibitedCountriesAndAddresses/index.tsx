@@ -1,8 +1,6 @@
-import prohibitedAddresses from './prohibited-addresses.json';
-import prohibitedCountries from './prohibited-countries.json';
-
+export { PROHIBITED_ADDRESSES } from './prohibitedAddresses';
+export { PROHIBITED_COUNTRIES } from './prohibitedCountries';
 export {
   isAddressProhibited,
   isCountryProhibited,
 } from './prohibitedCountriesAndAddresses';
-export { prohibitedAddresses, prohibitedCountries };

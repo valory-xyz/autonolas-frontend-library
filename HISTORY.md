@@ -152,3 +152,6 @@
 ## 0.4.17
 - Update the functions to prohibit user from prohibited countries & addresses
 - Export the JSON files for prohibited countries & addresses
+
+## 0.4.18
+- Updated prohibited functionality from JSON to constant
