@@ -158,3 +158,7 @@
 
 ## 0.4.19
 - export prohibited functionality to be used in other apps
+
+## 0.4.20
+- removed prohibited functionality
+- updated <AddressLink /> component to pass `supportedChains` as props

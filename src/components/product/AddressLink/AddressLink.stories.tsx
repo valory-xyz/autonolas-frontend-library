@@ -68,7 +68,13 @@ const columns: ColumnsType<DataType> = [
     key: 'owner',
     width: 140,
     render: (text) => (
-      <AddressLink text={text} suffixCount={6} canCopy textMinWidth={160} />
+      <AddressLink
+        text={text}
+        suffixCount={6}
+        canCopy
+        textMinWidth={160}
+        // supportedChains={[{ id: 100 }]}
+      />
     ),
   },
   {
