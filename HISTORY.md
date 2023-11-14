@@ -162,3 +162,6 @@
 ## 0.4.20
 - removed prohibited functionality
 - updated <AddressLink /> component to pass `supportedChains` as props
+
+## 0.4.21
+- updated notifyError, notifySuccess, notifyWarning functions to pass `key` as a prop to avoid duplicate notifications

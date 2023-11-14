@@ -150,11 +150,13 @@ export const isValidAddress = (address: string) =>
 export const notifySuccess = (
   message: ReactNode = 'Successful',
   description: ReactNode = '',
-) => notification.success({ message, description });
+  key?: string,
+) => notification.success({ message, description, key });
 
 export const notifyError = (
   message: ReactNode = 'Some error occured',
   description: ReactNode = '',
+  key?: string,
 ) => {
   // to get more details about the error
   console.warn({
@@ -163,13 +165,14 @@ export const notifyError = (
     description,
   });
 
-  notification.error({ message, description });
+  notification.error({ message, description, key });
 };
 
 export const notifyWarning = (
   message: ReactNode = 'Some error occured',
   description: ReactNode = '',
-) => notification.warning({ message, description });
+  key?: string,
+) => notification.warning({ message, description, key });
 
 /**
  * Fetches metadata from IPFS
