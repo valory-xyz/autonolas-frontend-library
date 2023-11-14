@@ -149,7 +149,7 @@ export const isValidAddress = (address: string) =>
 
 export const notifySuccess = (
   message: ReactNode = 'Successful',
-  description: ReactNode,
+  description: ReactNode = '',
   key?: string,
 ) => notification.success({ message, description, key });
 
