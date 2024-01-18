@@ -1,3 +1,5 @@
+import { SOLANA_CHAIN_NAMES } from '../utils';
+
 export type Web3ReceiptType = {
   blockHash: string;
   blockNumber: number;
@@ -23,3 +25,6 @@ export type Chain = {
 export type RpcUrl = {
   [key: number]: string;
 };
+
+export type SolanaChainNames =
+  typeof SOLANA_CHAIN_NAMES[keyof typeof SOLANA_CHAIN_NAMES];
