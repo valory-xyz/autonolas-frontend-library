@@ -3,9 +3,13 @@ import { Tooltip, Button, TooltipProps } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import styled from 'styled-components';
 import { AutonolasThemeProvider } from '../../common/ThemeProvider';
-import { GATEWAY_URL, HASH_PREFIXES } from '../../../utils/constants';
+import {
+  GATEWAY_URL,
+  HASH_PREFIXES,
+  SOLANA_CHAIN_NAMES,
+} from '../../../utils/constants';
 import { getExplorerURL, getChainId } from '../../../functions';
-import { Chain } from '../../../types';
+import { Chain, SolanaChainNames } from '../../../types';
 
 /**
  * function to get the trimmed text
@@ -31,17 +35,36 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
  *
  * chainId as param to be deprecated
  */
-const getRedirectLink = (
-  text: string,
-  isIpfsLink: boolean,
-  supportedChains?: Chain[],
-) => {
+
+type GetRedirectLinkArgs = {
+  text: string;
+  isIpfsLink: boolean;
+  supportedChains?: Chain[];
+  chainName?: SolanaChainNames;
+};
+
+const getRedirectLink = ({
+  text,
+  isIpfsLink,
+  supportedChains,
+  chainName,
+}: GetRedirectLinkArgs) => {
   if (isIpfsLink) {
     const hash = text.substring(2);
     if (hash.length === 64) {
       return `${GATEWAY_URL}${HASH_PREFIXES.type1}${hash}`;
     }
     return `${GATEWAY_URL}${text}`;
+  }
+
+  const isSolana =
+    chainName === SOLANA_CHAIN_NAMES.DEVNET ||
+    chainName === SOLANA_CHAIN_NAMES.MAINNET;
+
+  if (isSolana) {
+    return chainName === SOLANA_CHAIN_NAMES.DEVNET
+      ? `https://solscan.io/account/${text}?cluster=devnet`
+      : `https://solscan.io/account/${text}`;
   }
 
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
@@ -84,6 +107,8 @@ type AddressLinkType = {
   supportedChains?: Chain[];
   /** to override the default redirect link */
   onClick?: (text: string) => void;
+  /** chain name */
+  chainName?: SolanaChainNames;
 };
 
 export const AddressLink = ({
@@ -97,8 +122,15 @@ export const AddressLink = ({
   cannotClick,
   supportedChains,
   onClick,
+  chainName,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
+  const url = getRedirectLink({
+    text,
+    isIpfsLink,
+    supportedChains,
+    chainName,
+  });
 
   return (
     <AutonolasThemeProvider>
@@ -113,10 +145,7 @@ export const AddressLink = ({
                 if (typeof onClick === 'function') {
                   onClick(text);
                 } else {
-                  window.open(
-                    getRedirectLink(text, isIpfsLink, supportedChains),
-                    '_blank',
-                  );
+                  window.open(url, '_blank');
                 }
               }}
             >

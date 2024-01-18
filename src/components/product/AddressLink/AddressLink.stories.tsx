@@ -1,9 +1,11 @@
 import React from 'react';
 import { Typography, Card, Table } from 'antd';
-import { AddressLink } from './AddressLink';
 import type { ColumnsType } from 'antd/es/table';
 import { StarOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
+
 import { notifySuccess } from '../../../functions';
+import { AddressLink } from './AddressLink';
 
 const { Text, Title } = Typography;
 
@@ -60,7 +62,7 @@ const columns: ColumnsType<DataType> = [
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    width: 50,
+    width: 30,
   },
   {
     title: 'Etherscan',
@@ -72,10 +74,17 @@ const columns: ColumnsType<DataType> = [
         text={text}
         suffixCount={6}
         canCopy
-        textMinWidth={160}
+        textMinWidth={150}
         // supportedChains={[{ id: 100 }]}
       />
     ),
+  },
+  {
+    title: 'Solana',
+    dataIndex: 'owner',
+    key: 'owner',
+    width: 140,
+    render: (text) => <AddressLink text={text} chainName="solana-devnet" />,
   },
   {
     title: 'IPFS link',
@@ -85,10 +94,10 @@ const columns: ColumnsType<DataType> = [
     render: (text) => (
       <AddressLink
         text={text}
-        suffixCount={15}
+        suffixCount={8}
         isIpfsLink
         canCopy
-        textMinWidth={350}
+        textMinWidth={210}
       />
     ),
   },
@@ -149,13 +158,21 @@ const dataSource = [
   },
 ];
 
+const TableContainer = styled.div`
+  .ant-table-cell {
+    padding: 12px 4px !important;
+  }
+`;
+
 export const LinkTable = (): JSX.Element => {
   return (
-    <Table
-      columns={columns}
-      dataSource={dataSource}
-      scroll={{ x: scrollX || 1200 }}
-      rowKey={(record) => `row-${record.id}`}
-    />
+    <TableContainer>
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        scroll={{ x: scrollX || 1200 }}
+        rowKey={(record) => `row-${record.id}`}
+      />
+    </TableContainer>
   );
 };

@@ -165,3 +165,6 @@
 
 ## 0.4.21
 - updated notifyError, notifySuccess, notifyWarning functions to pass `key` as a prop to avoid duplicate notifications
+
+## 0.4.22
+- Add "Solana" support for <AddressLink /> component
