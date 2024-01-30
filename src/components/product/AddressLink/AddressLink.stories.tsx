@@ -75,6 +75,7 @@ const columns: ColumnsType<DataType> = [
         suffixCount={6}
         canCopy
         textMinWidth={150}
+        // chainId={421614}
         // supportedChains={[{ id: 100 }]}
       />
     ),

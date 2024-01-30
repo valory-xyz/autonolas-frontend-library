@@ -41,6 +41,7 @@ type GetRedirectLinkArgs = {
   isIpfsLink: boolean;
   supportedChains?: Chain[];
   chainName?: SolanaChainNames;
+  chainId?: number;
 };
 
 const getRedirectLink = ({
@@ -48,6 +49,7 @@ const getRedirectLink = ({
   isIpfsLink,
   supportedChains,
   chainName,
+  chainId,
 }: GetRedirectLinkArgs) => {
   if (isIpfsLink) {
     const hash = text.substring(2);
@@ -67,9 +69,13 @@ const getRedirectLink = ({
       : `https://solscan.io/account/${text}`;
   }
 
+  const getCurrentChainId = () => {
+    if (chainId) return chainId;
+    if (supportedChains) return getChainId(supportedChains);
+    return 1;
+  };
+  const explorerUrl = getExplorerURL(getCurrentChainId());
   const isTransaction = /^0x([A-Fa-f0-9]{64})$/.test(text);
-  const currentChainId = supportedChains ? getChainId(supportedChains) : 1;
-  const explorerUrl = getExplorerURL(currentChainId);
 
   return isTransaction
     ? `${explorerUrl}/tx/${text}`
@@ -109,6 +115,8 @@ type AddressLinkType = {
   onClick?: (text: string) => void;
   /** chain name */
   chainName?: SolanaChainNames;
+  /** chain ID */
+  chainId?: number;
 };
 
 export const AddressLink = ({
@@ -122,6 +130,7 @@ export const AddressLink = ({
   cannotClick,
   supportedChains,
   onClick,
+  chainId,
   chainName,
 }: AddressLinkType) => {
   const trimmedText = getTrimmedText(text, suffixCount);
@@ -130,6 +139,7 @@ export const AddressLink = ({
     isIpfsLink,
     supportedChains,
     chainName,
+    chainId,
   });
 
   return (

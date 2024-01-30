@@ -168,3 +168,6 @@
 
 ## 0.4.22
 - Add "Solana" support for <AddressLink /> component
+
+## 0.4.23
+- Add "Arbitrum" and "Arbitrum Sepolia" support for <AddressLink /> component
