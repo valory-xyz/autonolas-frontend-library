@@ -41,6 +41,9 @@ export const getSymbolName = (chainId: number) => {
     case 100:
     case 10200:
       return 'xDAI';
+    case 42161:
+    case 421614:
+      return 'ARB';
     default:
       return 'ETH';
   }
@@ -76,6 +79,10 @@ export const getNetworkName = (networkId: number) => {
       return 'Gnosis Chain';
     case 10200:
       return 'Gnosis Chain Testnet';
+    case 42161:
+      return 'Arbitrum';
+    case 421614:
+      return 'Arbitrum Sepolia';
     default:
       return 'Unknown Network';
   }
@@ -103,6 +110,10 @@ export const getExplorerURL = (chainId = 1) => {
       return `https://gnosisscan.io`;
     case 10200:
       return `https://gnosis.blockscout.com`;
+    case 42161:
+      return `https://arbiscan.io`;
+    case 421614:
+      return `https://sepolia.arbiscan.io`;
     default:
       return `https://etherscan.io`;
   }
