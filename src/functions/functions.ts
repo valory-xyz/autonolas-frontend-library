@@ -25,19 +25,9 @@ export const getTrimmedText = (str: string, suffixCount: number) => {
 
 export const getSymbolName = (chainId: number) => {
   switch (chainId) {
-    case 56:
-    case 97:
-      return 'BNB';
     case 137:
     case 80001:
       return 'MATIC';
-    case 43114:
-    case 43113:
-      return 'AVAX';
-    case 250:
-      return 'FTM';
-    case 1287:
-      return 'DEV';
     case 100:
     case 10200:
       return 'xDAI';
@@ -53,36 +43,32 @@ export const getNetworkName = (networkId: number) => {
   switch (networkId) {
     case 1:
       return 'Ethereum';
-    case 3:
-      return 'Ropsten';
-    case 4:
-      return 'Rinkeby';
     case 5:
       return 'Goerli';
-    case 56:
-      return 'Binance Smart Chain';
-    case 97:
-      return 'Binance Smart Chain Testnet';
-    case 137:
-      return 'Polygon';
-    case 80001:
-      return 'Polygon Testnet';
-    case 43114:
-      return 'Avalanche';
-    case 43113:
-      return 'Fuji Testnet';
-    case 250:
-      return 'Fantom';
-    case 1287:
-      return 'Moonbase Alpha';
+    case 10:
+      return 'Optimism';
     case 100:
       return 'Gnosis Chain';
+    case 137:
+      return 'Polygon';
+    case 8453:
+      return 'Base';
     case 10200:
       return 'Gnosis Chain Testnet';
     case 42161:
       return 'Arbitrum';
+    case 42220:
+      return 'Celo';
+    case 44787:
+      return 'Celo Alfajores';
+    case 84532:
+      return 'Base Sepolia';
+    case 80001:
+      return 'Polygon Testnet';
     case 421614:
       return 'Arbitrum Sepolia';
+    case 11155420:
+      return 'Optimism Sepolia';
     default:
       return 'Unknown Network';
   }
@@ -92,28 +78,30 @@ export const getExplorerURL = (chainId = 1) => {
   switch (chainId) {
     case 5:
       return `https://goerli.etherscan.io`;
-    case 56:
-    case 97:
-      return `https://bscscan.com`;
-    case 137:
-      return `https://polygonscan.com`;
-    case 80001:
-      return `https://mumbai.polygonscan.com`;
-    case 43114:
-    case 43113:
-      return `https://cchain.explorer.avax.network`;
-    case 250:
-      return `https://ftmscan.com`;
-    case 1287:
-      return `https://explorer.devv.finance`;
+    case 10:
+      return `https://optimistic.etherscan.io`;
     case 100:
       return `https://gnosisscan.io`;
+    case 137:
+      return `https://polygonscan.com`;
+    case 8453:
+      return `https://basescan.org`;
     case 10200:
       return `https://gnosis.blockscout.com`;
     case 42161:
       return `https://arbiscan.io`;
+    case 42220:
+      return `https://celoscan.io`;
+    case 44787:
+      return `https://explorer.celo.org/alfajores`;
+    case 84532:
+      return `https://sepolia.basescan.org`;
+    case 80001:
+      return `https://mumbai.polygonscan.com`;
     case 421614:
       return `https://sepolia.arbiscan.io`;
+    case 11155420:
+      return `https://sepolia-optimism.etherscan.io`;
     default:
       return `https://etherscan.io`;
   }
