@@ -171,3 +171,6 @@
 
 ## 0.4.23
 - Add "Arbitrum" and "Arbitrum Sepolia" support for <AddressLink /> component
+
+## 0.4.24
+- Added more chain support to `getSymbolName`, `getNetworkName` and `getExplorerURL`
